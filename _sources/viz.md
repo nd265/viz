@@ -324,12 +324,13 @@ from myst_nb import glue
 co2_scatter = alt.Chart(co2_df).mark_point(size=10, color='black').encode(
     x = "date_measured", 
     y = alt.Y("ppm", scale=alt.Scale(zero=False)))
-
+    
+co2_scatter
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('co2_scatter', co2_scatter, display=True)
+glue('co2_scatter', co2_scatter, display=False)
 ```
 
 :::{glue:figure} co2_scatter 
@@ -368,13 +369,13 @@ with just the default arguments:
 co2_line = alt.Chart(co2_df).mark_line(color='black').encode(
     x = "date_measured", 
     y = alt.Y("ppm", scale=alt.Scale(zero=False)))
-
+co2_line
 
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('co2_line', co2_line1, display=True)
+glue('co2_line', co2_line1, display=False)
 ```
 
 :::{glue:figure} co2_line1 
@@ -409,11 +410,12 @@ co2_line = alt.Chart(co2_df).mark_line(color='black').encode(
     x = alt.X("date_measured", title = "Year"),
     y = alt.Y("ppm", scale=alt.Scale(zero=False), title = "Atmospheric CO2 (ppm)")).configure_axis(
     titleFontSize=12)
+co2_line
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('co2_line', co2_line2, display=True)
+glue('co2_line', co2_line2, display=False)
 ```
 
 :::{glue:figure} co2_line2 
@@ -463,14 +465,14 @@ co2_line = alt.Chart(co2_dates).mark_line(color='black').encode(
     y = alt.Y("ppm", scale=alt.Scale(zero=False), title = "Atmospheric CO2 (ppm)")).configure_axis(
     titleFontSize=12)
 
-
+co2_line
 
 
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('co2_line', co2_line3, display=True)
+glue('co2_line', co2_line3, display=False)
 ```
 
 :::{glue:figure} co2_line3
@@ -544,12 +546,12 @@ faithful_scatter = alt.Chart(faithful).mark_circle(color='black').encode(
     x = "waiting",
     y = "eruptions"
 )
-
+faithful_scatter
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('faithful_scatter', faithful_scatter, display=True)
+glue('faithful_scatter', faithful_scatter, display=False)
 ```
 
 :::{glue:figure} faithful_scatter 
@@ -581,7 +583,7 @@ faithful_scatter
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('faithful_scatter', faithful_scatter2, display=True)
+glue('faithful_scatter', faithful_scatter2, display=False)
 ```
 
 :::{glue:figure} faithful_scatter2 
@@ -632,13 +634,13 @@ The resulting plot is shown in Figure \@ref(fig:03-mother-tongue-vs-most-at-home
 can_lang_plot = alt.Chart(can_lang).mark_circle(color='black').encode(
     x = "most_at_home",
     y = "mother_tongue")
-
+can_lang_plot
 ```
 
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot, display=True)
+glue('can_lang_plot', can_lang_plot, display=False)
 ```
 
 :::{glue:figure} can_lang_plot
@@ -664,12 +666,12 @@ can_lang_plot = alt.Chart(can_lang).mark_circle(color='black').encode(
     x = alt.X("most_at_home",title = "Language spoken most at home(number of Canadian residents)"),
     y = alt.Y("mother_tongue", scale=alt.Scale(zero=False), title = "Mother tongue(number of Canadian residents)")).configure_axis(
     titleFontSize=12)
-
+can_lang_plot
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot2, display=True)
+glue('can_lang_plot', can_lang_plot2, display=False)
 ```
 
 :::{glue:figure} can_lang_plot2
@@ -739,11 +741,12 @@ can_lang_plot = alt.Chart(can_lang).mark_circle(color='black').encode(
     x = alt.X("most_at_home",title = "Language spoken most at home(number of Canadian residents)", scale=alt.Scale( type="log"), axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue", title = "Mother tongue(number of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7))).configure_axis(
     titleFontSize=12)
+can_lang_plot
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot3, display=True)
+glue('can_lang_plot', can_lang_plot3, display=False)
 ```
 
 :::{glue:figure} can_lang_plot3
@@ -807,11 +810,12 @@ can_lang_plot = alt.Chart(can_lang).mark_circle(color='black').encode(
     x = alt.X("most_at_home_percent",title = "Language spoken most at home(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7))).configure_axis(
     titleFontSize=12)
+can_lang_plot
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot4, display=True)
+glue('can_lang_plot', can_lang_plot4, display=False)
 ```
 
 :::{glue:figure} can_lang_plot4
@@ -878,11 +882,12 @@ can_lang_plot = alt.Chart(can_lang).mark_circle().encode(
     y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = "category").configure_axis(
     titleFontSize=12)
+can_lang_plot
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot5, display=True)
+glue('can_lang_plot', can_lang_plot5, display=False)
 ```
 
 :::{glue:figure} can_lang_plot5
@@ -918,13 +923,13 @@ can_lang_plot = alt.Chart(can_lang).mark_circle().encode(
                             legendX=0, legendY=-90,
                             direction='vertical'))).configure_axis(
     titleFontSize=12)
-
+can_lang_plot
 
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot6, display=True)
+glue('can_lang_plot', can_lang_plot6, display=False)
 ```
 
 :::{glue:figure} can_lang_plot6
@@ -980,12 +985,12 @@ can_lang_plot = alt.Chart(can_lang).mark_point(filled=True).encode(
                          scale=alt.Scale(scheme='dark2')),
     shape = "category").configure_axis(
     titleFontSize=12)
-
+can_lang_plot
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot7, display=True)
+glue('can_lang_plot', can_lang_plot7, display=False)
 ```
 
 :::{glue:figure} can_lang_plot7
@@ -1076,7 +1081,7 @@ islands_bar
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('islands_bar', islands_bar, display=True)
+glue('islands_bar', islands_bar, display=False)
 ```
 
 :::{glue:figure} islands_bar
@@ -1113,7 +1118,7 @@ islands_bar
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('islands_bar', islands_bar, display=True)
+glue('islands_bar', islands_bar, display=False)
 ```
 
 :::{glue:figure} islands_bar
@@ -1168,10 +1173,11 @@ islands_top12_plot = alt.Chart(islands_top12).mark_bar(color='black').encode(
     y = alt.Y("landmass", title = "Landmass", sort='x'),
     color = alt.Color("landmass_type", title = "Type")).configure_axis(
     titleFontSize=12)
+islands_top_12_plot
 ```
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('islands_top12_plot', islands_top12_plot, display=True)
+glue('islands_top12_plot', islands_top12_plot, display=False)
 ```
 
 :::{glue:figure} islands_top12_plot
@@ -1243,11 +1249,12 @@ let's use the default arguments just to see how things look.
 morley_hist = alt.Chart(morley_df).mark_bar().encode(
     x = alt.X("Speed"),  
     y='count()')
+morley_hist
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('morley_hist', morley_hist, display=True)
+glue('morley_hist', morley_hist, display=False)
 ```
 
 :::{glue:figure} morley_hist
@@ -1293,12 +1300,13 @@ v_line = alt.Chart(pd.DataFrame({'x': [792.458]})).mark_rule(
 
 
 final_plot = morley_hist + v_line
+final_plot
 ```
 
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('final_plot', final_plot, display=True)
+glue('final_plot', final_plot, display=False)
 ```
 
 :::{glue:figure} final_plot
@@ -1337,11 +1345,12 @@ morley_hist = alt.Chart(morley_df).mark_bar(opacity=0.5).encode(
     color = "Expt")
 
 final_plot = morley_hist + v_line
+final_plot
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('final_plot', final_plot, display=True)
+glue('final_plot', final_plot, display=False)
 ```
 
 :::{glue:figure} final_plot
@@ -1377,11 +1386,12 @@ morley_hist = alt.Chart(morley_df).mark_bar(opacity=0.4).encode(
     color = "Expt:N")
 
 final_plot = morley_hist + v_line
+final_plot
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('final_plot', final_plot, display=True)
+glue('final_plot', final_plot, display=False)
 ```
 
 :::{glue:figure} final_plot
@@ -1431,11 +1441,12 @@ morley_hist = alt.Chart().mark_bar(opacity = 0.5).encode(
     color = "Expt:N").properties(height=100, width=400)
 
 final_plot = (morley_hist + v_line).facet(row = 'Expt:N', data = morley_df)
+final_plot
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('final_plot', final_plot, display=True)
+glue('final_plot', final_plot, display=False)
 ```
 
 :::{glue:figure} final_plot
@@ -1482,12 +1493,12 @@ morley_hist = alt.Chart().mark_bar(opacity=0.6).encode(
     color = alt.Color("Expt:N",  title = "Experiment ID")).properties(height=100, width= 400)
 
 final_plot = (morley_hist + v_line).facet(row='Expt:N', data=morley_rel)
-
+final_plot
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('final_plot', final_plot, display=True)
+glue('final_plot', final_plot, display=False)
 ```
 
 :::{glue:figure} final_plot
@@ -1567,11 +1578,13 @@ morley_hist_30 = alt.Chart(morley_rel).mark_bar(opacity=0.6).encode(
 
 final_plot = ((morley_hist_200 + v_line).facet(row='Expt:N', data=morley_rel, title = "maxBins=200") | (morley_hist_40 + v_line).facet(row='Expt:N', data=morley_rel, title = "maxBins=40")) & ((morley_hist_30 + v_line).facet(row='Expt:N', data=morley_rel, title = "maxBins=30") | (morley_hist_2 + v_line).facet(row='Expt:N', data=morley_rel, title = "maxBins=2"))
 
+final_plot
+
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('final_plot', final_plot, display=True)
+glue('final_plot', final_plot, display=False)
 ```
 
 :::{glue:figure} final_plot
@@ -1734,12 +1747,12 @@ faithful_plot = alt.Chart(faithful).mark_point(filled=True).encode(
     x = alt.X('waiting', title = "Waiting time to next eruption (minutes)"),
     y = alt.Y('eruptions', title = "Eruption time (minutes)")).configure_axis(
     titleFontSize=12)
-
+faithful_plot
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('faithful_plot', faithful_plot, display=True)
+glue('faithful_plot', faithful_plot, display=False)
 ```
 
 :::{glue:figure} faithful_plot
