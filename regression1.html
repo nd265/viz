@@ -1,0 +1,1779 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Regression I: K-nearest neighbors &#8212; DSCΙ 100</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Regression II: linear regression" href="regression2.html" />
+    <link rel="prev" title="Classification II: evaluation &amp; tuning" href="classification2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">DSCΙ 100</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   Welcome – TBD
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  First draft
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface-text.html">
+   Preface – TBD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="foreword-text.html">
+   Foreword – TBD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="acknowledgements.html">
+   Acknowledgments – TBD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="authors.html">
+   About the authors – TBD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="setup.html">
+   Setting up your computer – TBD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Python and the Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reading.html">
+   Reading in data locally and from the web
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="wrangling.html">
+   Cleaning and wrangling data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="viz.html">
+   Effective data visualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classification1.html">
+   Classification I: training &amp; predicting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classification2.html">
+   Classification II: evaluation &amp; tuning
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Regression I: K-nearest neighbors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="regression2.html">
+   Regression II: linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="clustering.html">
+   Clustering – TBD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inference.html">
+   Statistical inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References – TBD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="appendixA.html">
+   Appendix
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="_sources/regression1.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/regression1.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chapter-learning-objectives">
+   Chapter learning objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-regression-problem">
+   The regression problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploring-a-data-set">
+   Exploring a data set
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-nearest-neighbors-regression">
+   K-nearest neighbors regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-evaluating-and-tuning-the-model">
+   Training, evaluating, and tuning the model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#underfitting-and-overfitting">
+   Underfitting and overfitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluating-on-the-test-set">
+   Evaluating on the test set
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multivariable-knn-regression">
+   Multivariable KNN regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#strengths-and-limitations-of-knn-regression">
+   Strengths and limitations of KNN regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Regression I: K-nearest neighbors</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chapter-learning-objectives">
+   Chapter learning objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-regression-problem">
+   The regression problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploring-a-data-set">
+   Exploring a data set
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-nearest-neighbors-regression">
+   K-nearest neighbors regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-evaluating-and-tuning-the-model">
+   Training, evaluating, and tuning the model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#underfitting-and-overfitting">
+   Underfitting and overfitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluating-on-the-test-set">
+   Evaluating on the test set
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multivariable-knn-regression">
+   Multivariable KNN regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#strengths-and-limitations-of-knn-regression">
+   Strengths and limitations of KNN regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="regression-i-k-nearest-neighbors">
+<span id="regression1"></span><h1>Regression I: K-nearest neighbors<a class="headerlink" href="#regression-i-k-nearest-neighbors" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This chapter continues our foray into answering predictive questions.
+Here we will focus on predicting <em>numerical</em> variables
+and will use <em>regression</em> to perform this task.
+This is unlike the past two chapters, which focused on predicting categorical
+variables via classification. However, regression does have many similarities
+to classification: for example, just as in the case of classification,
+we will split our data into training, validation, and test sets, we will
+use <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> workflows, we will use a K-nearest neighbors (KNN)
+approach to make predictions, and we will use cross-validation to choose K.
+Because of how similar these procedures are, make sure to read Chapters
+<a class="reference internal" href="classification1.html#classification"><span class="std std-ref">Classification I: training &amp; predicting</span></a> and <a class="reference internal" href="classification2.html#classification2"><span class="std std-ref">Classification II: evaluation &amp; tuning</span></a> before reading
+this one—we will move a little bit faster here with the
+concepts that have already been covered.
+This chapter will primarily focus on the case where there is a single predictor,
+but the end of the chapter shows how to perform
+regression with more than one predictor variable, i.e., <em>multivariable regression</em>.
+It is important to note that regression
+can also be used to answer inferential and causal questions,
+however that is beyond the scope of this book.</p>
+</div>
+<div class="section" id="chapter-learning-objectives">
+<h2>Chapter learning objectives<a class="headerlink" href="#chapter-learning-objectives" title="Permalink to this headline">¶</a></h2>
+<p>By the end of the chapter, readers will be able to do the following:</p>
+<ul class="simple">
+<li><p>Recognize situations where a simple regression analysis would be appropriate for making predictions.</p></li>
+<li><p>Explain the K-nearest neighbor (KNN) regression algorithm and describe how it differs from KNN classification.</p></li>
+<li><p>Interpret the output of a KNN regression.</p></li>
+<li><p>In a dataset with two or more variables, perform K-nearest neighbor regression in Python using a <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> workflow.</p></li>
+<li><p>Execute cross-validation in Python to choose the number of neighbors.</p></li>
+<li><p>Evaluate KNN regression prediction accuracy in Python using a test data set and the root mean squared prediction error (RMSPE).</p></li>
+<li><p>In the context of KNN regression, compare and contrast goodness of fit and prediction properties (namely RMSE vs RMSPE).</p></li>
+<li><p>Describe the advantages and disadvantages of K-nearest neighbors regression.</p></li>
+</ul>
+</div>
+<div class="section" id="the-regression-problem">
+<h2>The regression problem<a class="headerlink" href="#the-regression-problem" title="Permalink to this headline">¶</a></h2>
+<p>Regression, like classification, is a predictive \index{predictive question} problem setting where we want
+to use past information to predict future observations. But in the case of
+regression, the goal is to predict <em>numerical</em> values instead of <em>categorical</em> values.
+The variable that you want to predict is often called the <em>response variable</em>. \index{response variable}
+For example, we could try to use the number of hours a person spends on
+exercise each week to predict their race time in the annual Boston marathon. As
+another example, we could try to use the size of a house to
+predict its sale price. Both of these response variables—race time and sale price—are
+numerical, and so predicting them given past data is considered a regression problem.</p>
+<p>Just like in the \index{classification!comparison to regression}
+classification setting, there are many possible methods that we can use
+to predict numerical response variables. In this chapter we will
+focus on the <strong>K-nearest neighbors</strong> algorithm <span id="id1">[<a class="reference internal" href="regression2.html#id5" title="Thomas Cover and Peter Hart. Nearest neighbor pattern classification. IEEE Transactions on Information Theory, 13(1):21–27, 1967.">Cover and Hart, 1967</a>, <a class="reference internal" href="regression2.html#id4" title="Evelyn Fix and Joseph Hodges. Discriminatory analysis. nonparametric discrimination: consistency properties. Technical Report, USAF School of Aviation Medicine, Randolph Field, Texas, 1951.">Fix and Hodges, 1951</a>]</span>, and in the next chapter
+we will study <strong>linear regression</strong>.
+In your future studies, you might encounter regression trees, splines,
+and general local regression methods; see the additional resources
+section at the end of the next chapter for where to begin learning more about
+these other methods.</p>
+<p>Many of the concepts from classification map over to the setting of regression. For example,
+a regression model predicts a new observation’s response variable based on the response variables
+for similar observations in the data set of past observations. When building a regression model,
+we first split the data into training and test sets, in order to ensure that we assess the performance
+of our method on observations not seen during training. And finally, we can use cross-validation to evaluate different
+choices of model parameters (e.g., K in a K-nearest neighbors model). The major difference
+is that we are now predicting numerical variables instead of categorical variables.</p>
+<blockquote>
+<div><p><strong>Note:</strong> You can usually tell whether a\index{categorical variable}\index{numerical variable} variable is numerical or
+categorical—and therefore whether you need to perform regression or
+classification—by taking two response variables X and Y from your data,
+and asking the question, “is response variable X <em>more</em> than response
+variable Y?” If the variable is categorical, the question will make no sense.
+(Is blue more than red?  Is benign more than malignant?) If the variable is
+numerical, it will make sense. (Is 1.5 hours more than 2.25 hours? Is
+$500,000 more than $400,000?) Be careful when applying this heuristic,
+though: sometimes categorical variables will be encoded as numbers in your
+data (e.g., “1” represents “benign”, and “0” represents “malignant”). In
+these cases you have to ask the question about the <em>meaning</em> of the labels
+(“benign” and “malignant”), not their values (“1” and “0”).</p>
+</div></blockquote>
+</div>
+<div class="section" id="exploring-a-data-set">
+<h2>Exploring a data set<a class="headerlink" href="#exploring-a-data-set" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter and the next, we will study
+a data set \index{Sacramento real estate} of
+<a class="reference external" href="https://support.spatialkey.com/spatialkey-sample-csv-data/">932 real estate transactions in Sacramento, California</a>
+originally reported in the <em>Sacramento Bee</em> newspaper.
+We first need to formulate a precise question that
+we want to answer. In this example, our question is again predictive:
+\index{question!regression} Can we use the size of a house in the Sacramento, CA area to predict
+its sale price? A rigorous, quantitative answer to this question might help
+a realtor advise a client as to whether the price of a particular listing
+is fair, or perhaps how to set the price of a new listing.
+We begin the analysis by loading and examining the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+
+<span class="n">sacramento</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/sacramento.csv&quot;</span><span class="p">)</span>
+<span class="n">sacramento</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>city</th>
+      <th>zip</th>
+      <th>beds</th>
+      <th>baths</th>
+      <th>sqft</th>
+      <th>type</th>
+      <th>price</th>
+      <th>latitude</th>
+      <th>longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SACRAMENTO</td>
+      <td>z95838</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>836</td>
+      <td>Residential</td>
+      <td>59222</td>
+      <td>38.631913</td>
+      <td>-121.434879</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SACRAMENTO</td>
+      <td>z95823</td>
+      <td>3</td>
+      <td>1.0</td>
+      <td>1167</td>
+      <td>Residential</td>
+      <td>68212</td>
+      <td>38.478902</td>
+      <td>-121.431028</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SACRAMENTO</td>
+      <td>z95815</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>796</td>
+      <td>Residential</td>
+      <td>68880</td>
+      <td>38.618305</td>
+      <td>-121.443839</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SACRAMENTO</td>
+      <td>z95815</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>852</td>
+      <td>Residential</td>
+      <td>69307</td>
+      <td>38.616835</td>
+      <td>-121.439146</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SACRAMENTO</td>
+      <td>z95824</td>
+      <td>2</td>
+      <td>1.0</td>
+      <td>797</td>
+      <td>Residential</td>
+      <td>81900</td>
+      <td>38.519470</td>
+      <td>-121.435768</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>927</th>
+      <td>SACRAMENTO</td>
+      <td>z95829</td>
+      <td>4</td>
+      <td>3.0</td>
+      <td>2280</td>
+      <td>Residential</td>
+      <td>232425</td>
+      <td>38.457679</td>
+      <td>-121.359620</td>
+    </tr>
+    <tr>
+      <th>928</th>
+      <td>SACRAMENTO</td>
+      <td>z95823</td>
+      <td>3</td>
+      <td>2.0</td>
+      <td>1477</td>
+      <td>Residential</td>
+      <td>234000</td>
+      <td>38.499893</td>
+      <td>-121.458890</td>
+    </tr>
+    <tr>
+      <th>929</th>
+      <td>CITRUS_HEIGHTS</td>
+      <td>z95610</td>
+      <td>3</td>
+      <td>2.0</td>
+      <td>1216</td>
+      <td>Residential</td>
+      <td>235000</td>
+      <td>38.708824</td>
+      <td>-121.256803</td>
+    </tr>
+    <tr>
+      <th>930</th>
+      <td>ELK_GROVE</td>
+      <td>z95758</td>
+      <td>4</td>
+      <td>2.0</td>
+      <td>1685</td>
+      <td>Residential</td>
+      <td>235301</td>
+      <td>38.417000</td>
+      <td>-121.397424</td>
+    </tr>
+    <tr>
+      <th>931</th>
+      <td>EL_DORADO_HILLS</td>
+      <td>z95762</td>
+      <td>3</td>
+      <td>2.0</td>
+      <td>1362</td>
+      <td>Residential</td>
+      <td>235738</td>
+      <td>38.655245</td>
+      <td>-121.075915</td>
+    </tr>
+  </tbody>
+</table>
+<p>932 rows × 9 columns</p>
+</div></div></div>
+</div>
+<p>The scientific question guides our initial exploration: the columns in the
+data that we are interested in are <code class="docutils literal notranslate"><span class="pre">sqft</span></code> (house size, in livable square feet)
+and <code class="docutils literal notranslate"><span class="pre">price</span></code> (house sale price, in US dollars (USD)).  The first step is to visualize
+the data as a scatter plot where we place the predictor variable
+(house size) on the x-axis, and we place the target/response variable that we
+want to predict (sale price) on the y-axis.
+\index{ggplot!geom_point}
+\index{visualization!scatter}</p>
+<blockquote>
+<div><p><strong>Note:</strong> Given that the y-axis unit is dollars in <a class="reference internal" href="#fig-07-edaregr"><span class="std std-numref">Fig. 81</span></a>,
+we format the axis labels to put dollar signs in front of the house prices,
+as well as commas to increase the readability of the larger numbers.
+We can do this in <code class="docutils literal notranslate"><span class="pre">altair</span></code> by passing the <code class="docutils literal notranslate"><span class="pre">axis=alt.Axis(format='$,.0f')</span></code> argument
+to the <code class="docutils literal notranslate"><span class="pre">y</span></code> encoding channel in an <code class="docutils literal notranslate"><span class="pre">altair</span></code> specification.</p>
+</div></blockquote>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eda</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">sacramento</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">mark_circle</span><span class="p">(</span><span class="n">opacity</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s2">&quot;sqft&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;House size (square feet)&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Price (USD)&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;$,.0f&#39;</span><span class="p">)),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">eda</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="figure align-default" id="fig-07-edaregr">
+<p class="caption"><span class="caption-number">Fig. 81 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet).</span><a class="headerlink" href="#fig-07-edaregr" title="Permalink to this image">¶</a></p>
+</div>
+<p>The plot is shown in <a class="reference internal" href="#fig-07-edaregr"><span class="std std-numref">Fig. 81</span></a>.
+We can see that in Sacramento, CA, as the
+size of a house increases, so does its sale price. Thus, we can reason that we
+may be able to use the size of a not-yet-sold house (for which we don’t know
+the sale price) to predict its final sale price. Note that we do not suggest here
+that a larger house size <em>causes</em> a higher sale price; just that house price
+tends to increase with house size, and that we may be able to use the latter to
+predict the former.</p>
+</div>
+<div class="section" id="k-nearest-neighbors-regression">
+<h2>K-nearest neighbors regression<a class="headerlink" href="#k-nearest-neighbors-regression" title="Permalink to this headline">¶</a></h2>
+<p>Much like in the case of classification,
+we can use a K-nearest neighbors-based \index{K-nearest neighbors!regression}
+approach in regression to make predictions.
+Let’s take a small sample of the data in <a class="reference internal" href="#fig-07-edaregr"><span class="std std-numref">Fig. 81</span></a>
+and walk through how K-nearest neighbors (KNN) works
+in a regression context before we dive in to creating our model and assessing
+how well it predicts house sale price. This subsample is taken to allow us to
+illustrate the mechanics of KNN regression with a few data points; later in
+this chapter we will use all the data.</p>
+<p>To take a small random sample of size 30, we’ll use the
+<code class="docutils literal notranslate"><span class="pre">sample</span></code> method of a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> object, and input the number of rows
+to randomly select (<code class="docutils literal notranslate"><span class="pre">n</span></code>) and the random seed (<code class="docutils literal notranslate"><span class="pre">random_state</span></code>). \index{slice_sample}</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">small_sacramento</span> <span class="o">=</span> <span class="n">sacramento</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next let’s say we come across a  2,000 square-foot house in Sacramento we are
+interested in purchasing, with an advertised list price of $350,000. Should we
+offer to pay the asking price for this house, or is it overpriced and we should
+offer less? Absent any other information, we can get a sense for a good answer
+to this question by using the data we have to predict the sale price given the
+sale prices we have already observed. But in <a class="reference internal" href="#fig-07-small-eda-regr"><span class="std std-numref">Fig. 82</span></a>,
+you can see that we have no
+observations of a house of size <em>exactly</em> 2,000 square feet. How can we predict
+the sale price?</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">small_plot</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">small_sacramento</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">mark_circle</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s2">&quot;sqft&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;House size (square feet)&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Price (USD)&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;$,.0f&#39;</span><span class="p">)),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># add an overlay to the base plot</span>
+<span class="n">line_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2000</span><span class="p">]})</span>
+<span class="n">rule</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">line_df</span><span class="p">)</span><span class="o">.</span><span class="n">mark_rule</span><span class="p">(</span><span class="n">strokeDash</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="n">small_plot</span> <span class="o">+</span> <span class="n">rule</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="figure align-default" id="fig-07-small-eda-regr">
+<p class="caption"><span class="caption-number">Fig. 82 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet) with vertical line indicating 2,000 square feet on x-axis.</span><a class="headerlink" href="#fig-07-small-eda-regr" title="Permalink to this image">¶</a></p>
+</div>
+<p>We will employ the same intuition from the classification chapter, and use the
+neighboring points to the new point of interest to suggest/predict what its
+sale price might be.
+For the example shown in <a class="reference internal" href="#fig-07-small-eda-regr"><span class="std std-numref">Fig. 82</span></a>,
+we find and label the 5 nearest neighbors to our observation
+of a house that is 2,000 square feet.
+\index{mutate}\index{slice}\index{arrange}\index{abs}</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nearest_neighbors</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">small_sacramento</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">diff</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="mi">2000</span> <span class="o">-</span> <span class="n">small_sacramento</span><span class="p">[</span><span class="s2">&quot;sqft&quot;</span><span class="p">]))</span>
+    <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;diff&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">nearest_neighbors</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>city</th>
+      <th>zip</th>
+      <th>beds</th>
+      <th>baths</th>
+      <th>sqft</th>
+      <th>type</th>
+      <th>price</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>diff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>298</th>
+      <td>SACRAMENTO</td>
+      <td>z95823</td>
+      <td>4</td>
+      <td>2.0</td>
+      <td>1900</td>
+      <td>Residential</td>
+      <td>361745</td>
+      <td>38.487409</td>
+      <td>-121.461413</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>718</th>
+      <td>ANTELOPE</td>
+      <td>z95843</td>
+      <td>4</td>
+      <td>2.0</td>
+      <td>2160</td>
+      <td>Residential</td>
+      <td>290000</td>
+      <td>38.704554</td>
+      <td>-121.354753</td>
+      <td>160</td>
+    </tr>
+    <tr>
+      <th>748</th>
+      <td>ROSEVILLE</td>
+      <td>z95678</td>
+      <td>3</td>
+      <td>2.0</td>
+      <td>1744</td>
+      <td>Residential</td>
+      <td>326951</td>
+      <td>38.771917</td>
+      <td>-121.304439</td>
+      <td>256</td>
+    </tr>
+    <tr>
+      <th>252</th>
+      <td>SACRAMENTO</td>
+      <td>z95835</td>
+      <td>3</td>
+      <td>2.5</td>
+      <td>1718</td>
+      <td>Residential</td>
+      <td>250000</td>
+      <td>38.676658</td>
+      <td>-121.528128</td>
+      <td>282</td>
+    </tr>
+    <tr>
+      <th>211</th>
+      <td>RANCHO_CORDOVA</td>
+      <td>z95670</td>
+      <td>3</td>
+      <td>2.0</td>
+      <td>1671</td>
+      <td>Residential</td>
+      <td>175000</td>
+      <td>38.591477</td>
+      <td>-121.315340</td>
+      <td>329</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="figure align-default" id="fig-07-knn5-example">
+<p class="caption"><span class="caption-number">Fig. 83 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet) with lines to 5 nearest neighbors.</span><a class="headerlink" href="#fig-07-knn5-example" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-07-knn5-example"><span class="std std-numref">Fig. 83</span></a> illustrates the difference between the house sizes
+of the 5 nearest neighbors (in terms of house size) to our new
+2,000 square-foot house of interest. Now that we have obtained these nearest neighbors,
+we can use their values to predict the
+sale price for the new home.  Specifically, we can take the mean (or
+average) of these 5 values as our predicted value, as illustrated by
+the red point in <a class="reference internal" href="#fig-07-predictedviz-knn"><span class="std std-numref">Fig. 84</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prediction</span> <span class="o">=</span> <span class="n">nearest_neighbors</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">prediction</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>280739.2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="figure align-default" id="fig-07-predictedviz-knn">
+<p class="caption"><span class="caption-number">Fig. 84 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet) with predicted price for a 2,000 square-foot house based on 5 nearest neighbors represented as a red dot.</span><a class="headerlink" href="#fig-07-predictedviz-knn" title="Permalink to this image">¶</a></p>
+</div>
+<p>Our predicted price is $
+(shown as a red point in <a class="reference internal" href="#fig-07-predictedviz-knn"><span class="std std-numref">Fig. 84</span></a>), which is much less than $350,000; perhaps we
+might want to offer less than the list price at which the house is advertised.
+But this is only the very beginning of the story. We still have all the same
+unanswered questions here with KNN regression that we had with KNN
+classification: which <span class="math notranslate nohighlight">\(K\)</span> do we choose, and is our model any good at making
+predictions? In the next few sections, we will address these questions in the
+context of KNN regression.</p>
+<p>One strength of the KNN regression algorithm
+that we would like to draw attention to at this point
+is its ability to work well with non-linear relationships
+(i.e., if the relationship is not a straight line).
+This stems from the use of nearest neighbors to predict values.
+The algorithm really has very few assumptions
+about what the data must look like for it to work.</p>
+</div>
+<div class="section" id="training-evaluating-and-tuning-the-model">
+<h2>Training, evaluating, and tuning the model<a class="headerlink" href="#training-evaluating-and-tuning-the-model" title="Permalink to this headline">¶</a></h2>
+<p>As usual,
+we must start by putting some test data away in a lock box
+that we will come back to only after we choose our final model.
+Let’s take care of that now.
+Note that for the remainder of the chapter
+we’ll be working with the entire Sacramento data set,
+as opposed to the smaller sample of 30 points
+that we used earlier in the chapter (<a class="reference internal" href="#fig-07-small-eda-regr"><span class="std std-numref">Fig. 82</span></a>).
+\index{training data}
+\index{test data}</p>
+<blockquote>
+<div><p>Note that we are not specifying the <code class="docutils literal notranslate"><span class="pre">stratify</span></code> argument here as we did in Chapter <a class="reference internal" href="classification2.html#classification2"><span class="std std-ref">Classification II: evaluation &amp; tuning</span></a>,
+since <code class="docutils literal notranslate"><span class="pre">sklearn.model_selection.train_test_split</span></code> cannot stratify based on a continuous variable. However, some functions inside other packages are able to do that.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sacramento_train</span><span class="p">,</span> <span class="n">sacramento_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">sacramento</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we’ll use cross-validation \index{cross-validation} to choose <span class="math notranslate nohighlight">\(K\)</span>. In KNN classification, we used
+accuracy to see how well our predictions matched the true labels. We cannot use
+the same metric in the regression setting, since our predictions will almost never
+<em>exactly</em> match the true response variable values. Therefore in the
+context of KNN regression we will use root mean square prediction error \index{root mean square prediction error|see{RMSPE}}\index{RMSPE}
+(RMSPE) instead. The mathematical formula for calculating RMSPE is:</p>
+<div class="math notranslate nohighlight">
+\[\text{RMSPE} = \sqrt{\frac{1}{n}\sum\limits_{i=1}^{n}(y_i - \hat{y}_i)^2}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n\)</span> is the number of observations,</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_i\)</span> is the observed value for the <span class="math notranslate nohighlight">\(i^\text{th}\)</span> observation, and</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{y}_i\)</span> is the forecasted/predicted value for the <span class="math notranslate nohighlight">\(i^\text{th}\)</span> observation.</p></li>
+</ul>
+<p>In other words, we compute the <em>squared</em> difference between the predicted and true response
+value for each observation in our test (or validation) set, compute the average, and then finally
+take the square root. The reason we use the <em>squared</em> difference (and not just the difference)
+is that the differences can be positive or negative, i.e., we can overshoot or undershoot the true
+response value. <a class="reference internal" href="#fig-07-verticalerrors"><span class="std std-numref">Fig. 85</span></a> illustrates both positive and negative differences
+between predicted and true response values.
+So if we want to measure error—a notion of distance between our predicted and true response values—we
+want to make sure that we are only adding up positive values, with larger positive values representing larger
+mistakes.
+If the predictions are very close to the true values, then
+RMSPE will be small. If, on the other-hand, the predictions are very
+different from the true values, then RMSPE will be quite large. When we
+use cross-validation, we will choose the <span class="math notranslate nohighlight">\(K\)</span> that gives
+us the smallest RMSPE.</p>
+<div class="figure align-default" id="fig-07-verticalerrors">
+<p class="caption"><span class="caption-number">Fig. 85 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet) with example predictions (blue line) and the error in those predictions compared with true response values for three selected observations (vertical red lines).</span><a class="headerlink" href="#fig-07-verticalerrors" title="Permalink to this image">¶</a></p>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> When using many code packages, the evaluation output
+we will get to assess the prediction quality of
+our KNN regression models is labeled “RMSE”, or “root mean squared
+error”. Why is this so, and why not RMSPE? \index{RMSPE!comparison with RMSE}
+In statistics, we try to be very precise with our
+language to indicate whether we are calculating the prediction error on the
+training data (<em>in-sample</em> prediction) versus on the testing data
+(<em>out-of-sample</em> prediction). When predicting and evaluating prediction quality on the training data, we
+say RMSE. By contrast, when predicting and evaluating prediction quality
+on the testing or validation data, we say RMSPE.
+The equation for calculating RMSE and RMSPE is exactly the same; all that changes is whether the <span class="math notranslate nohighlight">\(y\)</span>s are
+training or testing data. But many people just use RMSE for both,
+and rely on context to denote which data the root mean squared error is being calculated on.</p>
+</div></blockquote>
+<p>Now that we know how we can assess how well our model predicts a numerical
+value, let’s use Python to perform cross-validation and to choose the optimal <span class="math notranslate nohighlight">\(K\)</span>.
+First, we will create a recipe for preprocessing our data.
+Note that we include standardization
+in our preprocessing to build good habits, but since we only have one
+predictor, it is technically not necessary; there is no risk of comparing two predictors
+of different scales.
+Next we create a model pipeline for K-nearest neighbors regression. Note
+that we use <code class="docutils literal notranslate"><span class="pre">KNeighborsRegressor</span></code>
+now in the model specification to denote a regression problem, as opposed to the classification
+problems from the previous chapters.
+The use of <code class="docutils literal notranslate"><span class="pre">KNeighborsRegressor</span></code> essentially
+tells <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> that we need to use different metrics (instead of accuracy)
+for tuning and evaluation.
+Next we specify a dictionary of parameter grid containing the numbers of neighbors ranging from 1 to 200.
+Then we create a 5-fold <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> object, and pass in the pipeline and parameter grid. We also
+need to specify that <code class="docutils literal notranslate"><span class="pre">scoring=&quot;neg_root_mean_squared_error&quot;</span></code> to get <em>negative</em> RMSPE from <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>.
+The reason that <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> negates the regular RMSPE is that the function always tries to maximize
+the scores, while RMSPE should be minimized. Hence, in order to see the actual RMSPE, we need to negate
+back the <code class="docutils literal notranslate"><span class="pre">mean_test_score</span></code>.</p>
+<p>In the output of the <code class="docutils literal notranslate"><span class="pre">sacr_results</span></code>
+results data frame, we see that the <code class="docutils literal notranslate"><span class="pre">param_kneighborsregressor__n_neighbors</span></code> variable contains the values of <span class="math notranslate nohighlight">\(K\)</span>,
+the <code class="docutils literal notranslate"><span class="pre">RMSPE</span></code> variable contains the value of the RMSPE estimated via cross-validation,
+which was obtained through negating the <code class="docutils literal notranslate"><span class="pre">mean_test_score</span></code> variable,
+and the standard error (<code class="docutils literal notranslate"><span class="pre">std_test_score</span></code>) contains a value corresponding to a measure of how uncertain we are in the mean value. A detailed treatment of this
+is beyond the scope of this chapter; but roughly, if your estimated mean is 100,000 and standard
+error is 1,000, you can expect the <em>true</em> RMSPE to be somewhere roughly between 99,000 and 101,000 (although it may
+fall outside this range). You may ignore the other columns in the metrics data frame,
+as they do not provide any additional insight.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># preprocess the data, make the pipeline</span>
+<span class="n">sacr_preprocessor</span> <span class="o">=</span> <span class="n">make_column_transformer</span><span class="p">((</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;sqft&quot;</span><span class="p">]))</span>
+<span class="n">sacr_pipeline</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">sacr_preprocessor</span><span class="p">,</span> <span class="n">KNeighborsRegressor</span><span class="p">())</span>
+
+<span class="c1"># create the predictor and target</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sacramento_train</span><span class="p">[[</span><span class="s2">&quot;sqft&quot;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sacramento_train</span><span class="p">[[</span><span class="s2">&quot;price&quot;</span><span class="p">]]</span>
+
+<span class="c1"># create the 5-fold GridSearchCV object</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;kneighborsregressor__n_neighbors&quot;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="n">sacr_gridsearch</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="n">sacr_pipeline</span><span class="p">,</span>
+    <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;neg_root_mean_squared_error&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># fit the GridSearchCV object</span>
+<span class="n">sacr_gridsearch</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># retrieve the CV scores</span>
+<span class="n">sacr_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sacr_gridsearch</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="c1"># negate mean_test_score (negative RMSPE) to get the actual RMSPE</span>
+<span class="n">sacr_results</span><span class="p">[</span><span class="s2">&quot;RMSPE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">sacr_results</span><span class="p">[</span><span class="s2">&quot;mean_test_score&quot;</span><span class="p">]</span>
+
+<span class="n">sacr_results</span><span class="p">[</span>
+    <span class="p">[</span>
+        <span class="s2">&quot;param_kneighborsregressor__n_neighbors&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;RMSPE&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mean_test_score&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;std_test_score&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>param_kneighborsregressor__n_neighbors</th>
+      <th>RMSPE</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>116347.816531</td>
+      <td>-116347.816531</td>
+      <td>2376.433119</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>94761.641227</td>
+      <td>-94761.641227</td>
+      <td>4637.695255</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7</td>
+      <td>92798.404844</td>
+      <td>-92798.404844</td>
+      <td>5138.062815</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10</td>
+      <td>91365.438921</td>
+      <td>-91365.438921</td>
+      <td>4421.186200</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>13</td>
+      <td>90397.125653</td>
+      <td>-90397.125653</td>
+      <td>4764.494753</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>187</td>
+      <td>95993.399765</td>
+      <td>-95993.399765</td>
+      <td>5818.884555</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>190</td>
+      <td>96265.068316</td>
+      <td>-96265.068316</td>
+      <td>5856.295871</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>193</td>
+      <td>96505.064353</td>
+      <td>-96505.064353</td>
+      <td>5920.874895</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>196</td>
+      <td>96819.993688</td>
+      <td>-96819.993688</td>
+      <td>5938.938501</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>199</td>
+      <td>97039.201742</td>
+      <td>-97039.201742</td>
+      <td>6055.982122</td>
+    </tr>
+  </tbody>
+</table>
+<p>67 rows × 4 columns</p>
+</div></div></div>
+</div>
+<div class="figure align-default" id="fig-07-choose-k-knn-plot">
+<p class="caption"><span class="caption-number">Fig. 86 </span><span class="caption-text">Effect of the number of neighbors on the RMSPE.</span><a class="headerlink" href="#fig-07-choose-k-knn-plot" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-07-choose-k-knn-plot"><span class="std std-numref">Fig. 86</span></a> visualizes how the RMSPE varies with the number of neighbors <span class="math notranslate nohighlight">\(K\)</span>.
+We take the <em>minimum</em> RMSPE to find the best setting for the number of neighbors:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show only the row of minimum RMSPE</span>
+<span class="n">sacr_min</span> <span class="o">=</span> <span class="n">sacr_results</span><span class="p">[</span><span class="n">sacr_results</span><span class="p">[</span><span class="s2">&quot;RMSPE&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">sacr_results</span><span class="p">[</span><span class="s2">&quot;RMSPE&quot;</span><span class="p">])]</span>
+<span class="n">sacr_min</span><span class="p">[</span>
+    <span class="p">[</span>
+        <span class="s2">&quot;param_kneighborsregressor__n_neighbors&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;RMSPE&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mean_test_score&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;std_test_score&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>param_kneighborsregressor__n_neighbors</th>
+      <th>RMSPE</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>31</td>
+      <td>88388.589444</td>
+      <td>-88388.589444</td>
+      <td>5171.869527</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The smallest RMSPE occurs when <span class="math notranslate nohighlight">\(K =\)</span> .</p>
+</div>
+<div class="section" id="underfitting-and-overfitting">
+<h2>Underfitting and overfitting<a class="headerlink" href="#underfitting-and-overfitting" title="Permalink to this headline">¶</a></h2>
+<p>Similar to the setting of classification, by setting the number of neighbors
+to be too small or too large, we cause the RMSPE to increase, as shown in
+<a class="reference internal" href="#fig-07-choose-k-knn-plot"><span class="std std-numref">Fig. 86</span></a>. What is happening here?</p>
+<p><a class="reference internal" href="#fig-07-howk"><span class="std std-numref">Fig. 87</span></a> visualizes the effect of different settings of <span class="math notranslate nohighlight">\(K\)</span> on the
+regression model. Each plot shows the predicted values for house sale price from
+our KNN regression model for 6 different values for <span class="math notranslate nohighlight">\(K\)</span>: 1, 3, , 41, 250, and 699 (i.e., the training data).
+For each model, we predict prices for the range of possible home sizes we
+observed in the data set (here 500 to 5,000 square feet) and we plot the
+predicted prices as a blue line.</p>
+<div class="figure align-default" id="fig-07-howk">
+<p class="caption"><span class="caption-number">Fig. 87 </span><span class="caption-text">Predicted values for house price (represented as a blue line) from KNN regression models for six different values for <span class="math notranslate nohighlight">\(K\)</span>.</span><a class="headerlink" href="#fig-07-howk" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-07-howk"><span class="std std-numref">Fig. 87</span></a> shows that when <span class="math notranslate nohighlight">\(K\)</span> = 1, the blue line runs perfectly
+through (almost) all of our training observations.
+This happens because our
+predicted values for a given region (typically) depend on just a single observation.
+In general, when <span class="math notranslate nohighlight">\(K\)</span> is too small, the line follows the training data quite
+closely, even if it does not match it perfectly.
+If we used a different training data set of house prices and sizes
+from the Sacramento real estate market, we would end up with completely different
+predictions. In other words, the model is <em>influenced too much</em> by the data.
+Because the model follows the training data so closely, it will not make accurate
+predictions on new observations which, generally, will not have the same fluctuations
+as the original training data.
+Recall from the classification
+chapters that this behavior—where the model is influenced too much
+by the noisy data—is called <em>overfitting</em>; we use this same term
+in the context of regression. \index{overfitting!regression}</p>
+<p>What about the plots in <a class="reference internal" href="#fig-07-howk"><span class="std std-numref">Fig. 87</span></a> where <span class="math notranslate nohighlight">\(K\)</span> is quite large,
+say, <span class="math notranslate nohighlight">\(K\)</span> = 250 or 699?
+In this case the blue line becomes extremely smooth, and actually becomes flat
+once <span class="math notranslate nohighlight">\(K\)</span> is equal to the number of datapoints in the entire data set.
+This happens because our predicted values for a given x value (here, home
+size), depend on many neighboring observations; in the case where <span class="math notranslate nohighlight">\(K\)</span> is equal
+to the size of the dataset, the prediction is just the mean of the house prices
+in the dataset (completely ignoring the house size).
+In contrast to the <span class="math notranslate nohighlight">\(K=1\)</span> example,
+the smooth, inflexible blue line does not follow the training observations very closely.
+In other words, the model is <em>not influenced enough</em> by the training data.
+Recall from the classification
+chapters that this behavior is called <em>underfitting</em>; we again use this same
+term in the context of regression.  \index{underfitting!regression}</p>
+<p>Ideally, what we want is neither of the two situations discussed above. Instead,
+we would like a model that (1) follows the overall “trend” in the training data, so the model
+actually uses the training data to learn something useful, and (2) does not follow
+the noisy fluctuations, so that we can be confident that our model will transfer/generalize
+well to other new data. If we explore
+the other values for <span class="math notranslate nohighlight">\(K\)</span>, in particular <span class="math notranslate nohighlight">\(K\)</span> =  (as suggested by cross-validation),
+we can see it achieves this goal: it follows the increasing trend of house price
+versus house size, but is not influenced too much by the idiosyncratic variations
+in price. All of this is similar to how
+the choice of <span class="math notranslate nohighlight">\(K\)</span> affects K-nearest neighbors classification, as discussed in the previous
+chapter.</p>
+</div>
+<div class="section" id="evaluating-on-the-test-set">
+<h2>Evaluating on the test set<a class="headerlink" href="#evaluating-on-the-test-set" title="Permalink to this headline">¶</a></h2>
+<p>To assess how well our model might do at predicting on unseen data, we will
+assess its RMSPE on the test data. To do this, we will first
+re-train our KNN regression model on the entire training data set,
+using <span class="math notranslate nohighlight">\(K =\)</span>  neighbors. Then we will
+use <code class="docutils literal notranslate"><span class="pre">predict</span></code> to make predictions on the test data, and use the <code class="docutils literal notranslate"><span class="pre">mean_squared_error</span></code>
+function to compute the mean squared prediction error (MSPE). Finally take the
+square root of MSPE to get RMSPE. The reason that we do not use <code class="docutils literal notranslate"><span class="pre">score</span></code> method (as we
+did in Classification chapter) is that the scoring metric <code class="docutils literal notranslate"><span class="pre">score</span></code> uses for <code class="docutils literal notranslate"><span class="pre">KNeighborsRegressor</span></code>
+is <span class="math notranslate nohighlight">\(R^2\)</span> instead of RMSPE.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmin</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sacr_min</span><span class="p">[</span><span class="s2">&quot;param_kneighborsregressor__n_neighbors&quot;</span><span class="p">])</span>
+
+<span class="c1"># re-make the pipeline</span>
+<span class="n">sacr_pipeline</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">sacr_preprocessor</span><span class="p">,</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">kmin</span><span class="p">))</span>
+
+<span class="c1"># create the predictor and target</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sacramento_train</span><span class="p">[[</span><span class="s2">&quot;sqft&quot;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sacramento_train</span><span class="p">[[</span><span class="s2">&quot;price&quot;</span><span class="p">]]</span>
+
+<span class="c1"># fit the pipeline object</span>
+<span class="n">sacr_pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># predict on test data</span>
+<span class="n">sacr_preds</span> <span class="o">=</span> <span class="n">sacramento_test</span>
+<span class="n">sacr_preds</span> <span class="o">=</span> <span class="n">sacr_preds</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">predicted</span><span class="o">=</span><span class="n">sacr_pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">sacramento_test</span><span class="p">))</span>
+
+<span class="c1"># calculate RMSPE</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="n">RMSPE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+    <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_true</span><span class="o">=</span><span class="n">sacr_preds</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">],</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">sacr_preds</span><span class="p">[</span><span class="s2">&quot;predicted&quot;</span><span class="p">])</span>
+<span class="p">)</span>
+
+<span class="n">RMSPE</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79096.50714310486
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our final model’s test error as assessed by RMSPE
+is $ .
+Note that RMSPE is measured in the same units as the response variable.
+In other words, on new observations, we expect the error in our prediction to be
+<em>roughly</em> $ .
+From one perspective, this is good news: this is about the same as the cross-validation
+RMSPE estimate of our tuned model
+(which was $ ,
+so we can say that the model appears to generalize well
+to new data that it has never seen before.
+However, much like in the case of KNN classification, whether this value for RMSPE is <em>good</em>—i.e.,
+whether an error of around $ 
+is acceptable—depends entirely on the application.
+In this application, this error
+is not prohibitively large, but it is not negligible either;
+$ 
+might represent a substantial fraction of a home buyer’s budget, and
+could make or break whether or not they could afford put an offer on a house.</p>
+<p>Finally, <a class="reference internal" href="#fig-07-predict-all"><span class="std std-numref">Fig. 88</span></a> shows the predictions that our final model makes across
+the range of house sizes we might encounter in the Sacramento area—from 500 to 5000 square feet.
+You have already seen a few plots like this in this chapter, but here we also provide the code that generated it
+as a learning challenge.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sacr_preds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;sqft&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">5001</span><span class="p">,</span> <span class="mi">10</span><span class="p">)})</span>
+<span class="n">sacr_preds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">sacr_preds</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sacr_pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">sacr_preds</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;predicted&quot;</span><span class="p">])),</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># the base plot: the training data scatter plot</span>
+<span class="n">base_plot</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">sacramento_train</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">mark_circle</span><span class="p">(</span><span class="n">opacity</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s2">&quot;sqft&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;House size (square feet)&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Price (USD)&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;$,.0f&quot;</span><span class="p">)),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># add the prediction layer</span>
+<span class="n">plot_final</span> <span class="o">=</span> <span class="n">base_plot</span> <span class="o">+</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">sacr_preds</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;K = </span><span class="si">{</span><span class="n">kmin</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;sqft&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;predicted&quot;</span><span class="p">)</span>
+
+<span class="n">plot_final</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="figure align-default" id="fig-07-predict-all">
+<p class="caption"><span class="caption-number">Fig. 88 </span><span class="caption-text">Predicted values of house price (blue line) for the final KNN regression model.</span><a class="headerlink" href="#fig-07-predict-all" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="multivariable-knn-regression">
+<h2>Multivariable KNN regression<a class="headerlink" href="#multivariable-knn-regression" title="Permalink to this headline">¶</a></h2>
+<p>As in KNN classification, we can use multiple predictors in KNN regression.
+In this setting, we have the same concerns regarding the scale of the predictors. Once again,
+predictions are made by identifying the <span class="math notranslate nohighlight">\(K\)</span>
+observations that are nearest to the new point we want to predict; any
+variables that are on a large scale will have a much larger effect than
+variables on a small scale. Hence, we should re-define the preprocessor in the
+pipeline to incorporate all predictor variables.</p>
+<p>Note that we also have the same concern regarding the selection of predictors
+in KNN regression as in KNN classification: having more predictors is <strong>not</strong> always
+better, and the choice of which predictors to use has a potentially large influence
+on the quality of predictions. Fortunately, we can use the predictor selection
+algorithm from the classification chapter in KNN regression as well.
+As the algorithm is the same, we will not cover it again in this chapter.</p>
+<p>We will now demonstrate a multivariable KNN regression \index{K-nearest neighbors!multivariable regression}  analysis of the
+Sacramento real estate \index{Sacramento real estate} data using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. This time we will use
+house size (measured in square feet) as well as number of bedrooms as our
+predictors, and continue to use house sale price as our outcome/target variable
+that we are trying to predict.
+It is always a good practice to do exploratory data analysis, such as
+visualizing the data, before we start modeling the data. <a class="reference internal" href="#fig-07-bedscatter"><span class="std std-numref">Fig. 89</span></a>
+shows that the number of bedrooms might provide useful information
+to help predict the sale price of a house.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_beds</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">sacramento</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">mark_circle</span><span class="p">(</span><span class="n">opacity</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s2">&quot;beds&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Number of Bedrooms&quot;</span><span class="p">),</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Price (USD)&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;$,.0f&quot;</span><span class="p">)),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">plot_beds</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="figure align-default" id="fig-07-bedscatter">
+<p class="caption"><span class="caption-number">Fig. 89 </span><span class="caption-text">Scatter plot of the sale price of houses versus the number of bedrooms.</span><a class="headerlink" href="#fig-07-bedscatter" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-07-bedscatter"><span class="std std-numref">Fig. 89</span></a> shows that as the number of bedrooms increases,
+the house sale price tends to increase as well, but that the relationship
+is quite weak. Does adding the number of bedrooms
+to our model improve our ability to predict price? To answer that
+question, we will have to create a new KNN regression
+model using house size and number of bedrooms, and then we can compare it to
+the model we previously came up with that only used house
+size. Let’s do that now!</p>
+<p>First we’ll build a new model specification and preprocessor for the analysis. Note that
+we pass in <code class="docutils literal notranslate"><span class="pre">[&quot;sqft&quot;,</span> <span class="pre">&quot;beds&quot;]</span></code> to denote that we have two predictors in <code class="docutils literal notranslate"><span class="pre">make_column_transformer</span></code>.
+Moreover, we do not specify <code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> in <code class="docutils literal notranslate"><span class="pre">KNeighborsRegressor</span></code> inside the pipeline, and pass this pipeline to the <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> to tell <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> to tune the number of neighbors for us.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># preprocess the data, make the pipeline</span>
+<span class="n">sacr_preprocessor</span> <span class="o">=</span> <span class="n">make_column_transformer</span><span class="p">((</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;sqft&quot;</span><span class="p">,</span> <span class="s2">&quot;beds&quot;</span><span class="p">]))</span>
+<span class="n">sacr_pipeline</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">sacr_preprocessor</span><span class="p">,</span> <span class="n">KNeighborsRegressor</span><span class="p">())</span>
+
+<span class="c1"># create the predictor and target</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sacramento_train</span><span class="p">[[</span><span class="s2">&quot;sqft&quot;</span><span class="p">,</span> <span class="s2">&quot;beds&quot;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sacramento_train</span><span class="p">[[</span><span class="s2">&quot;price&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we’ll use 5-fold cross-validation through <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> to choose the number of neighbors via the minimum RMSPE:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create the 5-fold GridSearchCV object</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;kneighborsregressor__n_neighbors&quot;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">201</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="n">sacr_gridsearch</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="n">sacr_pipeline</span><span class="p">,</span>
+    <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;neg_root_mean_squared_error&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># fit the GridSearchCV object</span>
+<span class="n">sacr_gridsearch</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># retrieve the CV scores</span>
+<span class="n">sacr_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sacr_gridsearch</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="c1"># negate mean_test_score (negative RMSPE) to get the actual RMSPE</span>
+<span class="n">sacr_results</span><span class="p">[</span><span class="s2">&quot;RMSPE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">sacr_results</span><span class="p">[</span><span class="s2">&quot;mean_test_score&quot;</span><span class="p">]</span>
+
+<span class="c1"># show only the row of minimum RMSPE</span>
+<span class="n">sacr_multi</span> <span class="o">=</span> <span class="n">sacr_results</span><span class="p">[</span><span class="n">sacr_results</span><span class="p">[</span><span class="s2">&quot;RMSPE&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">sacr_results</span><span class="p">[</span><span class="s2">&quot;RMSPE&quot;</span><span class="p">])]</span>
+<span class="n">sacr_k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sacr_multi</span><span class="p">[</span><span class="s2">&quot;param_kneighborsregressor__n_neighbors&quot;</span><span class="p">])</span>
+
+<span class="n">sacr_multi</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_kneighborsregressor__n_neighbors</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>split3_test_score</th>
+      <th>split4_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+      <th>RMSPE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>11</th>
+      <td>0.003792</td>
+      <td>0.001426</td>
+      <td>0.003018</td>
+      <td>0.001913</td>
+      <td>12</td>
+      <td>{'kneighborsregressor__n_neighbors': 12}</td>
+      <td>-84112.371032</td>
+      <td>-87524.982111</td>
+      <td>-92748.561841</td>
+      <td>-90507.473349</td>
+      <td>-84252.419158</td>
+      <td>-87829.161498</td>
+      <td>3408.049188</td>
+      <td>1</td>
+      <td>87829.161498</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Here we see that the smallest estimated RMSPE from cross-validation occurs when <span class="math notranslate nohighlight">\(K =\)</span> .
+If we want to compare this multivariable KNN regression model to the model with only a single
+predictor <em>as part of the model tuning process</em> (e.g., if we are running forward selection as described
+in the chapter on evaluating and tuning classification models),
+then we must compare the accuracy estimated using only the training data via cross-validation.
+Looking back, the estimated cross-validation accuracy for the single-predictor
+model was .
+The estimated cross-validation accuracy for the multivariable model is
+.
+Thus in this case, we did not improve the model
+by a large amount by adding this additional predictor.</p>
+<p>Regardless, let’s continue the analysis to see how we can make predictions with a multivariable KNN regression model
+and evaluate its performance on test data. We first need to re-train the model on the entire
+training data set with <span class="math notranslate nohighlight">\(K =\)</span> , and then use that model to make predictions
+on the test data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># re-make the pipeline</span>
+<span class="n">sacr_pipeline_mult</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
+    <span class="n">sacr_preprocessor</span><span class="p">,</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">sacr_k</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># fit the pipeline object</span>
+<span class="n">sacr_pipeline_mult</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># predict on test data</span>
+<span class="n">sacr_preds</span> <span class="o">=</span> <span class="n">sacramento_test</span>
+<span class="n">sacr_preds</span> <span class="o">=</span> <span class="n">sacr_preds</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">predicted</span><span class="o">=</span><span class="n">sacr_pipeline_mult</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">sacramento_test</span><span class="p">))</span>
+
+<span class="c1"># calculate RMSPE</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="n">RMSPE_mult</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+    <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_true</span><span class="o">=</span><span class="n">sacr_preds</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">],</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">sacr_preds</span><span class="p">[</span><span class="s2">&quot;predicted&quot;</span><span class="p">])</span>
+<span class="p">)</span>
+
+<span class="n">RMSPE_mult</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78890.44165148023
+</pre></div>
+</div>
+</div>
+</div>
+<p>This time, when we performed KNN regression on the same data set, but also
+included number of bedrooms as a predictor, we obtained a RMSPE test error
+of .
+<a class="reference internal" href="#fig-07-knn-mult-viz"><span class="std std-numref">Fig. 90</span></a> visualizes the model’s predictions overlaid on top of the data. This
+time the predictions are a surface in 3D space, instead of a line in 2D space, as we have 2
+predictors instead of 1.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [44],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;img/regression1/fig07-knn-mult-viz.html&quot;</span><span class="p">))</span>
+
+<span class="ne">NameError</span>: name &#39;HTML&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="caption-hack figure align-default" id="fig-07-knn-mult-viz">
+<img alt="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+<p class="caption"><span class="caption-number">Fig. 90 </span><span class="caption-text">KNN regression model’s predictions represented as a surface in 3D space overlaid on top of the data using three predictors (price, house size, and the number of bedrooms). Note that in general we recommend against using 3D visualizations; here we use a 3D visualization only to illustrate what the surface of predictions looks like for learning purposes.</span><a class="headerlink" href="#fig-07-knn-mult-viz" title="Permalink to this image">¶</a></p>
+</div>
+<p>We can see that the predictions in this case, where we have 2 predictors, form
+a surface instead of a line. Because the newly added predictor (number of bedrooms) is
+related to price (as price changes, so does number of bedrooms)
+and is not totally determined by house size (our other predictor),
+we get additional and useful information for making our
+predictions. For example, in this model we would predict that the cost of a
+house with a size of 2,500 square feet generally increases slightly as the number
+of bedrooms increases. Without having the additional predictor of number of
+bedrooms, we would predict the same price for these two houses.</p>
+</div>
+<div class="section" id="strengths-and-limitations-of-knn-regression">
+<h2>Strengths and limitations of KNN regression<a class="headerlink" href="#strengths-and-limitations-of-knn-regression" title="Permalink to this headline">¶</a></h2>
+<p>As with KNN classification (or any prediction algorithm for that matter), KNN
+regression has both strengths and weaknesses. Some are listed here:</p>
+<p><strong>Strengths:</strong> K-nearest neighbors regression</p>
+<ol class="simple">
+<li><p>is a simple, intuitive algorithm,</p></li>
+<li><p>requires few assumptions about what the data must look like, and</p></li>
+<li><p>works well with non-linear relationships (i.e., if the relationship is not a straight line).</p></li>
+</ol>
+<p><strong>Weaknesses:</strong> K-nearest neighbors regression</p>
+<ol class="simple">
+<li><p>becomes very slow as the training data gets larger,</p></li>
+<li><p>may not perform well with a large number of predictors, and</p></li>
+<li><p>may not predict well beyond the range of values input in your training data.</p></li>
+</ol>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p>Practice exercises for the material covered in this chapter
+can be found in the accompanying
+<a class="reference external" href="https://github.com/UBC-DSCI/data-science-a-first-intro-worksheets#readme">worksheets repository</a>
+in the “Regression I: K-nearest neighbors” row.
+You can launch an interactive version of the worksheet in your browser by clicking the “launch binder” button.
+You can also preview a non-interactive version of the worksheet by clicking “view worksheet.”
+If you instead decide to download the worksheet and run it on your own machine,
+make sure to follow the instructions for computer setup
+found in Chapter <span class="xref std std-ref">move-to-your-own-machine</span>. This will ensure that the automated feedback
+and guidance that the worksheets provide will function as intended.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<div class="docutils container" id="id2">
+<dl class="citation">
+<dt class="label" id="id9"><span class="brackets">BKM67</span></dt>
+<dd><p>Evelyn Martin Lansdowne Beale, Maurice George Kendall, and David Mann. The discarding of variables in multivariate analysis. <em>Biometrika</em>, 54(3-4):357–366, 1967.</p>
+</dd>
+<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id1">CH67</a></span></dt>
+<dd><p>Thomas Cover and Peter Hart. Nearest neighbor pattern classification. <em>IEEE Transactions on Information Theory</em>, 13(1):21–27, 1967.</p>
+</dd>
+<dt class="label" id="id45"><span class="brackets">Coxd.</span></dt>
+<dd><p>Murray Cox. Inside Airbnb. n.d. URL: <a class="reference external" href="http://insideairbnb.com/">http://insideairbnb.com/</a> (visited on 2020-09-01).</p>
+</dd>
+<dt class="label" id="id60"><span class="brackets">DcCetinkayaRB19</span></dt>
+<dd><p>David Diez, Mine Çetinkaya-Rundel, and Christopher Barr. <em>OpenIntro Statistics</em>. OpenIntro, Inc., 2019. URL: <a class="reference external" href="https://openintro.org/book/os/">https://openintro.org/book/os/</a>.</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets">DS66</span></dt>
+<dd><p>Norman Draper and Harry Smith. <em>Applied Regression Analysis</em>. Wiley, 1966.</p>
+</dd>
+<dt class="label" id="id3"><span class="brackets">Efo66</span></dt>
+<dd><p>M. Eforymson. Stepwise regression—a backward and forward look. In <em>Eastern Regional Meetings of the Institute of Mathematical Statistics</em>. 1966.</p>
+</dd>
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">FH51</a></span></dt>
+<dd><p>Evelyn Fix and Joseph Hodges. Discriminatory analysis. nonparametric discrimination: consistency properties. Technical Report, USAF School of Aviation Medicine, Randolph Field, Texas, 1951.</p>
+</dd>
+<dt class="label" id="id10"><span class="brackets">HL67</span></dt>
+<dd><p>Ronald Hocking and R. N. Leslie. Selection of the best subset in regression analysis. <em>Technometrics</em>, 9(4):531–540, 1967.</p>
+</dd>
+<dt class="label" id="id48"><span class="brackets">IK20</span></dt>
+<dd><p>Chester Ismay and Albert Kim. <em>Statistical Inference via Data Science: A ModernDive into R and the Tidyverse</em>. Chapman and Hall/CRC Press, 2020. URL: <a class="reference external" href="https://moderndive.com/">https://moderndive.com/</a>.</p>
+</dd>
+<dt class="label" id="id21"><span class="brackets">JWHT13</span></dt>
+<dd><p>Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. <em>An Introduction to Statistical Learning</em>. Springer, 1st edition, 2013. URL: <a class="reference external" href="https://www.statlearning.com/">https://www.statlearning.com/</a>.</p>
+</dd>
+<dt class="label" id="id50"><span class="brackets">McK12</span></dt>
+<dd><p>Wes McKinney. <em>Python for data analysis: Data wrangling with Pandas, NumPy, and IPython</em>. &quot; O'Reilly Media, Inc.&quot;, 2012.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets">SWM93</span></dt>
+<dd><p>William Nick Street, William Wolberg, and Olvi Mangasarian. Nuclear feature extraction for breast tumor diagnosis. In <em>International Symposium on Electronic Imaging: Science and Technology</em>. 1993.</p>
+</dd>
+<dt class="label" id="id20"><span class="brackets">Wic14</span></dt>
+<dd><p>Hadley Wickham. Tidy data. <em>Journal of Statistical Software</em>, 59(10):1–23, 2014.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="classification2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Classification II: evaluation &amp; tuning</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="regression2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Regression II: linear regression</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By UBC<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
