@@ -378,6 +378,12 @@ co2_line
 glue('co2_line', co2_line1, display=False)
 ```
 
+:name: co2_line_1
+:figclass: caption-hack
+
+Scatter plot of tumor cell concavity versus smoothness colored by diagnosis label.
+
+
 :::{glue:figure} co2_line1 
 :figwidth: 700px 
 :name: co2_line1
