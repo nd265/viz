@@ -1868,7 +1868,7 @@ plot_grid(morley_hist_default,
 
 
 ```{code-cell} ipython3
-:tags:['remove-cell']
+:tags: ["remove-cell"]
 
 morley_hist_40 = alt.Chart(morley_rel).mark_bar(opacity=0.6).encode(
     x = alt.X("relative_accuracy", bin=alt.Bin(maxbins=40), title = "Relative Accuracy (%)"), 
