@@ -1051,7 +1051,7 @@ To get started, we will read and inspect the data:
 
 
 ```{code-cell} ipython3
-islands_df = pd.read_csv("islands.csv")
+islands_df = pd.read_csv("data/islands.csv")
 islands_df
 ```
 
