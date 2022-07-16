@@ -374,12 +374,12 @@ co2_line = alt.Chart(co2_df).mark_line(color='black').encode(
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('co2_line', co2_line, display=True)
+glue('co2_line', co2_line1, display=True)
 ```
 
-:::{glue:figure} co2_line 
+:::{glue:figure} co2_line1 
 :figwidth: 700px 
-:name: co2_line
+:name: co2_line1
 
 Line plot of atmospheric concentration of CO$_{2}$ over time.
 :::
@@ -404,37 +404,21 @@ change the font size, we use the `theme` function with the `text` argument:
 \index{ggplot!xlab,ylab}
 \index{ggplot!theme}
 
-```{r 03-data-co2-line-2, warning=FALSE, message=FALSE, fig.height = 3.1, fig.width = 4.5, fig.align = "center",  fig.cap = "Line plot of atmospheric concentration of CO$_{2}$ over time with clearer axes and labels."}
-co2_line <- ggplot(co2_df, aes(x = date_measured, y = ppm)) +
-  geom_line() +
-  xlab("Year") +
-  ylab("Atmospheric CO2 (ppm)") +
-  theme(text = element_text(size = 12))
-
-co2_line
-```
-
-
 ```{code-cell} ipython3
 co2_line = alt.Chart(co2_df).mark_line(color='black').encode(
     x = alt.X("date_measured", title = "Year"),
     y = alt.Y("ppm", scale=alt.Scale(zero=False), title = "Atmospheric CO2 (ppm)")).configure_axis(
     titleFontSize=12)
-
-
-
-co2_line
 ```
-
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('co2_line', co2_line, display=True)
+glue('co2_line', co2_line2, display=True)
 ```
 
-:::{glue:figure} co2_line 
+:::{glue:figure} co2_line2 
 :figwidth: 700px 
-:name: co2_line
+:name: co2_line2
 
 Line plot of atmospheric concentration of CO$_{2}$ over time with clearer axes and labels.
 :::
@@ -468,18 +452,6 @@ to convert the character strings we provide to `c` to `date` vectors.
 > but is not loaded by it. 
 > Hence we need to load it separately in the code below.
 
-```{r 03-data-co2-line-3, warning = FALSE, message = FALSE, fig.height = 3.1, fig.width = 4.5, fig.align = "center", fig.pos = "H", out.extra="", fig.cap = "Line plot of atmospheric concentration of CO$_{2}$ from 1990 to 1994."}
-library(lubridate)
-
-co2_line <- ggplot(co2_df, aes(x = date_measured, y = ppm)) +
-  geom_line() +
-  xlab("Year") +
-  ylab("Atmospheric CO2 (ppm)") +
-  xlim(c(date("1990-01-01"), date("1993-12-01"))) +
-  theme(text = element_text(size = 12))
-
-co2_line
-```
 
 
 ```{code-cell} ipython3
@@ -493,17 +465,17 @@ co2_line = alt.Chart(co2_dates).mark_line(color='black').encode(
 
 
 
-co2_line
+
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('co2_line', co2_line, display=True)
+glue('co2_line', co2_line3, display=True)
 ```
 
-:::{glue:figure} co2_line 
+:::{glue:figure} co2_line3
 :figwidth: 700px 
-:name: co2_line
+:name: co2_line3
 
 Line plot of atmospheric concentration of CO$_{2}$ from 1990 to 1994.
 :::
@@ -547,12 +519,6 @@ these specialized data frames provide.
 Is there a relationship between the waiting time before an eruption 
 and the duration of the eruption? 
 
-```{r 03-data-faithful, warning=FALSE, message=FALSE}
-# old faithful eruption time / wait time data
-faithful <- as_tibble(faithful)
-faithful
-```
-
 
 ```{code-cell} ipython3
 faithful = pd.read_csv("data/faithful.csv")
@@ -571,12 +537,6 @@ function with the `waiting` variable on the horizontal axis, the `eruptions`
 variable on the vertical axis, and the `geom_point` geometric object.
 The result is shown in Figure \@ref(fig:03-data-faithful-scatter).
 
-```{r 03-data-faithful-scatter, warning=FALSE, message=FALSE, fig.height = 3.5, fig.width = 3.75, fig.align = "center", fig.pos = "H", out.extra="", fig.cap = "Scatter plot of waiting time and eruption time."}
-faithful_scatter <- ggplot(faithful, aes(x = waiting, y = eruptions)) +
-  geom_point()
-
-faithful_scatter
-```
 
 
 ```{code-cell} ipython3
@@ -606,14 +566,7 @@ the points are generally nicely visually separated, and the pattern they form
 is clear.  In order to refine the visualization, we need only to add axis
 labels and make the font more readable:
 
-```{r 03-data-faithful-scatter-2, warning=FALSE, message=FALSE, fig.height = 3.5, fig.width = 3.75, fig.align = "center",  fig.pos = "H", out.extra="", fig.cap = "Scatter plot of waiting time and eruption time with clearer axes and labels."}
-faithful_scatter <- ggplot(faithful, aes(x = waiting, y = eruptions)) +
-  geom_point() +
-  labs(x = "Waiting Time (mins)", y = "Eruption Duration (mins)") +
-  theme(text = element_text(size = 12))
 
-faithful_scatter
-```
 
 ```{code-cell} ipython3
 faithful_scatter = alt.Chart(faithful).mark_circle(color='black').encode(
@@ -628,12 +581,12 @@ faithful_scatter
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('faithful_scatter', faithful_scatter, display=True)
+glue('faithful_scatter', faithful_scatter2, display=True)
 ```
 
-:::{glue:figure} faithful_scatter 
+:::{glue:figure} faithful_scatter2 
 :figwidth: 700px 
-:name: faithful_scatter
+:name: faithful_scatter2
 
 Scatter plot of waiting time and eruption time with clearer axes and labels.
 :::
@@ -658,10 +611,6 @@ non-official and non-Aboriginal languages)?
 
 To get started, we will read and inspect the data:
 
-```{r 03-canlang-example, message = F, warning = F}
-can_lang <- read_csv("data/can_lang.csv")
-can_lang
-```
 
 ```{code-cell} ipython3
 can_lang =  pd.read_csv("data/can_lang.csv")
@@ -676,10 +625,7 @@ We will begin with a scatter plot of the `mother_tongue` and `most_at_home` colu
 The resulting plot is shown in Figure \@ref(fig:03-mother-tongue-vs-most-at-home).
 \index{ggplot!geom\_point}
 
-```{r 03-mother-tongue-vs-most-at-home, fig.height=3.5, fig.width=3.75, fig.align = "center", warning=FALSE, fig.pos = "H", out.extra="", fig.cap = "Scatter plot of number of Canadians reporting a language as their mother tongue vs the primary language at home."}
-ggplot(can_lang, aes(x = most_at_home, y = mother_tongue)) +
-  geom_point()
-``` 
+
 
 ```{code-cell} ipython3
 
@@ -712,13 +658,7 @@ make the axes labels on the plots more readable.
 \index{escape character} We should also increase the font size to further 
 improve readability.
 
-```{r 03-mother-tongue-vs-most-at-home-labs, fig.height=3.5, fig.width=3.75, fig.align = "center", warning=FALSE, fig.pos = "H", out.extra="", fig.cap = "Scatter plot of number of Canadians reporting a language as their mother tongue vs the primary language at home with x and y labels."}
-ggplot(can_lang, aes(x = most_at_home, y = mother_tongue)) +
-  geom_point() +
-  labs(x = "Language spoken most at home \n (number of Canadian residents)",
-       y = "Mother tongue \n (number of Canadian residents)") +
-  theme(text = element_text(size = 12))
-```
+
 ```{code-cell} ipython3
 can_lang_plot = alt.Chart(can_lang).mark_circle(color='black').encode(
     x = alt.X("most_at_home",title = "Language spoken most at home(number of Canadian residents)"),
@@ -729,29 +669,18 @@ can_lang_plot = alt.Chart(can_lang).mark_circle(color='black').encode(
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot, display=True)
+glue('can_lang_plot', can_lang_plot2, display=True)
 ```
 
-:::{glue:figure} can_lang_plot
+:::{glue:figure} can_lang_plot2
 :figwidth: 700px 
-:name: can_lang_plot
+:name: can_lang_plot2
 
 Scatter plot of number of Canadians reporting a language as their mother tongue vs the primary language at home with x and y labels.
 :::
 
 
-```{r mother-tongue-hidden-summaries, echo = FALSE, warning = FALSE, message = FALSE}
-numlang_speakers <- can_lang |> 
-              select(mother_tongue) |> 
-              summarize(maxsp = max(mother_tongue), 
-                        minsp = min(mother_tongue))
 
-maxlang_speakers <- numlang_speakers |> 
-  pull(maxsp)
-
-minlang_speakers <- numlang_speakers |> 
-  pull(minsp)
-```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
@@ -775,10 +704,6 @@ We can confirm that the two points in the upper right-hand corner correspond
 to Canada's two official languages by filtering the data:
 \index{filter}
 
-```{r english-mother-tongue}
-can_lang |>
-  filter(language == "English" | language == "French")
-```
 ```{code-cell} ipython3
 can_lang.loc[(can_lang['language']=='English') | (can_lang['language']=='French')]
 
@@ -807,17 +732,6 @@ to put commas in these numbers to increase their readability.
 We can do this in R by passing the `label_comma` function (from the `scales` package)
 to the `labels` argument of the `scale_x_log10` and `scale_x_log10` functions.
 
-```{r 03-mother-tongue-vs-most-at-home-scale, message = FALSE, warning =  FALSE, fig.height=3.5,  fig.width=3.75, fig.align = "center",  fig.pos = "H", out.extra="", fig.cap = "Scatter plot of number of Canadians reporting a language as their mother tongue vs the primary language at home with log adjusted x and y axes."}
-library(scales)
-
-ggplot(can_lang, aes(x = most_at_home, y = mother_tongue)) +
-  geom_point() +
-  labs(x = "Language spoken most at home \n (number of Canadian residents)",
-       y = "Mother tongue \n (number of Canadian residents)") +
-  theme(text = element_text(size = 12)) +
-  scale_x_log10(labels = label_comma()) +
-  scale_y_log10(labels = label_comma())
-```
 
 
 ```{code-cell} ipython3
@@ -829,23 +743,17 @@ can_lang_plot = alt.Chart(can_lang).mark_circle(color='black').encode(
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot, display=True)
+glue('can_lang_plot', can_lang_plot3, display=True)
 ```
 
-:::{glue:figure} can_lang_plot
+:::{glue:figure} can_lang_plot3
 :figwidth: 700px 
-:name: can_lang_plot
+:name: can_lang_plot3
 
 Scatter plot of number of Canadians reporting a language as their mother tongue vs the primary language at home with log adjusted x and y axes.
 :::
 
-```{r 03-changing-the-units, include = FALSE}
-english_mother_tongue <- can_lang |>
-  filter(language == "English") |>
-  pull(mother_tongue)
 
-census_popn <- 35151728
-```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
@@ -877,16 +785,7 @@ end of the data table, we selected the new columns after the transformation so
 you can clearly see the mutated output from the table.
 \index{mutate}\index{select}
 
-```{r}
-can_lang <- can_lang |>
-  mutate(
-    mother_tongue_percent = (mother_tongue / 35151728) * 100,
-    most_at_home_percent = (most_at_home / 35151728) * 100
-  )
 
-can_lang |> 
-  select(mother_tongue_percent, most_at_home_percent)
-```
 
 ```{code-cell} ipython3
 can_lang = can_lang.assign(mother_tongue_percent = (can_lang['mother_tongue'] / 35151728) * 100,
@@ -900,15 +799,7 @@ Finally, we will edit the visualization to use the percentages we just computed
 units). Figure \@ref(fig:03-mother-tongue-vs-most-at-home-scale-props) displays
 the final result.
 
-```{r 03-mother-tongue-vs-most-at-home-scale-props, fig.height=3.5,  fig.width=3.75, fig.align = "center",  warning=FALSE, fig.pos = "H", out.extra="", fig.cap = "Scatter plot of percentage of Canadians reporting a language as their mother tongue vs the primary language at home."}
-ggplot(can_lang, aes(x = most_at_home_percent, y = mother_tongue_percent)) +
-  geom_point() +
-  labs(x = "Language spoken most at home \n (percentage of Canadian residents)",
-       y = "Mother tongue \n (percentage of Canadian residents)") +
-  theme(text = element_text(size = 12)) +
-  scale_x_log10(labels = comma) +
-  scale_y_log10(labels = comma)
-```
+
 
 ```{code-cell} ipython3
 
@@ -920,12 +811,12 @@ can_lang_plot = alt.Chart(can_lang).mark_circle(color='black').encode(
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot, display=True)
+glue('can_lang_plot', can_lang_plot4, display=True)
 ```
 
-:::{glue:figure} can_lang_plot
+:::{glue:figure} can_lang_plot4
 :figwidth: 700px 
-:name: can_lang_plot
+:name: can_lang_plot4
 
 Scatter plot of percentage of Canadians reporting a language as their mother tongue vs the primary language at home.
 :::
@@ -978,17 +869,7 @@ that the `category` column should color the points. Adding this argument will
 color the points according to their group and add a legend at the side of the
 plot. 
 
-```{r 03-scatter-color-by-category, warning=FALSE, fig.height=3.5, fig.width=5, fig.align = "center", fig.pos = "H", out.extra="", fig.cap = "Scatter plot of percentage of Canadians reporting a language as their mother tongue vs the primary language at home colored by language category."}
-ggplot(can_lang, aes(x = most_at_home_percent, 
-                     y = mother_tongue_percent, 
-                     color = category)) +
-  geom_point() +
-  labs(x = "Language spoken most at home \n (percentage of Canadian residents)",
-       y = "Mother tongue \n (percentage of Canadian residents)") +
-  theme(text = element_text(size = 12)) +
-  scale_x_log10(labels = comma) +
-  scale_y_log10(labels = comma)
-```
+
 
 
 ```{code-cell} ipython3
@@ -1001,12 +882,12 @@ can_lang_plot = alt.Chart(can_lang).mark_circle().encode(
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot, display=True)
+glue('can_lang_plot', can_lang_plot5, display=True)
 ```
 
-:::{glue:figure} can_lang_plot
+:::{glue:figure} can_lang_plot5
 :figwidth: 700px 
-:name: can_lang_plot
+:name: can_lang_plot5
 
 Scatter plot of percentage of Canadians reporting a language as their mother tongue vs the primary language at home colored by language category.
 :::
@@ -1026,19 +907,6 @@ However, that will not work well for this particular visualization
 because the legend labels are quite long 
 and would run off the page if displayed this way.
 
-```{r 03-scatter-color-by-category-legend-edit, warning=FALSE, fig.height=4.75,  fig.width=3.75, fig.align = "center", fig.pos = "H", out.extra="", fig.cap = "Scatter plot of percentage of Canadians reporting a language as their mother tongue vs the primary language at home colored by language category with the legend edited."}
-ggplot(can_lang, aes(x = most_at_home_percent, 
-                     y = mother_tongue_percent, 
-                     color = category)) +
-  geom_point() +
-  labs(x = "Language spoken most at home \n (percentage of Canadian residents)",
-       y = "Mother tongue \n (percentage of Canadian residents)") +
-  theme(text = element_text(size = 12),
-        legend.position = "top",
-        legend.direction = "vertical") +
-  scale_x_log10(labels = comma) +
-  scale_y_log10(labels = comma)
-```
 
 
 ```{code-cell} ipython3
@@ -1056,12 +924,12 @@ can_lang_plot = alt.Chart(can_lang).mark_circle().encode(
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot, display=True)
+glue('can_lang_plot', can_lang_plot6, display=True)
 ```
 
-:::{glue:figure} can_lang_plot
+:::{glue:figure} can_lang_plot6
 :figwidth: 700px 
-:name: can_lang_plot
+:name: can_lang_plot6
 
 Scatter plot of percentage of Canadians reporting a language as their mother tongue vs the primary language at home colored by language category with the legend edited.
 :::
@@ -1098,21 +966,7 @@ this makes the scatter point shapes different for each category. This kind of
 visual redundancy&mdash;i.e., conveying the same information with both scatter point color and shape&mdash;can
 further improve the clarity and accessibility of your visualization.
 
-```{r scatter-color-by-category-palette, fig.height=4.75,  fig.width=3.75, fig.align = "center", warning=FALSE, fig.pos = "H", out.extra="",  fig.cap = "Scatter plot of percentage of Canadians reporting a language as their mother tongue vs the primary language at home colored by language category with color-blind friendly colors."}
-ggplot(can_lang, aes(x = most_at_home_percent, 
-                     y = mother_tongue_percent, 
-                     color = category, 
-                     shape = category)) +
-  geom_point() +
-  labs(x = "Language spoken most at home \n (percentage of Canadian residents)",
-       y = "Mother tongue \n (percentage of Canadian residents)") +
-  theme(text = element_text(size = 12),
-        legend.position = "top",
-        legend.direction = "vertical") +
-  scale_x_log10(labels = comma) +
-  scale_y_log10(labels = comma) +
-  scale_color_brewer(palette = "Set2")
-```
+
 
 
 ```{code-cell} ipython3
@@ -1131,12 +985,12 @@ can_lang_plot = alt.Chart(can_lang).mark_point(filled=True).encode(
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot, display=True)
+glue('can_lang_plot', can_lang_plot7, display=True)
 ```
 
-:::{glue:figure} can_lang_plot
+:::{glue:figure} can_lang_plot7
 :figwidth: 700px 
-:name: can_lang_plot
+:name: can_lang_plot7
 
 Scatter plot of percentage of Canadians reporting a language as their mother tongue vs the primary language at home colored by language category with color-blind friendly colors.
 :::
@@ -1168,49 +1022,7 @@ Answering those questions often involves doing more complex analyses, and someti
 even gathering additional data. We will see more of such complex analyses later on in 
 this book.  
 
-<!--
-Finally, we can go one step further and distinguish English and French languages
-with different colors in our visualization. To separate these languages, we
-will filter the rows where the language is either English or French and mutate
-the `category` column to equal the corresponding language. 
-\index{filter}\index{mutate}
 
-```{r 03-separate-English-French}
-english_and_french <- can_lang |>
-  filter(language == "English" | language == "French") |>
-  mutate(category = language)
-english_and_french
-```
-
-Next we will bind \index{bind\_rows} the mutated data set `english_and_french` that we just created with the remaining rows in the `can_lang` data set:
-```{r 03-bind-english-french}
-can_lang <- bind_rows(
-  english_and_french,
-  can_lang |>
-    filter(language != "English" & language != "French")
-)
-```
-
-+++
-
-We have added a few more layers to make the data visualization in Figure \@ref(fig:03-nachos-to-cheesecake) even more effective. Specifically, we used have improved the visualizations accessibility by choosing colors that are easier to distinguish, mapped category to shape, and handled the problem of overlapping data points by making them slightly transparent. \index{ggplot!transparency}\index{alpha|see{ggplot}}
-
-```{r 03-nachos-to-cheesecake, fig.width=7.75, fig.height=4, warning=FALSE, message=FALSE, fig.cap = "Scatter plot of percentage of Canadians reporting a language as their mother tongue vs the primary language at home colored by language category."}
-ggplot(can_lang, aes(
-  x = most_at_home_percent,
-  y = mother_tongue_percent,
-  color = category,
-  shape = category # map categories to different shapes
-)) + 
-  geom_point(alpha = 0.6) + # set the transparency of the points
-  labs(x = "Language spoken most at home \n (percentage of Canadian residents)",
-       y = "Mother tongue \n (percentage of Canadian residents)") +
-  theme(text = element_text(size = 12)) +
-  scale_x_log10(labels = comma) +
-  scale_y_log10(labels = comma) + 
-  scale_color_brewer(palette = "RdYlBu")
-```
--->
 
 ### Bar plots: the island landmass data set
 The `islands.csv` data set \index{Island landmasses} contains a list of Earth's landmasses as well as their area (in thousands of square miles) [@islandsdata]. 
@@ -1231,11 +1043,6 @@ write_csv(islands_df, "data/islands.csv")
 
 To get started, we will read and inspect the data:
 
-```{r 03-data-islands, warning=FALSE, message=FALSE}
-# islands data
-islands_df <- read_csv("data/islands.csv")
-islands_df
-```
 
 
 ```{code-cell} ipython3
@@ -1259,12 +1066,6 @@ the landmass sizes. So we have to pass the `stat = "identity"` argument to `geom
 shown in Figure \@ref(fig:03-data-islands-bar).
 \index{ggplot!geom\_bar}
 
-```{r 03-data-islands-bar, warning=FALSE, message=FALSE,  fig.width=5, fig.height=2.75, fig.align = "center", fig.pos = "H", out.extra="", fig.cap = "Bar plot of all Earth's landmasses' size with squished labels."}
-islands_bar <- ggplot(islands_df, aes(x = landmass, y = size)) +
-  geom_bar(stat = "identity")
-
-islands_bar
-```
 
 
 ```{code-cell} ipython3
@@ -1297,13 +1098,7 @@ space, we'll use horizontal bars instead of vertical ones. We do this by
 swapping the `x` and `y` variables:
 \index{slice\_max}
 
-```{r 03-data-islands-bar-2, warning=FALSE, message=FALSE, fig.width=5, fig.height=2.75, fig.align = "center", fig.pos = "H", out.extra="", fig.cap = "Bar plot of size for Earth's largest 12 landmasses."}
-islands_top12 <- slice_max(islands_df, order_by = size, n = 12)
-islands_bar <- ggplot(islands_top12, aes(x = size, y = landmass)) +
-  geom_bar(stat = "identity") 
 
-islands_bar
-```
 
 ```{code-cell} ipython3
 islands_top12 = islands_df.sort_values(by = "size", ascending=False).iloc[:12] 
@@ -1366,17 +1161,7 @@ Thus we use the `fill` argument inside `labs` to change that to "Type."
 Finally, we again \index{ggplot!reorder} use the `theme` function 
 to change the font size.
 
-```{r 03-data-islands-bar-4, warning = FALSE, message = FALSE, fig.width=5, fig.height=2.75, fig.align="center", fig.pos = "H", out.extra="", fig.cap = "Bar plot of size for Earth's largest 12 landmasses colored by whether its a continent with clearer axes and labels."}
-islands_bar <- ggplot(islands_top12, 
-                      aes(x = size,
-                          y = fct_reorder(landmass, size, .desc = TRUE), 
-                          fill = landmass_type)) +
-  geom_bar(stat = "identity") +
-  labs(x = "Size (1000 square mi)", y = "Landmass",  fill = "Type") +
-  theme(text = element_text(size = 12))
 
-islands_bar
-```
 ```{code-cell} ipython3
 islands_top12_plot = alt.Chart(islands_top12).mark_bar(color='black').encode(
     x = alt.X("size",title = "Size (1000 square mi)"),
@@ -1425,11 +1210,7 @@ these specialized data frames provide.
 **Question:** \index{question!visualization} Given what we know now about the speed of 
 light (299,792.458 kilometres per second), how accurate were each of the experiments?
 
-```{r 03-data-morley, warning=FALSE, message=FALSE}
-# michelson morley experimental data
-morley <- as_tibble(morley)
-morley
-```
+
 
 ```{code-cell} ipython3
 morley_df = pd.read_csv("data/morley.csv")
@@ -1453,12 +1234,7 @@ To create a histogram in `ggplot2` we will use the `geom_histogram` geometric
 object, setting the `x` axis to the `Speed` measurement variable. As usual, 
 let's use the default arguments just to see how things look.
 
-```{r 03-data-morley-hist, warning=FALSE, message=FALSE,  fig.height = 2.75, fig.width = 4.5, fig.align = "center", fig.pos = "H", out.extra="", fig.cap = "Histogram of Michelson's speed of light data."}
-morley_hist <- ggplot(morley, aes(x = Speed)) +
-  geom_histogram()
 
-
-```
 
 
 
@@ -1506,13 +1282,7 @@ Note that
 *vertical lines* are used to denote quantities on the *horizontal axis*, 
 while *horizontal lines* are used to denote quantities on the *vertical axis*. 
 
-```{r 03-data-morley-hist-2, warning=FALSE,  fig.height = 2.75, fig.width = 4.5, fig.align = "center", fig.pos = "H", out.extra="", message=FALSE,fig.cap = "Histogram of Michelson's speed of light data with vertical line indicating true speed of light."}
-morley_hist <- ggplot(morley, aes(x = Speed)) +
-  geom_histogram() +
-  geom_vline(xintercept = 792.458, linetype = "dashed", size = 2)
 
-morley_hist
-```
 
 
 
@@ -1559,14 +1329,6 @@ instead of stacked bars
 (which is the default for bar plots or histograms 
 when they are colored by another categorical variable).
 
-```{r 03-data-morley-hist-3, warning=FALSE, message=FALSE,  fig.height = 2.75, fig.width = 4.5, fig.align = "center", fig.pos = "H", out.extra="", fig.cap = "Histogram of Michelson's speed of light data colored by experiment."}
-morley_hist <- ggplot(morley, aes(x = Speed, fill = Expt)) +
-  geom_histogram(alpha = 0.5, position = "identity") +
-  geom_vline(xintercept = 792.458, linetype = "dashed", size = 2)
-
-
-```
-
 
 ```{code-cell} ipython3
 morley_hist = alt.Chart(morley_df).mark_bar(opacity=0.5).encode(
@@ -1606,13 +1368,6 @@ categories. By writing
 and the color will be mapped discretely.
 \index{factor!usage in ggplot}
 
-```{r 03-data-morley-hist-with-factor, warning=FALSE, message=FALSE,  fig.height = 2.75, fig.width = 5, fig.pos = "H", out.extra="", fig.align = "center", fig.cap = "Histogram of Michelson's speed of light data colored by experiment as factor."}
-morley_hist <- ggplot(morley, aes(x = Speed, fill = as_factor(Expt))) +
-  geom_histogram(alpha = 0.5, position = "identity") +
-  geom_vline(xintercept = 792.458, linetype = "dashed", size = 2)
-
-
-```
 
 
 ```{code-cell} ipython3
@@ -1667,14 +1422,6 @@ This function allows the column names to be correctly evaluated
 in the context of the data frame.
 \index{ggplot!facet\_grid}
 
-```{r 03-data-morley-hist-4, warning=FALSE, message=FALSE, fig.height = 5, fig.width = 4.25, fig.align = "center", fig.pos = "H", out.extra="", fig.cap = "Histogram of Michelson's speed of light data split vertically by experiment."}
-morley_hist <- ggplot(morley, aes(x = Speed, fill = as_factor(Expt))) +
-  geom_histogram() +
-  facet_grid(rows = vars(Expt)) +
-  geom_vline(xintercept = 792.458, linetype = "dashed", size = 2)
-
-morley_hist
-```
 
 ```{code-cell} ipython3
 
@@ -1714,24 +1461,7 @@ of just how accurate all the experiments were overall. For example, how accurate
 To answer this question, we'll use the `mutate` function to transform our data into a relative measure of accuracy rather than absolute measurements:
 \index{ggplot!labs}\index{ggplot!theme}
 
-```{r 03-data-morley-hist-5, warning=FALSE, message=FALSE, fig.height = 5.25, fig.width = 4.5, fig.align = "center", fig.pos = "H", out.extra="", fig.cap = "Histogram of relative accuracy split vertically by experiment with clearer axes and labels."}
-morley_rel <- mutate(morley, 
-                     relative_accuracy = 100 * 
-                       ((299000 + Speed) - 299792.458) / (299792.458))
 
-morley_hist <- ggplot(morley_rel, 
-                      aes(x = relative_accuracy, 
-                          fill = as_factor(Expt))) +
-  geom_histogram() +
-  facet_grid(rows = vars(Expt)) +
-  geom_vline(xintercept = 0, linetype = "dashed", size = 2) +
-  labs(x = "Relative Accuracy (%)", 
-       y = "# Measurements", 
-       fill = "Experiment ID") +
-  theme(text = element_text(size = 12))
-
-morley_hist
-```
 
 ```{code-cell} ipython3
 
@@ -1806,65 +1536,7 @@ In this case, we can see that both the default number of bins
 and the binwidth of 0.01 are effective for helping answer our question.
 On the other hand, the bin widths of 0.001 and 0.1 are too small and too big, respectively.
 
-```{r 03-data-morley-hist-binwidth, echo = FALSE, warning = FALSE, message = FALSE, fig.height = 10, fig.align = "center", fig.pos = "H", out.extra="", fig.cap = "Effect of varying bin width on histograms."}
-morley_hist_default <- ggplot(morley_rel, 
-                              aes(x = relative_accuracy, 
-                                  fill = as_factor(Expt))) +
-  geom_histogram() +
-  facet_grid(rows = vars(Expt)) +
-  geom_vline(xintercept = 0, linetype = "dashed", size = 2) +
-  labs(x = "Relative Accuracy (%)", 
-       y = "# Measurements", 
-       fill = "Experiment ID") +
-  theme(legend.position = "none") +
-  ggtitle("Default (bins = 30)")  + 
-  theme(text = element_text(size = 14), axis.title=element_text(size=14)) 
 
-morley_hist_big <- ggplot(morley_rel, 
-                          aes(x = relative_accuracy, 
-                              fill = as_factor(Expt))) +
-  geom_histogram(binwidth = 0.1) +
-  facet_grid(rows = vars(Expt)) +
-  geom_vline(xintercept = 0, linetype = "dashed", size = 2) +
-  labs(x = "Relative Accuracy (%)", 
-       y = "# Measurements", 
-       fill = "Experiment ID") +
-  theme(legend.position = "none") +
-  ggtitle( "binwidth = 0.1")  + 
-  theme(text = element_text(size = 14), axis.title=element_text(size=14)) 
-
-morley_hist_med <- ggplot(morley_rel, 
-                          aes(x = relative_accuracy, 
-                              fill = as_factor(Expt))) +
-  geom_histogram(binwidth = 0.01) +
-  facet_grid(rows = vars(Expt)) +
-  geom_vline(xintercept = 0, linetype = "dashed", size = 1.0) +
-  labs(x = "Relative Accuracy (%)", 
-       y = "# Measurements", 
-       fill = "Experiment ID") +
-  theme(legend.position = "none") +
-  ggtitle("binwidth = 0.01")  + 
-  theme(text = element_text(size = 14), axis.title=element_text(size=14)) 
-
-morley_hist_small <- ggplot(morley_rel, 
-                            aes(x = relative_accuracy, 
-                                fill = as_factor(Expt))) +
-  geom_histogram(binwidth = 0.001) +
-  facet_grid(rows = vars(Expt)) +
-  geom_vline(xintercept = 0, linetype = "dashed", size = 1.0) +
-  labs(x = "Relative Accuracy (%)", 
-       y = "# Measurements", 
-       fill = "Experiment ID") +
-  theme(legend.position = "none") +
-  ggtitle("binwidth = 0.001")  + 
-  theme(text = element_text(size = 14), axis.title=element_text(size=14)) 
-
-plot_grid(morley_hist_default, 
-          morley_hist_small, 
-          morley_hist_med, 
-          morley_hist_big, 
-          ncol = 2)
-```
 
 
 ```{code-cell} ipython3
@@ -2054,16 +1726,7 @@ scatter plot of
 the [Old Faithful data set](https://www.stat.cmu.edu/~larry/all-of-statistics/=data/faithful.dat) [@faithfuldata],
 shown in Figure \@ref(fig:03-plot-line).
 
-```{r 03-plot-line, collapse=TRUE, warning=FALSE, message=FALSE, fig.width = 3.75, fig.height = 3.5, fig.pos = "H", out.extra="", fig.cap = "Scatter plot of waiting time and eruption time."}
-library(svglite) # we need this to save SVG files
-faithful_plot <- ggplot(data = faithful, aes(x = waiting, y = eruptions)) +
-  geom_point() +
-  labs(x = "Waiting time to next eruption \n (minutes)",
-       y = "Eruption time \n (minutes)") + 
-  theme(text = element_text(size = 12))
 
-faithful_plot
-```
 
 
 ```{code-cell} ipython3
