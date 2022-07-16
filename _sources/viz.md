@@ -668,7 +668,7 @@ can_lang =  pd.read_csv("data/can_lang.csv")
 ```
 
 ```{code-cell} ipython3
-:tags: ["hide-cell"]
+:tags: ["remove-cell"]
 can_lang = can_lang[(can_lang['most_at_home']>0) & (can_lang['mother_tongue']>0)]
 ```
 
@@ -754,7 +754,7 @@ minlang_speakers <- numlang_speakers |>
 ```
 
 ```{code-cell} ipython3
-:tags: ["hide-cell"]
+:tags: ["remove-cell"]
 numlang_speakers_max = max(can_lang['mother_tongue'])
 
 numlang_speakers_min = min(can_lang['mother_tongue'])
@@ -848,7 +848,7 @@ census_popn <- 35151728
 ```
 
 ```{code-cell} ipython3
-:tags: ["hide-cell"]
+:tags: ["remove-cell"]
 english_mother_tongue = can_lang.loc[can_lang['language']=='English'].mother_tongue
 english_mother_tongue 
 
