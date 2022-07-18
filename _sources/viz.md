@@ -269,29 +269,29 @@ Scatter plots show the data as individual points with `x` (horizontal axis)
 and `y` (vertical axis) coordinates.
 Here, we will use the measurement date as the `x` coordinate 
 and the CO$_{\text{2}}$ concentration as the `y` coordinate.  
-while using the `altair` package, We create a plot object with the `alt.chart()` function. 
+while using the `altair` package, We create a plot object with the `alt.Chart()` function. 
 There are a few basic aspects of a plot that we need to specify:
 \index{ggplot!aesthetic mapping}
 \index{ggplot!geometric object}
 
-The fundamental object in Altair is the `Chart`, which takes a data frame as a single argument `alt.Chart(co2_df)`
 
-With a chart object in hand, we can now specify how we would like the data to be visualized. We first indicate what kind of geometric `mark` we want to use to represent the data. We can set the `mark` attribute of the chart object using the the `Chart.mark_*` methods.
 
 - The name of the data frame object to visualize.
-    - Here, we specify the `co2_df` data frame.
-- The **aesthetic mapping**, which tells \index{aesthetic mapping} `ggplot` how the columns in the data frame map to properties of the visualization.
-    - To create an aesthetic mapping, we use the `aes` function.
+    - Here, we specify the `co2_df` data frame as an argument to the `alt.Chart()` function
+- The **geometric object**, which specifies \index{aesthetic mapping} how the mapped data should be displayed.
+    - To create a geometric object, we use `Chart.mark_*` methods (see the [altair reference](https://altair-viz.github.io/user_guide/marks.html) for a list of geometric objects).
+    - Here, we use the `mark_point` function to visualize our data as a scatter plot.
+- The **geometric encoding**, which tells \index{aesthetic mapping} `altair` how the columns in the data frame map to properties of the visualization.
+    - To create an encoding, we use the `encode()` function.
+    - The `encode()` method builds a key-value mapping between encoding channels (such as x, y) to fields in the dataset, accessed by field name(column names)
     - Here, we set the plot `x` axis to the `date_measured` variable, and the plot `y` axis to the `ppm` variable.
 
-- The **geometric object**, which specifies \index{aesthetic mapping} how the mapped data should be displayed.
-    - To create a geometric object, we use a `geom_*` function (see the [ggplot reference](https://ggplot2.tidyverse.org/reference/) for a list of geometric objects).
-    - Here, we use the `geom_point` function to visualize our data as a scatter plot.
 
-Figure \@ref(fig:03-ggplot-function-scatter) 
+
+{numref}`function_scatter` 
 shows how each of these aspects map to code
 for creating a basic scatter plot of the `co2_df` data.
-Note that we could pass many other possible arguments to the aesthetic mapping
+Note that we could pass many other possible arguments to the geometric endcoding
 and geometric object to change how the plot looks. For the purposes of quickly
 testing things out to see what they look like, though, we can just start with the
 default settings.
@@ -340,7 +340,7 @@ glue('co2_scatter', co2_scatter, display=False)
 Scatter plot of atmospheric concentration of CO$_{2}$ over time.
 :::
 
-Certainly, the visualization in Figure \@ref(fig:03-data-co2-scatter) 
+Certainly, the visualization in {numref}`co2_scatter` 
 shows a clear upward trend 
 in the atmospheric concentration of CO$_{\text{2}}$ over time.
 This plot answers the first part of our question in the affirmative, 
@@ -375,24 +375,20 @@ co2_line
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('co2_line', co2_line1, display=False)
+glue('co2_line', co2_line, display=False)
 ```
 
-:name: co2_line_1
-:figclass: caption-hack
-
-Scatter plot of tumor cell concavity versus smoothness colored by diagnosis label.
 
 
-:::{glue:figure} co2_line1 
+:::{glue:figure} co2_line
 :figwidth: 700px 
-:name: co2_line1
+:name: co2_line
 
 Line plot of atmospheric concentration of CO$_{2}$ over time.
 :::
 
 
-Aha! Figure \@ref(fig:03-data-co2-line) shows us there *is* another interesting
+Aha! {numref}`co2_line` shows us there *is* another interesting
 phenomenon in the data: in addition to increasing over time, the concentration
 seems to oscillate as well.  Given the visualization as it is now, it is still
 hard to tell how fast the oscillation is, but nevertheless, the line seems to
@@ -406,84 +402,73 @@ Now that we have settled on the rough details of the visualization, it is time
 to refine things. This plot is fairly straightforward, and there is not much
 visual noise to remove. But there are a few things we must do to improve
 clarity, such as adding informative axis labels and making the font a more
-readable size.  To add axis labels, we use the `xlab` and `ylab` functions. To
-change the font size, we use the `theme` function with the `text` argument:
+readable size.  To add axis labels, we use the `title` argument along with `alt.X` and `alt.Y` functions. To
+change the font size, we use the `configure_axis` function with the `titleFontSize` argument:
 \index{ggplot!xlab,ylab}
 \index{ggplot!theme}
 
 ```{code-cell} ipython3
-co2_line = alt.Chart(co2_df).mark_line(color='black').encode(
+co2_line_labels = alt.Chart(co2_df).mark_line(color='black').encode(
     x = alt.X("date_measured", title = "Year"),
     y = alt.Y("ppm", scale=alt.Scale(zero=False), title = "Atmospheric CO2 (ppm)")).configure_axis(
     titleFontSize=12)
-co2_line
+
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('co2_line', co2_line2, display=False)
+glue('co2_line_labels', co2_line_labels, display=False)
 ```
 
-:::{glue:figure} co2_line2 
+:::{glue:figure} co2_line_labels
 :figwidth: 700px 
-:name: co2_line2
+:name: co2_line_labels
 
 Line plot of atmospheric concentration of CO$_{2}$ over time with clearer axes and labels.
 :::
 
-> **Note:** The `theme` function is quite complex and has many arguments 
-> that can be specified to control many non-data aspects of a visualization.
-> An in-depth discussion of the `theme` function is beyond the scope of this book.
-> Interested readers may consult the `theme` function documentation;
-> see the additional resources section at the end of this chapter.
+> **Note:** The `configure_` function in `altair` is complex and supports many other functionalities, which can be viewed [here](https://altair-viz.github.io/user_guide/configuration.html)
+
 
 Finally, let's see if we can better understand the oscillation by changing the
 visualization slightly. Note that it is totally fine to use a small number of
 visualizations to answer different aspects of the question you are trying to
-answer. We will accomplish this by using *scales*, \index{ggplot!scales}
-another important feature of `ggplot2` that easily transforms the different
-variables and set limits.  We scale the horizontal axis using the `xlim` function,
-and the vertical axis with the `ylim` function.
-In particular, here, we will use the `xlim` function to zoom in 
+answer. We will accomplish this by using *scale*, \index{ggplot!scales}
+another important feature of `altair` that easily transforms the different
+variables and set limits.  We scale the horizontal axis using the `alt.Scale(domain=['1990', '1993'])` by restricting the x-axis values between 1990 and 1994,
+and the vertical axis with the `alt.Scale(zero=False)` function, to not start the y-axis with zero.
+In particular, here, we will use the `alt.Scale()` function to zoom in 
 on just five years of data (say, 1990-1994).
-`xlim` takes a vector of length two 
+`domain` argument takes a list of length two 
 to specify the upper and lower bounds to limit the axis. 
-We can create that using the `c` function.
-Note that it is important that the vector given to `xlim` must be of the same
-type as the data that is mapped to that axis. 
-Here, we have mapped a date to the x-axis, 
-and so we need to use the `date` function 
-(from the `tidyverse` [`lubridate` R package](https://lubridate.tidyverse.org/) [@lubridate; @lubridatepaper]) 
-to convert the character strings we provide to `c` to `date` vectors.
 
-> **Note:** `lubridate` is a package that is installed by the `tidyverse` metapackage,
-> but is not loaded by it. 
-> Hence we need to load it separately in the code below.
 
 
 
 ```{code-cell} ipython3
 
-co2_dates = co2_df.loc[(co2_df.date_measured >= '1990-01-01') &  (co2_df.date_measured <= '1993-01-01')]
+#co2_dates = co2_df.loc[(co2_df.date_measured >= '1990-01-01') &  (co2_df.date_measured <= '1993-01-01')]
 
-co2_line = alt.Chart(co2_dates).mark_line(color='black').encode(
-    x = alt.X("date_measured:T",title = "Year"),
-    y = alt.Y("ppm", scale=alt.Scale(zero=False), title = "Atmospheric CO2 (ppm)")).configure_axis(
-    titleFontSize=12)
+co2_line_scale = alt.Chart(co2_df).mark_line(color='black', clip=True).encode(
+    x=alt.X("date_measured", title="Measurement Date", axis=alt.Axis(tickCount=4), scale=alt.Scale(domain=['1990', '1994'])),
+    y=alt.Y("ppm", scale=alt.Scale(zero=False), title="Atmospheric CO2 (ppm)")
+).configure_axis(
+    titleFontSize=12
+)
 
-co2_line
+co2_line_scale
 
 
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('co2_line', co2_line3, display=False)
+glue('co2_line_scale', co2_line_scale, display=False)
 ```
 
-:::{glue:figure} co2_line3
+:::{glue:figure} co2_line_scale
 :figwidth: 700px 
-:name: co2_line3
+:name: co2_line_scale
 
 Line plot of atmospheric concentration of CO$_{2}$ from 1990 to 1994.
 :::
@@ -493,22 +478,21 @@ and finally increases again until the end of the year. In Hawaii, there are two 
 Therefore, the oscillating pattern in CO$_{\text{2}}$ matches up fairly closely with the two seasons.
 
 As you might have noticed from the code used to create the final visualization
-of the `co2_df` data frame, 
-we construct the visualizations in `ggplot` with layers.
-New layers are added with the `+` operator, 
-and we can really add as many as we would like!
+of the `co2_df` data frame, we used `axis=alt.Axis(tickCount=4)` to add the lines in the background to better visualise and map the values on the axis to the plot.
+
+
 A useful analogy to constructing a data visualization is painting a picture.
 We start with a blank canvas, 
 and the first thing we do is prepare the surface 
 for our painting by adding primer. 
-In our data visualization this is akin to calling `ggplot` 
+In our data visualization this is akin to calling `alt.Chart` 
 and specifying the data set we will be using.
 Next, we sketch out the background of the painting. 
 In our data visualization, 
-this would be when we map data to the axes in the `aes` function.
+this would be when we map data to the axes in the `encode` function.
 Then we add our key visual subjects to the painting.
 In our data visualization, 
-this would be the geometric objects (e.g., `geom_point`, `geom_line`, etc.).
+this would be the geometric objects (e.g., `mark_point`, `mark_line`, etc.).
 And finally, we work on adding details and refinements to the painting.
 In our data visualization this would be when we fine tune axis labels,
 change the font, adjust the point size, and do other related things.
@@ -518,10 +502,7 @@ The `faithful` data set \index{Old Faithful} contains measurements
 of the waiting time between eruptions 
 and the subsequent eruption duration (in minutes) of the Old Faithful
 geyser in Yellowstone National Park, Wyoming, United States. 
-The `faithful` data set is available in base R as a data frame,
-so it does not need to be loaded.
-We convert it to a tibble to take advantage of the nicer print output 
-these specialized data frames provide.
+First, we will read the data and then answer the following question:
 
 **Question:** \index{question!visualization} 
 Is there a relationship between the waiting time before an eruption 
@@ -540,15 +521,15 @@ But if you look at the output of the data frame,
 you'll notice that unlike time in the Mauna Loa CO$_{\text{2}}$ data set,
 neither of the variables here have a natural order to them.
 So a scatter plot is likely to be the most appropriate
-visualization. Let's create a scatter plot using the `ggplot`
-function with the `waiting` variable on the horizontal axis, the `eruptions` 
-variable on the vertical axis, and the `geom_point` geometric object.
-The result is shown in Figure \@ref(fig:03-data-faithful-scatter).
+visualization. Let's create a scatter plot using the `altair`
+package with the `waiting` variable on the horizontal axis, the `eruptions` 
+variable on the vertical axis, and the `mark_point` geometric object.
+The result is shown in {numref}`faithful_scatter`.
 
 
 
 ```{code-cell} ipython3
-faithful_scatter = alt.Chart(faithful).mark_circle(color='black').encode(
+faithful_scatter = alt.Chart(faithful).mark_point(color='black', filled=True).encode(
     x = "waiting",
     y = "eruptions"
 )
@@ -567,21 +548,22 @@ glue('faithful_scatter', faithful_scatter, display=False)
 Scatter plot of waiting time and eruption time.
 :::
 
-We can see in Figure \@ref(fig:03-data-faithful-scatter) that the data tend to fall
+We can see in {numref}`faithful_scatter` that the data tend to fall
 into two groups: one with short waiting and eruption times, and one with long
 waiting and eruption times. Note that in this case, there is no overplotting:
 the points are generally nicely visually separated, and the pattern they form
-is clear.  In order to refine the visualization, we need only to add axis
+is clear.  Also, note that to make the points solid, we used `filled=True` as argument of the `mark_point` function. In place of `mark_point(filled=True)`, we can also use `mark_circle()`. 
+In order to refine the visualization, we need only to add axis
 labels and make the font more readable:
 
 
 
 ```{code-cell} ipython3
-faithful_scatter = alt.Chart(faithful).mark_circle(color='black').encode(
+faithful_scatter_labels = alt.Chart(faithful).mark_circle(color='black').encode(
     x = alt.X("waiting", title = "Waiting Time (mins)"),
     y = alt.Y("eruptions", title = "Eruption Duration (mins)")
 )
-faithful_scatter
+faithful_scatter_labels
 
 
 ```
@@ -589,12 +571,12 @@ faithful_scatter
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('faithful_scatter', faithful_scatter2, display=False)
+glue('faithful_scatter_labels', faithful_scatter_labels, display=False)
 ```
 
-:::{glue:figure} faithful_scatter2 
+:::{glue:figure} faithful_scatter_labels
 :figwidth: 700px 
-:name: faithful_scatter2
+:name: faithful_scatter_labels
 
 Scatter plot of waiting time and eruption time with clearer axes and labels.
 :::
@@ -630,7 +612,7 @@ can_lang = can_lang[(can_lang['most_at_home']>0) & (can_lang['mother_tongue']>0)
 ```
 
 We will begin with a scatter plot of the `mother_tongue` and `most_at_home` columns from our data frame.
-The resulting plot is shown in Figure \@ref(fig:03-mother-tongue-vs-most-at-home).
+The resulting plot is shown in {numref}`can_lang_plot`
 \index{ggplot!geom\_point}
 
 
@@ -640,7 +622,7 @@ The resulting plot is shown in Figure \@ref(fig:03-mother-tongue-vs-most-at-home
 can_lang_plot = alt.Chart(can_lang).mark_circle(color='black').encode(
     x = "most_at_home",
     y = "mother_tongue")
-can_lang_plot
+
 ```
 
 
@@ -658,31 +640,31 @@ Scatter plot of number of Canadians reporting a language as their mother tongue 
 
 
 To make an initial improvement in the interpretability 
-of Figure \@ref(fig:03-mother-tongue-vs-most-at-home), we should 
+of {numref}`can_lang_plot`, we should 
 replace the default axis
-names with more informative labels. We can use `\n` to create a line break in
-the axis names so that the words after `\n` are printed on a new line. This will
-make the axes labels on the plots more readable.
+names with more informative labels. We can add a line break in
+the axis names so that some of the words are printed on a new line. This will
+make the axes labels on the plots more readable. To do this, we pass the title as a list. Each element of the list will be on a new line.
 \index{escape character} We should also increase the font size to further 
 improve readability.
 
 
 ```{code-cell} ipython3
-can_lang_plot = alt.Chart(can_lang).mark_circle(color='black').encode(
-    x = alt.X("most_at_home",title = "Language spoken most at home(number of Canadian residents)"),
-    y = alt.Y("mother_tongue", scale=alt.Scale(zero=False), title = "Mother tongue(number of Canadian residents)")).configure_axis(
+can_lang_plot_labels = alt.Chart(can_lang).mark_circle(color='black').encode(
+    x = alt.X("most_at_home",title = ["Language spoken most at home", "(number of Canadian residents)"]),
+    y = alt.Y("mother_tongue", scale=alt.Scale(zero=False), title = ["Mother tongue", "(number of Canadian residents)"])).configure_axis(
     titleFontSize=12)
-can_lang_plot
+can_lang_plot_labels
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot2, display=False)
+glue('can_lang_plot_labels', can_lang_plot_labels, display=False)
 ```
 
-:::{glue:figure} can_lang_plot2
+:::{glue:figure} can_lang_plot_labels
 :figwidth: 700px 
-:name: can_lang_plot2
+:name: can_lang_plot_labels
 
 Scatter plot of number of Canadians reporting a language as their mother tongue vs the primary language at home with x and y labels.
 :::
@@ -697,7 +679,7 @@ numlang_speakers_max = max(can_lang['mother_tongue'])
 numlang_speakers_min = min(can_lang['mother_tongue'])
 ```
 
-Okay! The axes and labels in Figure \@ref(fig:03-mother-tongue-vs-most-at-home-labs) are
+Okay! The axes and labels in {numref}`can_lang_plot_labels` are
 much more readable and interpretable now. However, the scatter points themselves could use
 some work; most of the 214 data points are bunched
 up in the lower left-hand side of the visualization. The data is clumped because
@@ -730,34 +712,30 @@ the values 1, 10, 100, and 1000 are all the same distance apart!
 So we see that applying this function is moving big values closer together 
 and moving small values farther apart.
 Note that if your data can take the value 0, logarithmic scaling may not 
-be appropriate (since `log10(0) = -Inf` in R). There are other ways to transform
+be appropriate (since `log10(0) = -inf` in Python). There are other ways to transform
 the data in such a case, but these are beyond the scope of the book. 
 
-We can accomplish logarithmic scaling in a `ggplot` visualization
-using the `scale_x_log10` and `scale_y_log10` functions.
-Given that the x and y axes have large numbers, we should also format the axis labels
-to put commas in these numbers to increase their readability.
-We can do this in R by passing the `label_comma` function (from the `scales` package)
-to the `labels` argument of the `scale_x_log10` and `scale_x_log10` functions.
+We can accomplish logarithmic scaling in the `altair` visualization
+using the argument `type="log"` in the scale functions.
 
 
 
 ```{code-cell} ipython3
-can_lang_plot = alt.Chart(can_lang).mark_circle(color='black').encode(
+can_lang_plot_log = alt.Chart(can_lang).mark_circle(color='black').encode(
     x = alt.X("most_at_home",title = "Language spoken most at home(number of Canadian residents)", scale=alt.Scale( type="log"), axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue", title = "Mother tongue(number of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7))).configure_axis(
     titleFontSize=12)
-can_lang_plot
+
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot3, display=False)
+glue('can_lang_plot_log', can_lang_plot_log, display=False)
 ```
 
-:::{glue:figure} can_lang_plot3
+:::{glue:figure} can_lang_plot_log
 :figwidth: 700px 
-:name: can_lang_plot3
+:name: can_lang_plot_log
 
 Scatter plot of number of Canadians reporting a language as their mother tongue vs the primary language at home with log adjusted x and y axes.
 :::
@@ -787,7 +765,7 @@ was `r  format(english_mother_tongue, scientific = FALSE, big.mark = ",") `
 `r 100` \% =
 `r format(round(english_mother_tongue/census_popn*100, 2), scientific = FALSE, big.mark = ",")`\%.
 
-Below we use `mutate` to calculate the percentage of people reporting a given
+Below we use `assign` to calculate the percentage of people reporting a given
 language as their mother tongue and primary language at home for all the
 languages in the `can_lang` data set. Since the new columns are appended to the
 end of the data table, we selected the new columns after the transformation so
@@ -805,40 +783,40 @@ can_lang[['mother_tongue_percent', 'most_at_home_percent']]
 
 Finally, we will edit the visualization to use the percentages we just computed
 (and change our axis labels to reflect this change in 
-units). Figure \@ref(fig:03-mother-tongue-vs-most-at-home-scale-props) displays
+units). {numref}`can_lang_plot_percent` displays
 the final result.
 
 
 
 ```{code-cell} ipython3
 
-can_lang_plot = alt.Chart(can_lang).mark_circle(color='black').encode(
+can_lang_plot_percent = alt.Chart(can_lang).mark_circle(color='black').encode(
     x = alt.X("most_at_home_percent",title = "Language spoken most at home(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7))).configure_axis(
     titleFontSize=12)
-can_lang_plot
+can_lang_plot_percent
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot4, display=False)
+glue('can_lang_plot_percent', can_lang_plot_percent, display=False)
 ```
 
-:::{glue:figure} can_lang_plot4
+:::{glue:figure} can_lang_plot_percent
 :figwidth: 700px 
-:name: can_lang_plot4
+:name: can_lang_plot_percent
 
 Scatter plot of percentage of Canadians reporting a language as their mother tongue vs the primary language at home.
 :::
 
 
-Figure \@ref(fig:03-mother-tongue-vs-most-at-home-scale-props) is the appropriate
+{numref}`can_lang_plot_percent` is the appropriate
 visualization to use to answer the first question in this section, i.e.,
 whether there is a relationship between the percentage of people who speak 
 a language as their mother tongue and the percentage for whom that
 is the primary language spoken at home.
 To fully answer the question, we need to use
- Figure \@ref(fig:03-mother-tongue-vs-most-at-home-scale-props)
+ {numref}`can_lang_plot_percent`
 to assess a few key characteristics of the data: 
 
 - **Direction:** if the y variable tends to increase when the x variable increases, then y has a **positive** relationship with x. If 
@@ -849,21 +827,21 @@ to assess a few key characteristics of the data:
   the relationship is strong when the scatter points are close together and look more like a "line" or "curve" than a "cloud."
 - **Shape:** if you can draw a straight line roughly through the data points, the relationship is **linear**. Otherwise, it is **nonlinear**. \index{relationship!linear, nonlinear}
 
-In Figure \@ref(fig:03-mother-tongue-vs-most-at-home-scale-props), we see that 
+In {numref}`can_lang_plot_percent`, we see that 
 as the percentage of people who have a language as their mother tongue increases, 
 so does the percentage of people who speak that language at home. 
 Therefore, there is a **positive** relationship between these two variables.
-Furthermore, because the points in Figure \@ref(fig:03-mother-tongue-vs-most-at-home-scale-props) 
+Furthermore, because the points in {numref}`can_lang_plot_percent`
 are fairly close together, and the points look more like a "line" than a "cloud",
 we can say that this is a **strong** relationship. 
 And finally, because drawing a straight line through these points in 
-Figure \@ref(fig:03-mother-tongue-vs-most-at-home-scale-props)
+{numref}`can_lang_plot_percent`
 would fit the pattern we observe quite well, we say that the relationship is **linear**.
 
 Onto the second part of our exploratory data analysis question!
 Recall that we are interested in knowing whether the strength 
 of the relationship we uncovered 
-in Figure \@ref(fig:03-mother-tongue-vs-most-at-home-scale-props) depends
+in {numref}`can_lang_plot_percent` depends
 on the higher-level language category (Official languages, Aboriginal languages,
 and non-official, non-Aboriginal languages).
 One common way to explore this
@@ -874,7 +852,7 @@ our previous
 scatter plot to represent each language's higher-level language category.
 
 Here we want to distinguish the values according to the `category` group with
-which they belong.  We can add an argument to the `aes` function, specifying
+which they belong.  We can add an argument `color` to the `encode` function, specifying
 that the `category` column should color the points. Adding this argument will
 color the points according to their group and add a legend at the side of the
 plot. 
@@ -883,71 +861,68 @@ plot.
 
 
 ```{code-cell} ipython3
-can_lang_plot = alt.Chart(can_lang).mark_circle().encode(
+can_lang_plot_category = alt.Chart(can_lang).mark_circle().encode(
     x = alt.X("most_at_home_percent",title = "Language spoken most at home(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = "category").configure_axis(
     titleFontSize=12)
-can_lang_plot
+can_lang_plot_category
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot5, display=False)
+glue('can_lang_plot_category', can_lang_plot_category, display=False)
 ```
 
-:::{glue:figure} can_lang_plot5
+:::{glue:figure} can_lang_plot_category
 :figwidth: 700px 
-:name: can_lang_plot5
+:name: can_lang_plot_category
 
 Scatter plot of percentage of Canadians reporting a language as their mother tongue vs the primary language at home colored by language category.
 :::
 
 
-The legend in Figure \@ref(fig:03-scatter-color-by-category) 
+The legend in {numref}`can_lang_plot_category`
 takes up valuable plot area. 
-We can improve this by moving the legend title using the `legend.position`
-and `legend.direction`
+We can improve this by moving the legend title using the `alt.Legend` function
+with the arguments `legendX`, `legendY` and `direction`
 arguments of the `theme` function. 
-Here we set `legend.position` to `"top"` to put the legend above the plot
-and `legend.direction` to `"vertical"` so that the legend items remain 
-vertically stacked on top of each other.
-When the `legend.position` is set to either `"top"` or `"bottom"` 
-the default direction is to stack the legend items horizontally.
-However, that will not work well for this particular visualization 
+Here we set the `direction` to `"vertical"` so that the legend items remain 
+vertically stacked on top of each other. The default `direction` is horizontal, which won't work
+not work well for this particular visualization 
 because the legend labels are quite long 
 and would run off the page if displayed this way.
 
 
 
 ```{code-cell} ipython3
-can_lang_plot = alt.Chart(can_lang).mark_circle().encode(
+can_lang_plot_legend = alt.Chart(can_lang).mark_circle().encode(
     x = alt.X("most_at_home_percent",title = "Language spoken most at home(percentage of Canadian residents)", scale=alt.Scale(type="log"),axis=alt.Axis(tickCount=7) ),
     y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = alt.Color("category", legend=alt.Legend(
-                            orient='none',
+                            #orient='none',
                             legendX=0, legendY=-90,
                             direction='vertical'))).configure_axis(
     titleFontSize=12)
-can_lang_plot
+can_lang_plot_legend
 
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot6, display=False)
+glue('can_lang_plot_legend', can_lang_plot_legend, display=False)
 ```
 
-:::{glue:figure} can_lang_plot6
+:::{glue:figure} can_lang_plot_legend
 :figwidth: 700px 
-:name: can_lang_plot6
+:name: can_lang_plot_legend
 
 Scatter plot of percentage of Canadians reporting a language as their mother tongue vs the primary language at home colored by language category with the legend edited.
 :::
 
-In Figure \@ref(fig:03-scatter-color-by-category-legend-edit), the points are colored with
-the default `ggplot2` color palette. But what if you want to use different
-colors? In R, two packages that provide alternative color 
+In {numref}`can_lang_plot_legend`, the points are colored with
+the default `altair` color palette. But what if you want to use different
+colors? In Altair, two packages that provide alternative color 
 palettes \index{color palette} are `RColorBrewer` [@RColorBrewer]
 and `ggthemes` [@ggthemes]; in this book we will cover how to use `RColorBrewer`.
 You can visualize the list of color
@@ -970,10 +945,11 @@ You can use
 this [color blindness simulator](https://www.color-blindness.com/coblis-color-blindness-simulator/) to check 
 if your visualizations \index{color palette!color blindness simulator} 
 are color-blind friendly.
-Below we pick the `"Set2"` palette, with the result shown
+
+Below we pick the `"dark2"` theme, with the result shown
 in Figure \@ref(fig:scatter-color-by-category-palette).
 We also set the `shape` aesthetic mapping to the `category` variable as well;
-this makes the scatter point shapes different for each category. This kind of 
+this makes the scatter point shapes different for each category. Note: We cannot use different shapes with `mark_circle`, it can only be used with `mark_point`. This kind of 
 visual redundancy&mdash;i.e., conveying the same information with both scatter point color and shape&mdash;can
 further improve the clarity and accessibility of your visualization.
 
@@ -981,7 +957,7 @@ further improve the clarity and accessibility of your visualization.
 
 
 ```{code-cell} ipython3
-can_lang_plot = alt.Chart(can_lang).mark_point(filled=True).encode(
+can_lang_plot_theme = alt.Chart(can_lang).mark_point(filled=True).encode(
     x = alt.X("most_at_home_percent",title = "Language spoken most at home(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = alt.Color("category", legend=alt.Legend(
@@ -991,31 +967,31 @@ can_lang_plot = alt.Chart(can_lang).mark_point(filled=True).encode(
                          scale=alt.Scale(scheme='dark2')),
     shape = "category").configure_axis(
     titleFontSize=12)
-can_lang_plot
+can_lang_plot_theme
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('can_lang_plot', can_lang_plot7, display=False)
+glue('can_lang_plot_theme', can_lang_plot_theme, display=False)
 ```
 
-:::{glue:figure} can_lang_plot7
+:::{glue:figure} can_lang_plot_theme
 :figwidth: 700px 
-:name: can_lang_plot7
+:name: can_lang_plot_theme
 
 Scatter plot of percentage of Canadians reporting a language as their mother tongue vs the primary language at home colored by language category with color-blind friendly colors.
 :::
 
 
 
-From the visualization in Figure \@ref(fig:scatter-color-by-category-palette), 
+From the visualization in {numref}`can_lang_plot_theme`, 
 we can now clearly see that the vast majority of Canadians reported one of the official languages 
 as their mother tongue and as the language they speak most often at home. 
 What do we see when considering the second part of our exploratory question? 
 Do we see a difference in the relationship
 between languages spoken as a mother tongue and as a primary language
 at home across the higher-level language categories? 
-Based on Figure \@ref(fig:scatter-color-by-category-palette), there does not
+Based on {numref}`can_lang_plot_theme`, there does not
 appear to be much of a difference.
 For each higher-level language category, 
 there appears to be a strong, positive, and linear relationship between 
@@ -1040,17 +1016,7 @@ The `islands.csv` data set \index{Island landmasses} contains a list of Earth's 
 
 **Question:** \index{question!visualization} Are the continents (North / South America, Africa, Europe, Asia, Australia, Antarctica) Earth's seven largest landmasses? If so, what are the next few largest landmasses after those?
 
-```{r, echo = FALSE, message = FALSE, warning = FALSE}
-islands_df <- read_csv("data/islands.csv")
-continents <- c("Africa", "Antarctica", "Asia", "Australia", 
-                "Europe", "North America", "South America")
 
-islands_df <- mutate(islands_df, 
-                     landmass_type = ifelse(landmass %in% continents, 
-                                            "Continent", "Other"))
-
-write_csv(islands_df, "data/islands.csv")
-```
 
 To get started, we will read and inspect the data:
 
@@ -1070,8 +1036,8 @@ They are particularly useful for comparing summary statistics between different
 groups of a categorical variable.
 
 We specify that we would like to use a bar plot
-via the `geom_bar` function in `ggplot2`. 
-However, by default, `geom_bar` sets the heights
+via the `mark_bar` function in `altair`. 
+However, by default, `mark_bar` sets the heights
 of bars to the number of times a value appears in a data frame (its *count*); here, we want to plot exactly the values in the data frame, i.e.,
 the landmass sizes. So we have to pass the `stat = "identity"` argument to `geom_bar`. The result is 
 shown in Figure \@ref(fig:03-data-islands-bar).
