@@ -715,7 +715,7 @@ Scatter plot of number of Canadians reporting a language as their mother tongue 
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-english_mother_tongue = can_lang.loc[can_lang['language']=='English'].mother_tongue
+english_mother_tongue = can_lang.loc[can_lang['language']=='English'].mother_tongue.values[0]
 census_popn = 35151728
 result = round((english_mother_tongue/census_popn)*100,2)
 glue("english_mother_tongue", nglish_mother_tongue)
@@ -733,8 +733,7 @@ by the number of people who live in Canada and multiplying by 100\%.
 For example, 
 the percentage of people who reported that their mother tongue was English 
 in the 2016 Canadian census 
-was {glue:}`english_mother_tongue` 
-/ {glue:}`census_popn` $\times$ 
+was {glue:}`english_mother_tongue` / {glue:}`census_popn` $\times$ 
 `100` \% = {glue:}`result`\%
 
 Below we use `assign` to calculate the percentage of people reporting a given
