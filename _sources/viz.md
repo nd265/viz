@@ -722,8 +722,8 @@ using the argument `type="log"` in the scale functions.
 
 ```{code-cell} ipython3
 can_lang_plot_log = alt.Chart(can_lang).mark_circle(color='black').encode(
-    x = alt.X("most_at_home",title = "Language spoken most at home(number of Canadian residents)", scale=alt.Scale( type="log"), axis=alt.Axis(tickCount=7)),
-    y = alt.Y("mother_tongue", title = "Mother tongue(number of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7))).configure_axis(
+    x = alt.X("most_at_home",title = ["Language spoken most at home", "(number of Canadian residents)"]), scale=alt.Scale( type="log"), axis=alt.Axis(tickCount=7)),
+    y = alt.Y("mother_tongue", title = ["Mother tongue", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7))).configure_axis(
     titleFontSize=12)
 
 ```
@@ -791,8 +791,8 @@ the final result.
 ```{code-cell} ipython3
 
 can_lang_plot_percent = alt.Chart(can_lang).mark_circle(color='black').encode(
-    x = alt.X("most_at_home_percent",title = "Language spoken most at home(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
-    y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7))).configure_axis(
+    x = alt.X("most_at_home_percent",title = ["Language spoken most at home", "(number of Canadian residents)"]), scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
+    y = alt.Y("mother_tongue_percent", title = ["Mother tongue", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7))).configure_axis(
     titleFontSize=12)
 
 ```
@@ -862,8 +862,8 @@ plot.
 
 ```{code-cell} ipython3
 can_lang_plot_category = alt.Chart(can_lang).mark_circle().encode(
-    x = alt.X("most_at_home_percent",title = "Language spoken most at home(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
-    y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
+    x = alt.X("most_at_home_percent",title = title = ["Language spoken most at home", "(number of Canadian residents)"]), scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
+    y = alt.Y("mother_tongue_percent", title = ["Mother tongue", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = "category").configure_axis(
     titleFontSize=12)
 
@@ -897,8 +897,8 @@ and would run off the page if displayed this way.
 
 ```{code-cell} ipython3
 can_lang_plot_legend = alt.Chart(can_lang).mark_circle().encode(
-    x = alt.X("most_at_home_percent",title = "Language spoken most at home(percentage of Canadian residents)", scale=alt.Scale(type="log"),axis=alt.Axis(tickCount=7) ),
-    y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
+    x = alt.X("most_at_home_percent",title = title = ["Language spoken most at home", "(number of Canadian residents)"]), scale=alt.Scale(type="log"),axis=alt.Axis(tickCount=7) ),
+    y = alt.Y("mother_tongue_percent", title = ["Mother tongue", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = alt.Color("category", legend=alt.Legend(
                             orient='none',
                             legendX=0, legendY=-90,
@@ -958,7 +958,7 @@ further improve the clarity and accessibility of your visualization.
 
 ```{code-cell} ipython3
 can_lang_plot_theme = alt.Chart(can_lang).mark_point(filled=True).encode(
-    x = alt.X("most_at_home_percent",title = "Language spoken most at home(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
+    x = alt.X("most_at_home_percent",title = title = ["Language spoken most at home", "(number of Canadian residents)"]), scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = alt.Color("category", legend=alt.Legend(
                             orient='none',
@@ -1770,11 +1770,7 @@ glue("svg_size", svg_size)
 ```
 
 
-```
-{glue:}`png_size`
-{glue:}`svg_size`
 
-```
 
 ```{list-table} File sizes of the scatter plot of the Old Faithful data set when saved as different file formats.
 :header-rows: 1
@@ -1785,10 +1781,10 @@ glue("svg_size", svg_size)
   - Image size
 * - Raster
   - PNG
-  - ```{glue:}`png_size````
+  - {glue:}`png_size`
 * - Vector
   - SVG
-  - - ```{glue:}`svg_size````
+  - {glue:}`svg_size`
 ```
 
 
