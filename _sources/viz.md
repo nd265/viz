@@ -68,7 +68,7 @@ As with most coding tasks, it is totally fine (and quite common) to make
 mistakes and iterate a few times before you find the right visualization for
 your data and question. There are many different kinds of plotting
 graphics available to use (see Chapter 5 of *Fundamentals of Data Visualization* [@wilkeviz] for a directory). 
-The types of plot that we introduce in this book are shown in Figure \@ref(fig:plot-sketches);
+The types of plot that we introduce in this book are shown in {numref}`plot_sketches`
 which one you should select depends on your data 
 and the question you want to answer. 
 In general, the guiding principles of when to use each type of plot 
@@ -84,47 +84,15 @@ are as follows:
 - **bar plots** visualize comparisons of amounts
 - **histograms** visualize the distribution of one quantitative variable (i.e., all its possible values and how often they occur) \index{distribution}
 
-```{r plot-sketches, echo = FALSE, fig.width = 4.5, fig.height = 4.65, fig.align = 'center', fig.cap = "Examples of scatter, line and bar plots, as well as histograms."}
-set.seed(1)
 
-scatter_plot <- tibble(x = seq(0.25, 10, by = 0.5) + rnorm(20, 1, 1.5),
-                       y = seq(0.25, 10, by = 0.5) + rnorm(20, 1, 0.5)) |>
-  ggplot(aes(x = x, y = y)) +
-  geom_point() +
-  scale_x_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 3)) +
-  scale_y_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 3)) +
-  ggtitle("Scatter plot") +
-  theme_classic()
-
-line_plot <- tibble(x = seq(0.5, 10, by = 1) + rnorm(10, 1, 0.5),
-                       y = seq(0.5, 10, by = 1) + rnorm(10, 1, 0.1)) |>
-  ggplot(aes(x = x, y = y)) +
-  geom_line() +
-  scale_x_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 3)) +
-  scale_y_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 3)) +
-  ggtitle("Line plot") +
-  theme_classic()
-
-bar_plot <- tibble(count = c(35, 27, 21),
-                   category = as_factor(c("Group 1", "Group 2", "Group 3"))) |>
-  ggplot(aes(y = count, x = category)) +
-  geom_bar(stat = "identity") +
-  ggtitle("Bar plot") +
-  theme_classic()
-
-histogram_plot <- tibble(measurements = rnorm(200, 25, 5)) |>
-  ggplot(aes(x = measurements)) +
-  geom_histogram(binwidth = 3) +
-  ggtitle("Histogram") +
-  theme_classic()
-
-plot_grid(scatter_plot,
-          line_plot,
-          bar_plot,
-          histogram_plot,
-          ncol = 2, 
-          greedy = FALSE)
+```{figure} img/plot-sketches-1.png
+---
+height: 400px
+name: plot_sketches
+---
+Examples of scatter, line and bar plots, as well as histograms.
 ```
+
 
 All types of visualization have their (mis)uses, but three kinds are usually
 hard to understand or are easily replaced with an oft-better alternative.  In
@@ -922,38 +890,24 @@ Scatter plot of percentage of Canadians reporting a language as their mother ton
 
 In {numref}`can_lang_plot_legend`, the points are colored with
 the default `altair` color palette. But what if you want to use different
-colors? In Altair, two packages that provide alternative color 
-palettes \index{color palette} are `RColorBrewer` [@RColorBrewer]
-and `ggthemes` [@ggthemes]; in this book we will cover how to use `RColorBrewer`.
-You can visualize the list of color
-palettes that `RColorBrewer` has to offer with the `display.brewer.all`
-function. You can also print a list of color-blind friendly palettes by adding
-`colorblindFriendly = TRUE` to the function. 
+colors? In Altair, there are many themes available, which can be viewed [here](https://vega.github.io/vega/docs/schemes/)
 
-(ref:rcolorbrewer) Color palettes available from the `RColorBrewer` R package.
 
-```{r rcolorbrewer, fig.height = 7, fig.cap = "(ref:rcolorbrewer)"}
-library(RColorBrewer)
-display.brewer.all(colorblindFriendly = TRUE)
-```
-
-From Figure \@ref(fig:rcolorbrewer), 
-we can choose the color palette we want to use in our plot. 
-To change the color palette, 
-we add the `scale_color_brewer` layer indicating the palette we want to use. 
+To change the color scheme, 
+we add the `scheme` argument in the `scale` of the `color` argument in `altair` layer indicating the palette we want to use. 
 You can use 
 this [color blindness simulator](https://www.color-blindness.com/coblis-color-blindness-simulator/) to check 
 if your visualizations \index{color palette!color blindness simulator} 
 are color-blind friendly.
 
 Below we pick the `"dark2"` theme, with the result shown
-in Figure \@ref(fig:scatter-color-by-category-palette).
+in {numref}`can_lang_plot_theme`
 We also set the `shape` aesthetic mapping to the `category` variable as well;
-this makes the scatter point shapes different for each category. Note: We cannot use different shapes with `mark_circle`, it can only be used with `mark_point`. This kind of 
+this makes the scatter point shapes different for each category. This kind of 
 visual redundancy&mdash;i.e., conveying the same information with both scatter point color and shape&mdash;can
 further improve the clarity and accessibility of your visualization.
 
-
+>> Note: We cannot use different shapes with `mark_circle`, it can only be used with `mark_point`
 
 
 ```{code-cell} ipython3
