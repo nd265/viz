@@ -648,6 +648,11 @@ Scatter plot of number of Canadians reporting a language as their mother tongue 
 numlang_speakers_max = max(can_lang['mother_tongue'])
 
 numlang_speakers_min = min(can_lang['mother_tongue'])
+
+log_result = np.floor(np.log(numlang_speakers_max/numlang_speakers_min))
+glue("numlang_speakers_max", numlang_speakers_max)
+glue("numlang_speakers_min", numlang_speakers_min)
+glue("log_result", log_result)
 ```
 
 Okay! The axes and labels in {numref}`can_lang_plot_labels` are
@@ -657,9 +662,9 @@ up in the lower left-hand side of the visualization. The data is clumped because
 many more people in Canada speak English or French (the two points in
 the upper right corner) than other languages. 
 In particular, the most common mother tongue language 
-has `r  format(maxlang_speakers, scientific = FALSE, big.mark = ",")` speakers,
-while the least common has only `r  format(minlang_speakers, scientific = FALSE, big.mark = ",")`.
-That's a `r as.integer(floor(log10(maxlang_speakers/minlang_speakers)))`-decimal-place difference
+has {glue:}`numlang_speakers_max` speakers,  
+while the least common has only {glue:}`numlang_speakers_min`.
+That's a {glue:}`log_result` -decimal-place difference
 in the magnitude of these two numbers!
 We can confirm that the two points in the upper right-hand corner correspond
 to Canada's two official languages by filtering the data:
@@ -714,10 +719,9 @@ Scatter plot of number of Canadians reporting a language as their mother tongue 
 
 
 ```{code-cell} ipython3
-#:tags: ["remove-cell"]
+:tags: ["remove-cell"]
 english_mother_tongue = can_lang.loc[can_lang['language']=='English'].mother_tongue.values[0]
-print(english_mother_tongue)
-census_popn = 35151728
+census_popn = int(35151728)
 result = round((english_mother_tongue/census_popn)*100,2)
 glue("english_mother_tongue", english_mother_tongue)
 glue("census_popn", census_popn)
