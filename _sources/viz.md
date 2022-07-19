@@ -563,7 +563,7 @@ faithful_scatter_labels = alt.Chart(faithful).mark_circle(color='black').encode(
     x = alt.X("waiting", title = "Waiting Time (mins)"),
     y = alt.Y("eruptions", title = "Eruption Duration (mins)")
 )
-faithful_scatter_labels
+
 
 
 ```
@@ -654,7 +654,7 @@ can_lang_plot_labels = alt.Chart(can_lang).mark_circle(color='black').encode(
     x = alt.X("most_at_home",title = ["Language spoken most at home", "(number of Canadian residents)"]),
     y = alt.Y("mother_tongue", scale=alt.Scale(zero=False), title = ["Mother tongue", "(number of Canadian residents)"])).configure_axis(
     titleFontSize=12)
-can_lang_plot_labels
+
 ```
 
 ```{code-cell} ipython3
