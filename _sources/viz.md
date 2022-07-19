@@ -722,7 +722,7 @@ using the argument `type="log"` in the scale functions.
 
 ```{code-cell} ipython3
 can_lang_plot_log = alt.Chart(can_lang).mark_circle(color='black').encode(
-    x = alt.X("most_at_home",title = ["Language spoken most at home", "(number of Canadian residents)"]), scale=alt.Scale( type="log"), axis=alt.Axis(tickCount=7)),
+    x = alt.X("most_at_home",title = ["Language spoken most at home", "(number of Canadian residents)"], scale=alt.Scale( type="log"), axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue", title = ["Mother tongue", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7))).configure_axis(
     titleFontSize=12)
 
@@ -791,7 +791,7 @@ the final result.
 ```{code-cell} ipython3
 
 can_lang_plot_percent = alt.Chart(can_lang).mark_circle(color='black').encode(
-    x = alt.X("most_at_home_percent",title = ["Language spoken most at home", "(number of Canadian residents)"]), scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
+    x = alt.X("most_at_home_percent",title = ["Language spoken most at home", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue_percent", title = ["Mother tongue", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7))).configure_axis(
     titleFontSize=12)
 
@@ -862,7 +862,7 @@ plot.
 
 ```{code-cell} ipython3
 can_lang_plot_category = alt.Chart(can_lang).mark_circle().encode(
-    x = alt.X("most_at_home_percent",title = title = ["Language spoken most at home", "(number of Canadian residents)"]), scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
+    x = alt.X("most_at_home_percent",title = title = ["Language spoken most at home", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue_percent", title = ["Mother tongue", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = "category").configure_axis(
     titleFontSize=12)
@@ -897,7 +897,7 @@ and would run off the page if displayed this way.
 
 ```{code-cell} ipython3
 can_lang_plot_legend = alt.Chart(can_lang).mark_circle().encode(
-    x = alt.X("most_at_home_percent",title = title = ["Language spoken most at home", "(number of Canadian residents)"]), scale=alt.Scale(type="log"),axis=alt.Axis(tickCount=7) ),
+    x = alt.X("most_at_home_percent",title = title = ["Language spoken most at home", "(number of Canadian residents)"], scale=alt.Scale(type="log"),axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue_percent", title = ["Mother tongue", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = alt.Color("category", legend=alt.Legend(
                             orient='none',
@@ -958,7 +958,7 @@ further improve the clarity and accessibility of your visualization.
 
 ```{code-cell} ipython3
 can_lang_plot_theme = alt.Chart(can_lang).mark_point(filled=True).encode(
-    x = alt.X("most_at_home_percent",title = title = ["Language spoken most at home", "(number of Canadian residents)"]), scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
+    x = alt.X("most_at_home_percent",title = ["Language spoken most at home", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = alt.Color("category", legend=alt.Legend(
                             orient='none',
@@ -1386,7 +1386,7 @@ Both the `rows` and `columns` arguments take the column names on which to split 
 morley_hist = alt.Chart(morley_df).mark_bar(opacity = 0.5).encode(
     x = alt.X("Speed", bin=alt.Bin(maxbins=50)),  
     y=alt.Y('count()', stack=False),
-    color = "Expt:N").properties(height=100, width=200)
+    color = "Expt:N").properties(height=100, width=300)
 
 final_plot_facet = (morley_hist + v_line).facet(row = 'Expt:N', data = morley_df)
 
