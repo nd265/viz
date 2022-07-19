@@ -216,7 +216,7 @@ that was measured on each date, and is type `float64`.
 > **Note:** `read_csv` was able to parse the `date_measured` column into the
 > `datetime` vector type because it was entered 
 > in the international standard date format, 
-> called ISO 8601, which lists dates as `year-month-day` and we used `parse_dates=True`
+> called ISO 8601, which lists dates as `year-month-day` and we used `parse_dates=True`. 
 > `datetime` vectors are `double` vectors with special properties that allow 
 > them to handle dates correctly.
 > For example, `datetime` type vectors allow functions like `altair` 
@@ -225,10 +225,8 @@ that was measured on each date, and is type `float64`.
 > (e.g., in the `date_measured` column in the `co2_df` data frame).
 > This means Python will not accidentally plot the dates in the wrong order 
 > (i.e., not alphanumerically as would happen if it was a character vector). 
-> An in-depth study of dates and times is beyond the scope of the book, 
-> but interested readers 
-> may consult the Dates and Times chapter of *R for Data Science* [@wickham2016r];
-> see the additional resources at the end of this chapter.
+> More about dates and times can be viewed [here](https://wesmckinney.com/book/time-series.html)
+
 
 Since we are investigating a relationship between two variables 
 (CO$_{\text{2}}$ concentration and date), 
@@ -244,7 +242,7 @@ There are a few basic aspects of a plot that we need to specify:
 
 
 
-- The name of the data frame object to visualize.
+- The name of the **data frame** object to visualize.
     - Here, we specify the `co2_df` data frame as an argument to the `alt.Chart()` function
 - The **geometric object**, which specifies \index{aesthetic mapping} how the mapped data should be displayed.
     - To create a geometric object, we use `Chart.mark_*` methods (see the [altair reference](https://altair-viz.github.io/user_guide/marks.html) for a list of geometric objects).
@@ -255,31 +253,6 @@ There are a few basic aspects of a plot that we need to specify:
     - Here, we set the plot `x` axis to the `date_measured` variable, and the plot `y` axis to the `ppm` variable.
 
 
-
-{numref}`function_scatter` 
-shows how each of these aspects map to code
-for creating a basic scatter plot of the `co2_df` data.
-Note that we could pass many other possible arguments to the geometric endcoding
-and geometric object to change how the plot looks. For the purposes of quickly
-testing things out to see what they look like, though, we can just start with the
-default settings.
-\index{ggplot!aes}
-\index{ggplot!geom\_point}
- 
-
-
-
-
-```{figure} img/ggplot_function_scatter.jpeg
----
-height: 400px
-name: function_scatter
----
-Creating a scatter plot with the `ggplot` function.
-```
-
-
-\newpage
 
 
 
@@ -309,7 +282,7 @@ Scatter plot of atmospheric concentration of CO$_{2}$ over time.
 :::
 
 
->> Note: We can change the size of the point and color of the plot by specifying `mark_point(size=10, color='black')`. 
+> **Note:** We can change the size of the point and color of the plot by specifying `mark_point(size=10, color='black')`. 
 
 Certainly, the visualization in {numref}`co2_scatter` 
 shows a clear upward trend 
@@ -418,7 +391,6 @@ to specify the upper and lower bounds to limit the axis.
 
 ```{code-cell} ipython3
 
-#co2_dates = co2_df.loc[(co2_df.date_measured >= '1990-01-01') &  (co2_df.date_measured <= '1993-01-01')]
 
 co2_line_scale = alt.Chart(co2_df).mark_line(color='black', clip=True).encode(
     x=alt.X("date_measured", title="Measurement Date", axis=alt.Axis(tickCount=4), scale=alt.Scale(domain=['1990', '1994'])),
@@ -555,7 +527,7 @@ Scatter plot of waiting time and eruption time with clearer axes and labels.
 
 +++
 
-\newpage
+
 
 ### Axis transformation and colored scatter plots: the Canadian languages data set
 
@@ -917,7 +889,7 @@ this makes the scatter point shapes different for each category. This kind of
 visual redundancy&mdash;i.e., conveying the same information with both scatter point color and shape&mdash;can
 further improve the clarity and accessibility of your visualization.
 
->> Note: We cannot use different shapes with `mark_circle`, it can only be used with `mark_point`
+> Note: We cannot use different shapes with `mark_circle`, it can only be used with `mark_point`
 
 
 ```{code-cell} ipython3
@@ -1082,8 +1054,8 @@ in the ascending order of `x` axis values.
 We do this here so that the largest bar will be closest to the axis line,
 which is more visually appealing.
 
->> **Note:** If we want to sort the values on `y-axis` in descending order of `x-axis`,
->> we need to specify `sort='-x'`.
+> **Note:** If we want to sort the values on `y-axis` in descending order of `x-axis`,
+> we need to specify `sort='-x'`.
 
 To label the x and y axes, we will use the `alt.X` and `alt.Y` function
 The default label is the name of the column being mapped to `color`. Here that
@@ -1115,7 +1087,7 @@ Bar plot of size for Earth's largest 12 landmasses colored by whether its a cont
 :::
 
 
-The plot in {numref}`islands_plot_sorted ` is now a very effective
+The plot in {numref}`islands_plot_sorted` is now a very effective
 visualization for answering our original questions. Landmasses are organized by
 their size, and continents are colored differently than other landmasses,
 making it quite clear that continents are the largest seven landmasses.
@@ -1791,7 +1763,7 @@ found in Chapter \@ref(move-to-your-own-machine). This will ensure that the auto
 and guidance that the worksheets provide will function as intended.
 
 ## Additional resources
-- The [`ggplot2` R package page](https://ggplot2.tidyverse.org) [@ggplot] is
+- The [altair documentation](https://altair-viz.github.io/) [@ggplot] is
   where you should look if you want to learn more about the functions in this
   chapter, the full set of arguments you can use, and other related functions.
   The site also provides a very nice cheat sheet that summarizes many of the data
@@ -1806,11 +1778,7 @@ and guidance that the worksheets provide will function as intended.
   the full set of tools that `ggplot2` provides. This chapter is where you should
   look if you want to learn how to make more intricate visualizations in
   `ggplot2` than what is included in this chapter.
-- The [`theme` function documentation](https://ggplot2.tidyverse.org/reference/theme.html)
-  is an excellent reference to see how you can fine tune the non-data aspects 
-  of your visualization.
-- *R for Data Science* [@wickham2016r] has a chapter on [dates and
-  times](https://r4ds.had.co.nz/dates-and-times.html).  This chapter is where
-  you should look if you want to learn about `date` vectors, including how to
-  create them, and how to use them to effectively handle durations, periods and
-  intervals using the `lubridate` package.
+- [dates and
+  times](https://wesmckinney.com/book/time-series.html).  This chapter is where
+  you should look if you want to learn about `date` and `time`, including how to
+  create them, and how to use them to effectively handle durations, etc
