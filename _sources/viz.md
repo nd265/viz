@@ -645,6 +645,7 @@ Scatter plot of number of Canadians reporting a language as their mother tongue 
 
 ```{code-cell} ipython3
 #:tags: ["remove-cell"]
+import numpy as np
 numlang_speakers_max = max(can_lang['mother_tongue'])
 print(numlang_speakers_max)
 numlang_speakers_min = min(can_lang['mother_tongue'])
