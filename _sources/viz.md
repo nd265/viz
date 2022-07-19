@@ -325,7 +325,7 @@ co2_scatter = alt.Chart(co2_df).mark_point(size=10, color='black').encode(
     x = "date_measured", 
     y = alt.Y("ppm", scale=alt.Scale(zero=False)))
     
-co2_scatter
+
 ```
 
 ```{code-cell} ipython3
@@ -369,7 +369,7 @@ with just the default arguments:
 co2_line = alt.Chart(co2_df).mark_line(color='black').encode(
     x = "date_measured", 
     y = alt.Y("ppm", scale=alt.Scale(zero=False)))
-co2_line
+
 
 ```
 
@@ -456,7 +456,7 @@ co2_line_scale = alt.Chart(co2_df).mark_line(color='black', clip=True).encode(
     titleFontSize=12
 )
 
-co2_line_scale
+
 
 
 ```
@@ -533,7 +533,7 @@ faithful_scatter = alt.Chart(faithful).mark_point(color='black', filled=True).en
     x = "waiting",
     y = "eruptions"
 )
-faithful_scatter
+
 ```
 
 ```{code-cell} ipython3
@@ -794,7 +794,7 @@ can_lang_plot_percent = alt.Chart(can_lang).mark_circle(color='black').encode(
     x = alt.X("most_at_home_percent",title = "Language spoken most at home(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7))).configure_axis(
     titleFontSize=12)
-can_lang_plot_percent
+
 ```
 
 ```{code-cell} ipython3
@@ -866,7 +866,7 @@ can_lang_plot_category = alt.Chart(can_lang).mark_circle().encode(
     y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = "category").configure_axis(
     titleFontSize=12)
-can_lang_plot_category
+
 ```
 
 ```{code-cell} ipython3
@@ -904,7 +904,7 @@ can_lang_plot_legend = alt.Chart(can_lang).mark_circle().encode(
                             legendX=0, legendY=-90,
                             direction='vertical'))).configure_axis(
     titleFontSize=12)
-can_lang_plot_legend
+
 
 ```
 
@@ -967,7 +967,7 @@ can_lang_plot_theme = alt.Chart(can_lang).mark_point(filled=True).encode(
                          scale=alt.Scale(scheme='dark2')),
     shape = "category").configure_axis(
     titleFontSize=12)
-can_lang_plot_theme
+
 ```
 
 ```{code-cell} ipython3
@@ -1045,7 +1045,7 @@ The result is shown in {numref}`islands_bar`
 ```{code-cell} ipython3
 islands_bar = alt.Chart(islands_df).mark_bar().encode(
     x = "landmass", y = "size")
-islands_bar
+
 ```
 
 ```{code-cell} ipython3
@@ -1263,7 +1263,7 @@ v_line = alt.Chart(pd.DataFrame({'x': [792.458]})).mark_rule(
 
 
 final_plot = morley_hist + v_line
-final_plot
+
 ```
 
 
@@ -1582,7 +1582,7 @@ morley_hist_title = alt.Chart(morley_df, title = "Histogram of Michelson's speed
     x = alt.X("Speed"), 
     y=alt.Y('count()'),
     color = "Expt:N")
-morley_hist_title
+
 
 ```
 ```{code-cell} ipython3
@@ -1741,43 +1741,62 @@ The kind of image to save is specified by the file extension.
 For example, 
 to create a PNG image file, we specify that the file extension is `.png`.
 Below we demonstrate how to save PNG and SVG file types 
-for the `faithful_plot`:
+for the `faithful_scater_labels` plot:
+
+```{code-cell} ipython3
+:tags: ["remove-cell"]
+!pip install altair_saver
+```
 
 
 ```{code-cell} ipython3
+#!pip install altair_saver  #uncomment and run in jupyter notebook to install altair_saver, if not already installed
+from altair_saver import save
+
 faithful_scatter_labels.save("faithful_plot.png")
 faithful_scatter_labels.save("faithful_plot.svg")
 
 ```
 
-```{r, filesizes, echo = FALSE}
-file_sizes <- tibble(`Image type` = c("Raster", 
-                        "Raster", 
-                        "Raster", 
-                        "Raster",
-                        "Vector"),
-       `File type` = c("PNG", "JPG", "BMP", "TIFF", "SVG"),
-       `Image size` = c(paste(round(file.info("img/faithful_plot.png")["size"] 
-                                    / 1000000, 2), "MB"),
-                        paste(round(file.info("img/faithful_plot.jpg")["size"] 
-                                    / 1000000, 2), "MB"),
-                        paste(round(file.info("img/faithful_plot.bmp")["size"] 
-                                    / 1000000, 2), "MB"),
-                        paste(round(file.info("img/faithful_plot.tiff")["size"] 
-                                    / 1000000, 2), "MB"),
-                        paste(round(file.info("img/faithful_plot.svg")["size"] 
-                                    / 1000000, 2), "MB")))
-kable(file_sizes,
-      caption = "File sizes of the scatter plot of the Old Faithful data set when saved as different file formats.") |>
-  kable_styling(latex_options = "hold_position")
+
+```{code-cell} ipython3
+:tags: ["remove-cell"]
+import os
+png_size = os.path.getsize("data/faithful_plot.png")/1000000
+svg_size = os.path.getsize("data/faithful_plot.svg")/1000000
+
+glue("png_size", png_size)
+glue("svg_size", svg_size)
 ```
 
-Take a look at the file sizes in Table \@ref(tab:filesizes).
+
+```
+{glue:}`png_size`
+{glue:}`svg_size`
+
+```
+
+```{list-table} File sizes of the scatter plot of the Old Faithful data set when saved as different file formats.
+:header-rows: 1
+:name: png-vs-svg-table
+
+* - Image type
+  - File type
+  - Image size
+* - Raster
+  - PNG
+  - ```{glue:}`png_size````
+* - Vector
+  - SVG
+  - - ```{glue:}`svg_size````
+```
+
+
+
+Take a look at the file sizes in {numref}`png-vs-svg-table`
 Wow, that's quite a difference! Notice that for such a simple plot with few
 graphical elements (points), the vector graphics format (SVG) is over 100 times
-smaller than the uncompressed raster images (BMP, TIFF). Also, note that the
-JPG format is twice as large as the PNG format since the JPG compression
-algorithm is designed for natural images (not plots). 
+smaller than the uncompressed raster images. 
 
 In {numref}`png-vs-svg`, we also show what
 the images look like when we zoom in to a rectangle with only 3 data points.
