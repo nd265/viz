@@ -690,7 +690,7 @@ want to predict (sale price) on the y-axis.
 \index{ggplot!geom_point}
 \index{visualization!scatter}</p>
 <blockquote>
-<div><p><strong>Note:</strong> Given that the y-axis unit is dollars in <a class="reference internal" href="#fig-07-edaregr"><span class="std std-numref">Fig. 81</span></a>,
+<div><p><strong>Note:</strong> Given that the y-axis unit is dollars in <a class="reference internal" href="#fig-07-edaregr"><span class="std std-numref">Fig. 84</span></a>,
 we format the axis labels to put dollar signs in front of the house prices,
 as well as commas to increase the readability of the larger numbers.
 We can do this in <code class="docutils literal notranslate"><span class="pre">altair</span></code> by passing the <code class="docutils literal notranslate"><span class="pre">axis=alt.Axis(format='$,.0f')</span></code> argument
@@ -713,9 +713,9 @@ to the <code class="docutils literal notranslate"><span class="pre">y</span></co
 </div>
 </div>
 <div class="figure align-default" id="fig-07-edaregr">
-<p class="caption"><span class="caption-number">Fig. 81 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet).</span><a class="headerlink" href="#fig-07-edaregr" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 84 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet).</span><a class="headerlink" href="#fig-07-edaregr" title="Permalink to this image">¶</a></p>
 </div>
-<p>The plot is shown in <a class="reference internal" href="#fig-07-edaregr"><span class="std std-numref">Fig. 81</span></a>.
+<p>The plot is shown in <a class="reference internal" href="#fig-07-edaregr"><span class="std std-numref">Fig. 84</span></a>.
 We can see that in Sacramento, CA, as the
 size of a house increases, so does its sale price. Thus, we can reason that we
 may be able to use the size of a not-yet-sold house (for which we don’t know
@@ -729,7 +729,7 @@ predict the former.</p>
 <p>Much like in the case of classification,
 we can use a K-nearest neighbors-based \index{K-nearest neighbors!regression}
 approach in regression to make predictions.
-Let’s take a small sample of the data in <a class="reference internal" href="#fig-07-edaregr"><span class="std std-numref">Fig. 81</span></a>
+Let’s take a small sample of the data in <a class="reference internal" href="#fig-07-edaregr"><span class="std std-numref">Fig. 84</span></a>
 and walk through how K-nearest neighbors (KNN) works
 in a regression context before we dive in to creating our model and assessing
 how well it predicts house sale price. This subsample is taken to allow us to
@@ -750,7 +750,7 @@ interested in purchasing, with an advertised list price of $350,000. Should we
 offer to pay the asking price for this house, or is it overpriced and we should
 offer less? Absent any other information, we can get a sense for a good answer
 to this question by using the data we have to predict the sale price given the
-sale prices we have already observed. But in <a class="reference internal" href="#fig-07-small-eda-regr"><span class="std std-numref">Fig. 82</span></a>,
+sale prices we have already observed. But in <a class="reference internal" href="#fig-07-small-eda-regr"><span class="std std-numref">Fig. 85</span></a>,
 you can see that we have no
 observations of a house of size <em>exactly</em> 2,000 square feet. How can we predict
 the sale price?</p>
@@ -775,12 +775,12 @@ the sale price?</p>
 </div>
 </div>
 <div class="figure align-default" id="fig-07-small-eda-regr">
-<p class="caption"><span class="caption-number">Fig. 82 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet) with vertical line indicating 2,000 square feet on x-axis.</span><a class="headerlink" href="#fig-07-small-eda-regr" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 85 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet) with vertical line indicating 2,000 square feet on x-axis.</span><a class="headerlink" href="#fig-07-small-eda-regr" title="Permalink to this image">¶</a></p>
 </div>
 <p>We will employ the same intuition from the classification chapter, and use the
 neighboring points to the new point of interest to suggest/predict what its
 sale price might be.
-For the example shown in <a class="reference internal" href="#fig-07-small-eda-regr"><span class="std std-numref">Fig. 82</span></a>,
+For the example shown in <a class="reference internal" href="#fig-07-small-eda-regr"><span class="std std-numref">Fig. 85</span></a>,
 we find and label the 5 nearest neighbors to our observation
 of a house that is 2,000 square feet.
 \index{mutate}\index{slice}\index{arrange}\index{abs}</p>
@@ -898,15 +898,15 @@ of a house that is 2,000 square feet.
 </div></div></div>
 </div>
 <div class="figure align-default" id="fig-07-knn5-example">
-<p class="caption"><span class="caption-number">Fig. 83 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet) with lines to 5 nearest neighbors.</span><a class="headerlink" href="#fig-07-knn5-example" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 86 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet) with lines to 5 nearest neighbors.</span><a class="headerlink" href="#fig-07-knn5-example" title="Permalink to this image">¶</a></p>
 </div>
-<p><a class="reference internal" href="#fig-07-knn5-example"><span class="std std-numref">Fig. 83</span></a> illustrates the difference between the house sizes
+<p><a class="reference internal" href="#fig-07-knn5-example"><span class="std std-numref">Fig. 86</span></a> illustrates the difference between the house sizes
 of the 5 nearest neighbors (in terms of house size) to our new
 2,000 square-foot house of interest. Now that we have obtained these nearest neighbors,
 we can use their values to predict the
 sale price for the new home.  Specifically, we can take the mean (or
 average) of these 5 values as our predicted value, as illustrated by
-the red point in <a class="reference internal" href="#fig-07-predictedviz-knn"><span class="std std-numref">Fig. 84</span></a>.</p>
+the red point in <a class="reference internal" href="#fig-07-predictedviz-knn"><span class="std std-numref">Fig. 87</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prediction</span> <span class="o">=</span> <span class="n">nearest_neighbors</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -921,10 +921,10 @@ the red point in <a class="reference internal" href="#fig-07-predictedviz-knn"><
 </div>
 </div>
 <div class="figure align-default" id="fig-07-predictedviz-knn">
-<p class="caption"><span class="caption-number">Fig. 84 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet) with predicted price for a 2,000 square-foot house based on 5 nearest neighbors represented as a red dot.</span><a class="headerlink" href="#fig-07-predictedviz-knn" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 87 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet) with predicted price for a 2,000 square-foot house based on 5 nearest neighbors represented as a red dot.</span><a class="headerlink" href="#fig-07-predictedviz-knn" title="Permalink to this image">¶</a></p>
 </div>
 <p>Our predicted price is $
-(shown as a red point in <a class="reference internal" href="#fig-07-predictedviz-knn"><span class="std std-numref">Fig. 84</span></a>), which is much less than $350,000; perhaps we
+(shown as a red point in <a class="reference internal" href="#fig-07-predictedviz-knn"><span class="std std-numref">Fig. 87</span></a>), which is much less than $350,000; perhaps we
 might want to offer less than the list price at which the house is advertised.
 But this is only the very beginning of the story. We still have all the same
 unanswered questions here with KNN regression that we had with KNN
@@ -948,7 +948,7 @@ Let’s take care of that now.
 Note that for the remainder of the chapter
 we’ll be working with the entire Sacramento data set,
 as opposed to the smaller sample of 30 points
-that we used earlier in the chapter (<a class="reference internal" href="#fig-07-small-eda-regr"><span class="std std-numref">Fig. 82</span></a>).
+that we used earlier in the chapter (<a class="reference internal" href="#fig-07-small-eda-regr"><span class="std std-numref">Fig. 85</span></a>).
 \index{training data}
 \index{test data}</p>
 <blockquote>
@@ -982,7 +982,7 @@ context of KNN regression we will use root mean square prediction error \index{r
 value for each observation in our test (or validation) set, compute the average, and then finally
 take the square root. The reason we use the <em>squared</em> difference (and not just the difference)
 is that the differences can be positive or negative, i.e., we can overshoot or undershoot the true
-response value. <a class="reference internal" href="#fig-07-verticalerrors"><span class="std std-numref">Fig. 85</span></a> illustrates both positive and negative differences
+response value. <a class="reference internal" href="#fig-07-verticalerrors"><span class="std std-numref">Fig. 88</span></a> illustrates both positive and negative differences
 between predicted and true response values.
 So if we want to measure error—a notion of distance between our predicted and true response values—we
 want to make sure that we are only adding up positive values, with larger positive values representing larger
@@ -993,7 +993,7 @@ different from the true values, then RMSPE will be quite large. When we
 use cross-validation, we will choose the <span class="math notranslate nohighlight">\(K\)</span> that gives
 us the smallest RMSPE.</p>
 <div class="figure align-default" id="fig-07-verticalerrors">
-<p class="caption"><span class="caption-number">Fig. 85 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet) with example predictions (blue line) and the error in those predictions compared with true response values for three selected observations (vertical red lines).</span><a class="headerlink" href="#fig-07-verticalerrors" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 88 </span><span class="caption-text">Scatter plot of price (USD) versus house size (square feet) with example predictions (blue line) and the error in those predictions compared with true response values for three selected observations (vertical red lines).</span><a class="headerlink" href="#fig-07-verticalerrors" title="Permalink to this image">¶</a></p>
 </div>
 <blockquote>
 <div><p><strong>Note:</strong> When using many code packages, the evaluation output
@@ -1189,9 +1189,9 @@ as they do not provide any additional insight.</p>
 </div></div></div>
 </div>
 <div class="figure align-default" id="fig-07-choose-k-knn-plot">
-<p class="caption"><span class="caption-number">Fig. 86 </span><span class="caption-text">Effect of the number of neighbors on the RMSPE.</span><a class="headerlink" href="#fig-07-choose-k-knn-plot" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 89 </span><span class="caption-text">Effect of the number of neighbors on the RMSPE.</span><a class="headerlink" href="#fig-07-choose-k-knn-plot" title="Permalink to this image">¶</a></p>
 </div>
-<p><a class="reference internal" href="#fig-07-choose-k-knn-plot"><span class="std std-numref">Fig. 86</span></a> visualizes how the RMSPE varies with the number of neighbors <span class="math notranslate nohighlight">\(K\)</span>.
+<p><a class="reference internal" href="#fig-07-choose-k-knn-plot"><span class="std std-numref">Fig. 89</span></a> visualizes how the RMSPE varies with the number of neighbors <span class="math notranslate nohighlight">\(K\)</span>.
 We take the <em>minimum</em> RMSPE to find the best setting for the number of neighbors:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1251,17 +1251,17 @@ We take the <em>minimum</em> RMSPE to find the best setting for the number of ne
 <h2>Underfitting and overfitting<a class="headerlink" href="#underfitting-and-overfitting" title="Permalink to this headline">¶</a></h2>
 <p>Similar to the setting of classification, by setting the number of neighbors
 to be too small or too large, we cause the RMSPE to increase, as shown in
-<a class="reference internal" href="#fig-07-choose-k-knn-plot"><span class="std std-numref">Fig. 86</span></a>. What is happening here?</p>
-<p><a class="reference internal" href="#fig-07-howk"><span class="std std-numref">Fig. 87</span></a> visualizes the effect of different settings of <span class="math notranslate nohighlight">\(K\)</span> on the
+<a class="reference internal" href="#fig-07-choose-k-knn-plot"><span class="std std-numref">Fig. 89</span></a>. What is happening here?</p>
+<p><a class="reference internal" href="#fig-07-howk"><span class="std std-numref">Fig. 90</span></a> visualizes the effect of different settings of <span class="math notranslate nohighlight">\(K\)</span> on the
 regression model. Each plot shows the predicted values for house sale price from
 our KNN regression model for 6 different values for <span class="math notranslate nohighlight">\(K\)</span>: 1, 3, , 41, 250, and 699 (i.e., the training data).
 For each model, we predict prices for the range of possible home sizes we
 observed in the data set (here 500 to 5,000 square feet) and we plot the
 predicted prices as a blue line.</p>
 <div class="figure align-default" id="fig-07-howk">
-<p class="caption"><span class="caption-number">Fig. 87 </span><span class="caption-text">Predicted values for house price (represented as a blue line) from KNN regression models for six different values for <span class="math notranslate nohighlight">\(K\)</span>.</span><a class="headerlink" href="#fig-07-howk" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 90 </span><span class="caption-text">Predicted values for house price (represented as a blue line) from KNN regression models for six different values for <span class="math notranslate nohighlight">\(K\)</span>.</span><a class="headerlink" href="#fig-07-howk" title="Permalink to this image">¶</a></p>
 </div>
-<p><a class="reference internal" href="#fig-07-howk"><span class="std std-numref">Fig. 87</span></a> shows that when <span class="math notranslate nohighlight">\(K\)</span> = 1, the blue line runs perfectly
+<p><a class="reference internal" href="#fig-07-howk"><span class="std std-numref">Fig. 90</span></a> shows that when <span class="math notranslate nohighlight">\(K\)</span> = 1, the blue line runs perfectly
 through (almost) all of our training observations.
 This happens because our
 predicted values for a given region (typically) depend on just a single observation.
@@ -1277,7 +1277,7 @@ Recall from the classification
 chapters that this behavior—where the model is influenced too much
 by the noisy data—is called <em>overfitting</em>; we use this same term
 in the context of regression. \index{overfitting!regression}</p>
-<p>What about the plots in <a class="reference internal" href="#fig-07-howk"><span class="std std-numref">Fig. 87</span></a> where <span class="math notranslate nohighlight">\(K\)</span> is quite large,
+<p>What about the plots in <a class="reference internal" href="#fig-07-howk"><span class="std std-numref">Fig. 90</span></a> where <span class="math notranslate nohighlight">\(K\)</span> is quite large,
 say, <span class="math notranslate nohighlight">\(K\)</span> = 250 or 699?
 In this case the blue line becomes extremely smooth, and actually becomes flat
 once <span class="math notranslate nohighlight">\(K\)</span> is equal to the number of datapoints in the entire data set.
@@ -1367,7 +1367,7 @@ is not prohibitively large, but it is not negligible either;
 $ 
 might represent a substantial fraction of a home buyer’s budget, and
 could make or break whether or not they could afford put an offer on a house.</p>
-<p>Finally, <a class="reference internal" href="#fig-07-predict-all"><span class="std std-numref">Fig. 88</span></a> shows the predictions that our final model makes across
+<p>Finally, <a class="reference internal" href="#fig-07-predict-all"><span class="std std-numref">Fig. 91</span></a> shows the predictions that our final model makes across
 the range of house sizes we might encounter in the Sacramento area—from 500 to 5000 square feet.
 You have already seen a few plots like this in this chapter, but here we also provide the code that generated it
 as a learning challenge.</p>
@@ -1400,7 +1400,7 @@ as a learning challenge.</p>
 </div>
 </div>
 <div class="figure align-default" id="fig-07-predict-all">
-<p class="caption"><span class="caption-number">Fig. 88 </span><span class="caption-text">Predicted values of house price (blue line) for the final KNN regression model.</span><a class="headerlink" href="#fig-07-predict-all" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 91 </span><span class="caption-text">Predicted values of house price (blue line) for the final KNN regression model.</span><a class="headerlink" href="#fig-07-predict-all" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="multivariable-knn-regression">
@@ -1424,7 +1424,7 @@ house size (measured in square feet) as well as number of bedrooms as our
 predictors, and continue to use house sale price as our outcome/target variable
 that we are trying to predict.
 It is always a good practice to do exploratory data analysis, such as
-visualizing the data, before we start modeling the data. <a class="reference internal" href="#fig-07-bedscatter"><span class="std std-numref">Fig. 89</span></a>
+visualizing the data, before we start modeling the data. <a class="reference internal" href="#fig-07-bedscatter"><span class="std std-numref">Fig. 92</span></a>
 shows that the number of bedrooms might provide useful information
 to help predict the sale price of a house.</p>
 <div class="cell tag_remove-output docutils container">
@@ -1444,9 +1444,9 @@ to help predict the sale price of a house.</p>
 </div>
 </div>
 <div class="figure align-default" id="fig-07-bedscatter">
-<p class="caption"><span class="caption-number">Fig. 89 </span><span class="caption-text">Scatter plot of the sale price of houses versus the number of bedrooms.</span><a class="headerlink" href="#fig-07-bedscatter" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 92 </span><span class="caption-text">Scatter plot of the sale price of houses versus the number of bedrooms.</span><a class="headerlink" href="#fig-07-bedscatter" title="Permalink to this image">¶</a></p>
 </div>
-<p><a class="reference internal" href="#fig-07-bedscatter"><span class="std std-numref">Fig. 89</span></a> shows that as the number of bedrooms increases,
+<p><a class="reference internal" href="#fig-07-bedscatter"><span class="std std-numref">Fig. 92</span></a> shows that as the number of bedrooms increases,
 the house sale price tends to increase as well, but that the relationship
 is quite weak. Does adding the number of bedrooms
 to our model improve our ability to predict price? To answer that
@@ -1609,7 +1609,7 @@ on the test data.</p>
 <p>This time, when we performed KNN regression on the same data set, but also
 included number of bedrooms as a predictor, we obtained a RMSPE test error
 of .
-<a class="reference internal" href="#fig-07-knn-mult-viz"><span class="std std-numref">Fig. 90</span></a> visualizes the model’s predictions overlaid on top of the data. This
+<a class="reference internal" href="#fig-07-knn-mult-viz"><span class="std std-numref">Fig. 93</span></a> visualizes the model’s predictions overlaid on top of the data. This
 time the predictions are a surface in 3D space, instead of a line in 2D space, as we have 2
 predictors instead of 1.</p>
 <div class="cell tag_remove-input docutils container">
@@ -1626,7 +1626,7 @@ predictors instead of 1.</p>
 </div>
 <div class="caption-hack figure align-default" id="fig-07-knn-mult-viz">
 <img alt="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
-<p class="caption"><span class="caption-number">Fig. 90 </span><span class="caption-text">KNN regression model’s predictions represented as a surface in 3D space overlaid on top of the data using three predictors (price, house size, and the number of bedrooms). Note that in general we recommend against using 3D visualizations; here we use a 3D visualization only to illustrate what the surface of predictions looks like for learning purposes.</span><a class="headerlink" href="#fig-07-knn-mult-viz" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 93 </span><span class="caption-text">KNN regression model’s predictions represented as a surface in 3D space overlaid on top of the data using three predictors (price, house size, and the number of bedrooms). Note that in general we recommend against using 3D visualizations; here we use a 3D visualization only to illustrate what the surface of predictions looks like for learning purposes.</span><a class="headerlink" href="#fig-07-knn-mult-viz" title="Permalink to this image">¶</a></p>
 </div>
 <p>We can see that the predictions in this case, where we have 2 predictors, form
 a surface instead of a line. Because the newly added predictor (number of bedrooms) is

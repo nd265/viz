@@ -900,7 +900,7 @@ can_lang_plot_legend = alt.Chart(can_lang).mark_circle().encode(
     x = alt.X("most_at_home_percent",title = "Language spoken most at home(percentage of Canadian residents)", scale=alt.Scale(type="log"),axis=alt.Axis(tickCount=7) ),
     y = alt.Y("mother_tongue_percent", title = "Mother tongue(percentage of Canadian residents)", scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = alt.Color("category", legend=alt.Legend(
-                            #orient='none',
+                            orient='none',
                             legendX=0, legendY=-90,
                             direction='vertical'))).configure_axis(
     titleFontSize=12)
@@ -1466,10 +1466,9 @@ admirable job given the technology available at the time.
 When you create a histogram in `altair`, the default number of bins used is 30.
 Naturally, this is not always the right number to use.
 You can set the number of bins yourself by using
-the `bins` argument in the `geom_histogram` geometric object.
-You can also set the *width* of the bins using the
-`binwidth` argument in the `geom_histogram` geometric object.
-But what number of bins, or bin width, is the right one to use? 
+the `maxbins` argument in the `mark_bar` geometric object.
+
+But what number of bins is the right one to use? 
 
 Unfortunately there is no hard rule for what the right bin number
 or width is. It depends entirely on your problem; the *right* number of bins 
@@ -1477,22 +1476,18 @@ or bin width is
 the one that *helps you answer the question* you asked. 
 Choosing the correct setting for your problem 
 is something that commonly takes iteration.
-We recommend setting the *bin width* (not the *number of bins*) because
-it often more directly corresponds to values in your problem of interest. For example,
-if you are looking at a histogram of human heights,
-a bin width of 1 inch would likely be reasonable, while the number of bins to use is 
-not immediately clear.
-It's usually a good idea to try out several bin widths to see which one
+
+It's usually a good idea to try out several `maxbins` to see which one
 most clearly captures your data in the context of the question
 you want to answer.
 
-To get a sense for how different bin widths affect visualizations, 
+To get a sense for how different bin affect visualizations, 
 let's experiment with the histogram that we have been working on in this section.
-In Figure \@ref(fig:03-data-morley-hist-binwidth),
+In {numref}`final_plot_max_bins`,
 we compare the default setting with three other histograms where we set the 
-`binwidth` to 0.001, 0.01 and 0.1.
+`maxbins` to 200, 70 and 5.
 In this case, we can see that both the default number of bins 
-and the binwidth of 0.01 are effective for helping answer our question.
+and the bins=5 of  are effective for helping answer our question.
 On the other hand, the bin widths of 0.001 and 0.1 are too small and too big, respectively.
 
 
@@ -1501,8 +1496,8 @@ On the other hand, the bin widths of 0.001 and 0.1 are too small and too big, re
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
 
-morley_hist_40 = alt.Chart(morley_rel).mark_bar(opacity=0.6).encode(
-    x = alt.X("relative_accuracy", bin=alt.Bin(maxbins=40), title = "Relative Accuracy (%)"), 
+morley_hist_default = alt.Chart(morley_rel).mark_bar(opacity=0.6).encode(
+    x = alt.X("relative_accuracy", title = "Relative Accuracy (%)"), 
     y=alt.Y('count()', stack=False, title = "# Measurements"),
     color = alt.Color("Expt:N",  title = "Experiment ID")).properties(height=100, width=400)
 
@@ -1510,12 +1505,12 @@ morley_hist_200 = alt.Chart(morley_rel).mark_bar(opacity=0.6).encode(
     x = alt.X("relative_accuracy", bin=alt.Bin(maxbins=200), title = "Relative Accuracy (%)"), 
     y=alt.Y('count()', stack=False, title = "# Measurements"),
     color = alt.Color("Expt:N",  title = "Experiment ID")).properties(height=100, width=400)
-morley_hist_2 = alt.Chart(morley_rel).mark_bar(opacity=0.6).encode(
-    x = alt.X("relative_accuracy", bin=alt.Bin(maxbins=2), title = "Relative Accuracy (%)"), 
+morley_hist_70 = alt.Chart(morley_rel).mark_bar(opacity=0.6).encode(
+    x = alt.X("relative_accuracy", bin=alt.Bin(maxbins=70), title = "Relative Accuracy (%)"), 
     y=alt.Y('count()', stack=False, title = "# Measurements"),
     color = alt.Color("Expt:N",  title = "Experiment ID")).properties(height=100, width=400)
 
-morley_hist_30 = alt.Chart(morley_rel).mark_bar(opacity=0.6).encode(
+morley_hist_5 = alt.Chart(morley_rel).mark_bar(opacity=0.6).encode(
     x = alt.X("relative_accuracy", bin=alt.Bin(maxbins=5), title = "Relative Accuracy (%)"), 
     y=alt.Y('count()', stack=False, title = "# Measurements"),
     color = alt.Color("Expt:N",  title = "Experiment ID")).properties(height=100, width=400)
@@ -1524,41 +1519,84 @@ morley_hist_30 = alt.Chart(morley_rel).mark_bar(opacity=0.6).encode(
 
 
 
-final_plot = ((morley_hist_200 + v_line).facet(row='Expt:N', data=morley_rel, title = "maxBins=200") | (morley_hist_40 + v_line).facet(row='Expt:N', data=morley_rel, title = "maxBins=40")) & ((morley_hist_30 + v_line).facet(row='Expt:N', data=morley_rel, title = "maxBins=30") | (morley_hist_2 + v_line).facet(row='Expt:N', data=morley_rel, title = "maxBins=2"))
+final_plot_max_bins = ((morley_hist_default + v_line).facet(row='Expt:N', data=morley_rel, title = "default maxbins") | (morley_hist_200 + v_line).facet(row='Expt:N', data=morley_rel, title = "maxBins=200")) & ((morley_hist_70 + v_line).facet(row='Expt:N', data=morley_rel, title = "maxBins=70") | (morley_hist_5 + v_line).facet(row='Expt:N', data=morley_rel, title = "maxBins=5"))
 
-final_plot
+
 
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('final_plot', final_plot, display=False)
+glue('final_plot_max_bins', final_plot_max_bins, display=True)
 ```
 
-:::{glue:figure} final_plot
+:::{glue:figure} final_plot_max_bins
 :figwidth: 700px 
-:name: final_plot
+:name: final_plot_max_bins
 
 Effect of varying number of max bins on histograms.
 :::
 
-#### Adding layers to a `ggplot` plot object {-}
+#### Adding layers to a `altair` plot object {-}
 
-One of the powerful features of `ggplot` is that you 
+One of the powerful features of `altair` is that you 
 can continue to iterate on a single plot object, adding and refining
 one layer \index{ggplot!add layer} at a time. If you stored your plot as a named object
-using the assignment symbol (`<-`), you can 
+using the assignment symbol (`=`), you can 
 add to it using the `+` operator.
-For example, if we wanted to add a title to the last plot we created (`morley_hist`), 
-we can use the `+` operator to add a title layer with the `ggtitle` function.
-The result is shown in Figure \@ref(fig:03-data-morley-hist-addlayer).
+For example, if we wanted to add a vertical line to the last plot we created (`morley_hist`), 
+we can use the `+` operator to add a vertical line chart layer with the `mark_rule` function.
+The result is shown in {numref}`morley_hist_layer`.
 
-```{r 03-data-morley-hist-addlayer, warning = FALSE, message = FALSE, fig.height = 5.25, fig.width = 4.5, fig.align = "center", fig.pos = "H", out.extra="", fig.cap = "Histogram of relative accuracy split vertically by experiment with a descriptive title highlighting the take home message of the visualization."}
-morley_hist_title <- morley_hist +
-  ggtitle("Speed of light experiments \n were accurate to about 0.05%")
-
-morley_hist_title
+```{code-cell} ipython3
+morley_hist_colored = alt.Chart(morley_df).mark_bar(opacity=0.5).encode(
+    x = alt.X("Speed"), 
+    y=alt.Y('count()'),
+    color = "Expt:N")
+    
+v_line = alt.Chart(pd.DataFrame({'x': [792.458]})).mark_rule(
+    strokeDash=[3,3], size=1).encode(
+    x='x')
+morley_hist_layer = morley_hist_colored + v_line   
+    
 ```
+
+```{code-cell} ipython3
+:tags: ["remove-cell"]
+glue('morley_hist_layer', morley_hist_layer, display=True)
+```
+
+:::{glue:figure} morley_hist_layer
+:figwidth: 700px 
+:name: morley_hist_layer
+
+Histogram of Michelson's speed of light data colored by experiment with layered vertical line.
+:::
+
+
+We can also add a title to the chart by specifying `title` argument in the `alt.Chart` function
+
+
+```{code-cell} ipython3
+morley_hist_title = alt.Chart(morley_df, title = "Histogram of Michelson's speed of light data colored by experiment").mark_bar(opacity=0.5).encode(
+    x = alt.X("Speed"), 
+    y=alt.Y('count()'),
+    color = "Expt:N")
+morley_hist_title
+
+```
+```{code-cell} ipython3
+:tags: ["remove-cell"]
+glue('morley_hist_title', morley_hist_title, display=True)
+```
+
+:::{glue:figure} morley_hist_title
+:figwidth: 700px 
+:name: morley_hist_title
+
+Histogram of Michelson's speed of light data colored with title
+:::
+
 
 > **Note:** Good visualization titles clearly communicate 
 > the take home message to the audience. Typically, 
@@ -1649,10 +1687,9 @@ display of the original image.
 \index{raster graphics!file types}
 
 - *Common file types:* 
-    - [JPEG](https://en.wikipedia.org/wiki/JPEG) (`.jpg`, `.jpeg`): lossy, usually used for photographs 
+   
     - [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) (`.png`): lossless, usually used for plots / line drawings
-    - [BMP](https://en.wikipedia.org/wiki/BMP_file_format) (`.bmp`): lossless, raw image data, no compression (rarely used)
-    - [TIFF](https://en.wikipedia.org/wiki/TIFF) (`.tif`, `.tiff`): typically lossless, no compression, used mostly in graphic arts, publishing
+   
 - *Open-source software:* [GIMP](https://www.gimp.org/)
 
 **Vector** images are represented as a collection of mathematical 
@@ -1662,7 +1699,7 @@ redraws all of the elements using their mathematical formulas.
 
 - *Common file types:* 
     - [SVG](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) (`.svg`): general-purpose use 
-    - [EPS](https://en.wikipedia.org/wiki/Encapsulated_PostScript) (`.eps`), general-purpose use (rarely used)
+    
 - *Open-source software:* [Inkscape](https://inkscape.org/)
 
 Raster and vector images have opposing advantages and disadvantages. A raster
@@ -1685,49 +1722,31 @@ bad, while raster images eventually start to look "pixelated."
 Let's learn how to save plot images to these different file formats using a 
 scatter plot of 
 the [Old Faithful data set](https://www.stat.cmu.edu/~larry/all-of-statistics/=data/faithful.dat) [@faithfuldata],
-shown in Figure \@ref(fig:03-plot-line).
+shown in {numref}`faithful_scatter_labels`
 
 
 
-
-```{code-cell} ipython3
-faithful_plot = alt.Chart(faithful).mark_point(filled=True).encode(
-    x = alt.X('waiting', title = "Waiting time to next eruption (minutes)"),
-    y = alt.Y('eruptions', title = "Eruption time (minutes)")).configure_axis(
-    titleFontSize=12)
-faithful_plot
-```
-
-```{code-cell} ipython3
-:tags: ["remove-cell"]
-glue('faithful_plot', faithful_plot, display=False)
-```
-
-:::{glue:figure} faithful_plot
+:::{glue:figure} faithful_scatter_labels
 :figwidth: 700px 
-:name: faithful_plot
+:name: faithful_scatter_labels
 
 Scatter plot of waiting time and eruption time.
 :::
 
-
-Now that we have a named `ggplot` plot object, we can use the `ggsave` function
+Now that we have a named `altair` plot object, we can use the `chart.save` function
 to save a file containing this image. 
-`ggsave` works by taking a file name to create for the image 
-as its first argument. 
-This can include the path to the directory where you would like to save the file 
+`chart.save` works by taking the path to the directory where you would like to save the file 
 (e.g., `img/filename.png` to save a file named `filename` to the `img` directory),
-and the name of the plot object to save as its second argument.
 The kind of image to save is specified by the file extension.
 For example, 
 to create a PNG image file, we specify that the file extension is `.png`.
-Below we demonstrate how to save PNG, JPG, BMP, TIFF and SVG file types 
+Below we demonstrate how to save PNG and SVG file types 
 for the `faithful_plot`:
 
 
 ```{code-cell} ipython3
-faithful_plot.save("faithful_plot.png")
-faithful_plot.save("faithful_plot.svg")
+faithful_scatter_labels.save("faithful_plot.png")
+faithful_scatter_labels.save("faithful_plot.svg")
 
 ```
 
@@ -1760,17 +1779,25 @@ smaller than the uncompressed raster images (BMP, TIFF). Also, note that the
 JPG format is twice as large as the PNG format since the JPG compression
 algorithm is designed for natural images (not plots). 
 
-In Figure \@ref(fig:03-raster-image), we also show what
+In {numref}`png-vs-svg`, we also show what
 the images look like when we zoom in to a rectangle with only 3 data points.
 You can see why vector graphics formats are so useful: because they're just
 based on mathematical formulas, vector graphics can be scaled up to arbitrary
 sizes.  This makes them great for presentation media of all sizes, from papers
 to posters to billboards.
 
-(ref:03-raster-image) Zoomed in `faithful`, raster (PNG, left) and vector (SVG, right) formats.
 
 ```{r 03-raster-image, echo=FALSE, fig.cap = "(ref:03-raster-image)", fig.show="hold", fig.align= "center", message =F, out.width="100%"}
 knitr::include_graphics("img/png-vs-svg.png")
+```
+
+
+```{figure} img/png-vs-svg.png
+---
+height: 400px
+name: png-vs-svg
+---
+Zoomed in `faithful`, raster (PNG, left) and vector (SVG, right) formats.
 ```
 
 ## Exercises

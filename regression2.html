@@ -499,9 +499,9 @@ $350,000. Should we offer the list price, or is that over/undervalued?
 To answer this question using simple linear regression, we use the data we have
 to draw the straight line of best fit through our existing data points.
 The small subset of data as well as the line of best fit are shown
-in <a class="reference internal" href="#fig-08-lin-reg1"><span class="std std-numref">Fig. 91</span></a>.</p>
+in <a class="reference internal" href="#fig-08-lin-reg1"><span class="std std-numref">Fig. 94</span></a>.</p>
 <div class="figure align-default" id="fig-08-lin-reg1">
-<p class="caption"><span class="caption-number">Fig. 91 </span><span class="caption-text">Scatter plot of sale price versus size with line of best fit for subset of the Sacramento housing data.</span><a class="headerlink" href="#fig-08-lin-reg1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 94 </span><span class="caption-text">Scatter plot of sale price versus size with line of best fit for subset of the Sacramento housing data.</span><a class="headerlink" href="#fig-08-lin-reg1" title="Permalink to this image">¶</a></p>
 </div>
 <p>The equation for the straight line is: \index{straight line!equation}</p>
 <div class="math notranslate nohighlight">
@@ -522,32 +522,32 @@ Or what about <em>negative</em> 2,000 square feet? As it turns out, nothing in t
 regression will happily make predictions for crazy predictor values if you ask it to. But even though
 you <em>can</em> make these wild predictions, you shouldn’t. You should only make predictions roughly within
 the range of your original data, and perhaps a bit beyond it only if it makes sense. For example,
-the data in <a class="reference internal" href="#fig-08-lin-reg1"><span class="std std-numref">Fig. 91</span></a> only reaches around 600 square feet on the low end, but
+the data in <a class="reference internal" href="#fig-08-lin-reg1"><span class="std std-numref">Fig. 94</span></a> only reaches around 600 square feet on the low end, but
 it would probably be reasonable to use the linear regression model to make a prediction at 500 square feet, say.</p>
 <p>Back to the example! Once we have the coefficients <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span>, we can use the equation
 above to evaluate the predicted sale price given the value we have for the
-predictor variable—here 2,000 square feet. <a class="reference internal" href="#fig-08-lin-reg2"><span class="std std-numref">Fig. 92</span></a> demonstrates this process.</p>
+predictor variable—here 2,000 square feet. <a class="reference internal" href="#fig-08-lin-reg2"><span class="std std-numref">Fig. 95</span></a> demonstrates this process.</p>
 <div class="figure align-default" id="fig-08-lin-reg2">
-<p class="caption"><span class="caption-number">Fig. 92 </span><span class="caption-text">Scatter plot of sale price versus size with line of best fit and a red dot at the predicted sale price for a 2,000 square-foot home.</span><a class="headerlink" href="#fig-08-lin-reg2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 95 </span><span class="caption-text">Scatter plot of sale price versus size with line of best fit and a red dot at the predicted sale price for a 2,000 square-foot home.</span><a class="headerlink" href="#fig-08-lin-reg2" title="Permalink to this image">¶</a></p>
 </div>
 <p>By using simple linear regression on this small data set to predict the sale price
 for a 2,000 square-foot house, we get a predicted value of
 $. But wait a minute…how
 exactly does simple linear regression choose the line of best fit? Many
 different lines could be drawn through the data points.
-Some plausible examples are shown in <a class="reference internal" href="#fig-08-several-lines"><span class="std std-numref">Fig. 93</span></a>.</p>
+Some plausible examples are shown in <a class="reference internal" href="#fig-08-several-lines"><span class="std std-numref">Fig. 96</span></a>.</p>
 <div class="figure align-default" id="fig-08-several-lines">
-<p class="caption"><span class="caption-number">Fig. 93 </span><span class="caption-text">Scatter plot of sale price versus size with many possible lines that could be drawn through the data points.</span><a class="headerlink" href="#fig-08-several-lines" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 96 </span><span class="caption-text">Scatter plot of sale price versus size with many possible lines that could be drawn through the data points.</span><a class="headerlink" href="#fig-08-several-lines" title="Permalink to this image">¶</a></p>
 </div>
 <p>Simple linear regression chooses the straight line of best fit by choosing
 the line that minimizes the <strong>average squared vertical distance</strong> between itself and
-each of the observed data points in the training data. <a class="reference internal" href="#fig-08-verticaldisttomin"><span class="std std-numref">Fig. 94</span></a> illustrates
+each of the observed data points in the training data. <a class="reference internal" href="#fig-08-verticaldisttomin"><span class="std std-numref">Fig. 97</span></a> illustrates
 these vertical distances as red lines. Finally, to assess the predictive
 accuracy of a simple linear regression model,
 we use RMSPE—the same measure of predictive performance we used with KNN regression.
 \index{RMSPE}</p>
 <div class="figure align-default" id="fig-08-verticaldisttomin">
-<p class="caption"><span class="caption-number">Fig. 94 </span><span class="caption-text">Scatter plot of sale price versus size with red lines denoting the vertical distances between the predicted values and the observed data points.</span><a class="headerlink" href="#fig-08-verticaldisttomin" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 97 </span><span class="caption-text">Scatter plot of sale price versus size with red lines denoting the vertical distances between the predicted values and the observed data points.</span><a class="headerlink" href="#fig-08-verticaldisttomin" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="linear-regression-in-python">
@@ -684,7 +684,7 @@ plot of the original housing price data. There is a function in
 the <code class="docutils literal notranslate"><span class="pre">altair</span></code>, <code class="docutils literal notranslate"><span class="pre">transform_regression</span></code>, that
 allows us to add a layer on our plot with the simple
 linear regression predicted line of best fit.
-<a class="reference internal" href="#fig-08-lm-predict-all"><span class="std std-numref">Fig. 95</span></a> displays the result.</p>
+<a class="reference internal" href="#fig-08-lm-predict-all"><span class="std std-numref">Fig. 98</span></a> displays the result.</p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm_plot_final</span> <span class="o">=</span> <span class="p">(</span>
@@ -711,7 +711,7 @@ linear regression predicted line of best fit.
 </div>
 </div>
 <div class="figure align-default" id="fig-08-lm-predict-all">
-<p class="caption"><span class="caption-number">Fig. 95 </span><span class="caption-text">Scatter plot of sale price versus size with line of best fit for the full Sacramento housing data.</span><a class="headerlink" href="#fig-08-lm-predict-all" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 98 </span><span class="caption-text">Scatter plot of sale price versus size with line of best fit for the full Sacramento housing data.</span><a class="headerlink" href="#fig-08-lm-predict-all" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="comparing-simple-linear-and-knn-regression">
@@ -721,11 +721,11 @@ regression, we \index{regression!comparison of methods} can start to compare and
 predictions made by them. To start, let’s look at the visualization of the
 simple linear regression model predictions for the Sacramento real estate data
 (predicting price from house size) and the “best” KNN regression model
-obtained from the same problem, shown in <a class="reference internal" href="#fig-08-compareregression"><span class="std std-numref">Fig. 96</span></a>.</p>
+obtained from the same problem, shown in <a class="reference internal" href="#fig-08-compareregression"><span class="std std-numref">Fig. 99</span></a>.</p>
 <div class="figure align-default" id="fig-08-compareregression">
-<p class="caption"><span class="caption-number">Fig. 96 </span><span class="caption-text">Comparison of simple linear regression and KNN regression.</span><a class="headerlink" href="#fig-08-compareregression" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 99 </span><span class="caption-text">Comparison of simple linear regression and KNN regression.</span><a class="headerlink" href="#fig-08-compareregression" title="Permalink to this image">¶</a></p>
 </div>
-<p>What differences do we observe in <a class="reference internal" href="#fig-08-compareregression"><span class="std std-numref">Fig. 96</span></a>? One obvious
+<p>What differences do we observe in <a class="reference internal" href="#fig-08-compareregression"><span class="std std-numref">Fig. 99</span></a>? One obvious
 difference is the shape of the blue lines. In simple linear regression we are
 restricted to a straight line, whereas in KNN regression our line is much more
 flexible and can be quite wiggly. But there is a major interpretability advantage in limiting the
@@ -748,7 +748,7 @@ set. On such a data set, KNN regression may fare better. Additionally, there
 are other types of regression you can learn about in future books that may do
 even better at predicting with such data.</p>
 <p>How do these two models compare on the Sacramento house prices data set? In
-<a class="reference internal" href="#fig-08-compareregression"><span class="std std-numref">Fig. 96</span></a>, we also printed the RMSPE as calculated from
+<a class="reference internal" href="#fig-08-compareregression"><span class="std std-numref">Fig. 99</span></a>, we also printed the RMSPE as calculated from
 predicting on the test data set that was not used to train/fit the models. The RMSPE for the simple linear
 regression model is slightly lower than the RMSPE for the KNN regression model.
 Considering that the simple linear regression model is also more interpretable,
@@ -876,7 +876,7 @@ include both the <code class="docutils literal notranslate"><span class="pre">sq
 <p>Our model’s test error as assessed by RMSPE
 is .
 In the case of two predictors, we can plot the predictions made by our linear regression creates a <em>plane</em> of best fit, as
-shown in <a class="reference internal" href="#fig-08-3dlinreg"><span class="std std-numref">Fig. 97</span></a>.</p>
+shown in <a class="reference internal" href="#fig-08-3dlinreg"><span class="std std-numref">Fig. 100</span></a>.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -891,7 +891,7 @@ shown in <a class="reference internal" href="#fig-08-3dlinreg"><span class="std 
 </div>
 <div class="caption-hack figure align-default" id="fig-08-3dlinreg">
 <img alt="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
-<p class="caption"><span class="caption-number">Fig. 97 </span><span class="caption-text">Linear regression plane of best fit overlaid on top of the data (using price, house size, and number of bedrooms as predictors). Note that in general we recommend against using 3D visualizations; here we use a 3D visualization only to illustrate what the regression plane looks like for learning purposes.</span><a class="headerlink" href="#fig-08-3dlinreg" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 100 </span><span class="caption-text">Linear regression plane of best fit overlaid on top of the data (using price, house size, and number of bedrooms as predictors). Note that in general we recommend against using 3D visualizations; here we use a 3D visualization only to illustrate what the regression plane looks like for learning purposes.</span><a class="headerlink" href="#fig-08-3dlinreg" title="Permalink to this image">¶</a></p>
 </div>
 <p>We see that the predictions from linear regression with two predictors form a
 flat plane. This is the hallmark of linear regression, and differs from the
@@ -988,7 +988,7 @@ than you might expect based on the rest of the data. The problem with outliers i
 they can have <em>too much influence</em> on the line of best fit. In general, it is very difficult
 to judge accurately which data are outliers without advanced techniques that are beyond
 the scope of this book.</p>
-<p>But to illustrate what can happen when you have outliers, <a class="reference internal" href="#fig-08-lm-outlier"><span class="std std-numref">Fig. 98</span></a>
+<p>But to illustrate what can happen when you have outliers, <a class="reference internal" href="#fig-08-lm-outlier"><span class="std std-numref">Fig. 101</span></a>
 shows a small subset of the Sacramento housing data again, except we have added a <em>single</em> data point (highlighted
 in red). This house is 5,000 square feet in size, and sold for only $50,000. Unbeknownst to the
 data analyst, this house was sold by a parent to their child for an absurdly low price. Of course,
@@ -997,18 +997,18 @@ the data point is an <em>outlier</em>. In blue we plot the original line of best
 we plot the new line of best fit including the outlier. You can see how different the red line
 is from the blue line, which is entirely caused by that one extra outlier data point.</p>
 <div class="figure align-default" id="fig-08-lm-outlier">
-<p class="caption"><span class="caption-number">Fig. 98 </span><span class="caption-text">Scatter plot of a subset of the data, with outlier highlighted in red.</span><a class="headerlink" href="#fig-08-lm-outlier" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 101 </span><span class="caption-text">Scatter plot of a subset of the data, with outlier highlighted in red.</span><a class="headerlink" href="#fig-08-lm-outlier" title="Permalink to this image">¶</a></p>
 </div>
 <p>Fortunately, if you have enough data, the inclusion of one or two
 outliers—as long as their values are not <em>too</em> wild—will
-typically not have a large effect on the line of best fit. <a class="reference internal" href="#fig-08-lm-outlier-2"><span class="std std-numref">Fig. 99</span></a> shows how that same outlier data point from earlier
+typically not have a large effect on the line of best fit. <a class="reference internal" href="#fig-08-lm-outlier-2"><span class="std std-numref">Fig. 102</span></a> shows how that same outlier data point from earlier
 influences the line of best fit when we are working with the entire original
 Sacramento training data. You can see that with this larger data set, the line
 changes much less when adding the outlier.
 Nevertheless, it is still important when working with linear regression to critically
 think about how much any individual data point is influencing the model.</p>
 <div class="figure align-default" id="fig-08-lm-outlier-2">
-<p class="caption"><span class="caption-number">Fig. 99 </span><span class="caption-text">Scatter plot of the full data, with outlier highlighted in red.</span><a class="headerlink" href="#fig-08-lm-outlier-2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 102 </span><span class="caption-text">Scatter plot of the full data, with outlier highlighted in red.</span><a class="headerlink" href="#fig-08-lm-outlier-2" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="multicollinearity">
@@ -1021,9 +1021,9 @@ result in large changes in the coefficients. Consider an extreme example using
 the Sacramento housing data where the house was measured twice by two people.
 Since the two people are each slightly inaccurate, the two measurements might
 not agree exactly, but they are very strongly linearly related to each other,
-as shown in <a class="reference internal" href="#fig-08-lm-multicol"><span class="std std-numref">Fig. 100</span></a>.</p>
+as shown in <a class="reference internal" href="#fig-08-lm-multicol"><span class="std std-numref">Fig. 103</span></a>.</p>
 <div class="figure align-default" id="fig-08-lm-multicol">
-<p class="caption"><span class="caption-number">Fig. 100 </span><span class="caption-text">Scatter plot of house size (in square feet) measured by person 1 versus house size (in square feet) measured by person 2.</span><a class="headerlink" href="#fig-08-lm-multicol" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 103 </span><span class="caption-text">Scatter plot of house size (in square feet) measured by person 1 versus house size (in square feet) measured by person 2.</span><a class="headerlink" href="#fig-08-lm-multicol" title="Permalink to this image">¶</a></p>
 </div>
 <p>If we again fit the multivariable linear regression model on this data, then the plane of best fit
 has regression coefficients that are very sensitive to the exact values in the data. For example,
@@ -1053,7 +1053,7 @@ the only option is to obtain measurements of more useful variables.</p>
 meaningful relationship with the response variable, but that relationship does not fit
 the assumptions of the regression method you have chosen. For example, a data frame <code class="docutils literal notranslate"><span class="pre">df</span></code>
 with two variables—<code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>—with a nonlinear relationship between the two variables
-will not be fully captured by simple linear regression, as shown in <a class="reference internal" href="#fig-08-predictor-design"><span class="std std-numref">Fig. 101</span></a>.</p>
+will not be fully captured by simple linear regression, as shown in <a class="reference internal" href="#fig-08-predictor-design"><span class="std std-numref">Fig. 104</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
@@ -1145,7 +1145,7 @@ will not be fully captured by simple linear regression, as shown in <a class="re
 </div></div></div>
 </div>
 <div class="figure align-default" id="fig-08-predictor-design">
-<p class="caption"><span class="caption-number">Fig. 101 </span><span class="caption-text">Example of a data set with a nonlinear relationship between the predictor and the response.</span><a class="headerlink" href="#fig-08-predictor-design" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 104 </span><span class="caption-text">Example of a data set with a nonlinear relationship between the predictor and the response.</span><a class="headerlink" href="#fig-08-predictor-design" title="Permalink to this image">¶</a></p>
 </div>
 <p>Instead of trying to predict the response <code class="docutils literal notranslate"><span class="pre">y</span></code> using a linear regression on <code class="docutils literal notranslate"><span class="pre">x</span></code>,
 we might have some scientific background about our problem to suggest that <code class="docutils literal notranslate"><span class="pre">y</span></code>
@@ -1159,14 +1159,14 @@ we might <em>create a new predictor variable</em> <code class="docutils literal 
 </div>
 </div>
 <p>Then we can perform linear regression for <code class="docutils literal notranslate"><span class="pre">y</span></code> using the predictor variable <code class="docutils literal notranslate"><span class="pre">z</span></code>,
-as shown in <a class="reference internal" href="#fig-08-predictor-design-2"><span class="std std-numref">Fig. 102</span></a>.
+as shown in <a class="reference internal" href="#fig-08-predictor-design-2"><span class="std std-numref">Fig. 105</span></a>.
 Here you can see that the transformed predictor <code class="docutils literal notranslate"><span class="pre">z</span></code> helps the
 linear regression model make more accurate predictions.
-Note that none of the <code class="docutils literal notranslate"><span class="pre">y</span></code> response values have changed between <a class="reference internal" href="#fig-08-predictor-design"><span class="std std-numref">Fig. 101</span></a>
-and <a class="reference internal" href="#fig-08-predictor-design-2"><span class="std std-numref">Fig. 102</span></a>; the only change is that the <code class="docutils literal notranslate"><span class="pre">x</span></code> values
+Note that none of the <code class="docutils literal notranslate"><span class="pre">y</span></code> response values have changed between <a class="reference internal" href="#fig-08-predictor-design"><span class="std std-numref">Fig. 104</span></a>
+and <a class="reference internal" href="#fig-08-predictor-design-2"><span class="std std-numref">Fig. 105</span></a>; the only change is that the <code class="docutils literal notranslate"><span class="pre">x</span></code> values
 have been replaced by <code class="docutils literal notranslate"><span class="pre">z</span></code> values.</p>
 <div class="figure align-default" id="fig-08-predictor-design-2">
-<p class="caption"><span class="caption-number">Fig. 102 </span><span class="caption-text">Relationship between the transformed predictor and the response.</span><a class="headerlink" href="#fig-08-predictor-design-2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 105 </span><span class="caption-text">Relationship between the transformed predictor and the response.</span><a class="headerlink" href="#fig-08-predictor-design-2" title="Permalink to this image">¶</a></p>
 </div>
 <p>The process of
 transforming predictors (and potentially combining multiple predictors in the process)
