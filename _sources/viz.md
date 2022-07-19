@@ -852,7 +852,7 @@ our previous
 scatter plot to represent each language's higher-level language category.
 
 Here we want to distinguish the values according to the `category` group with
-which they belong.  We can add an argument `color` to the `encode` function, specifying
+which they belong.  We can add the argument `color` to the `encode` function, specifying
 that the `category` column should color the points. Adding this argument will
 color the points according to their group and add a legend at the side of the
 plot. 
@@ -1037,10 +1037,7 @@ groups of a categorical variable.
 
 We specify that we would like to use a bar plot
 via the `mark_bar` function in `altair`. 
-However, by default, `mark_bar` sets the heights
-of bars to the number of times a value appears in a data frame (its *count*); here, we want to plot exactly the values in the data frame, i.e.,
-the landmass sizes. So we have to pass the `stat = "identity"` argument to `geom_bar`. The result is 
-shown in Figure \@ref(fig:03-data-islands-bar).
+The result is shown in {numref}`islands_bar`
 \index{ggplot!geom\_bar}
 
 
@@ -1063,14 +1060,13 @@ glue('islands_bar', islands_bar, display=False)
 Bar plot of all Earth's landmasses' size with squished labels.
 :::
 
-Alright, not bad! The plot in Figure \@ref(fig:03-data-islands-bar) is
+Alright, not bad! The plot in {numref}`islands_bar` is
 definitely the right kind of visualization, as we can clearly see and compare
 sizes of landmasses. The major issues are that the smaller landmasses' sizes
-are hard to distinguish, and the names of the landmasses are obscuring each
-other as they have been squished into too little space. But remember that the
+are hard to distinguish, and the names of the landmasses are tilted by default to fit in the labels. But remember that the
 question we asked was only about the largest landmasses; let's make the plot a
 little bit clearer by keeping only the largest 12 landmasses. We do this using
-the `slice_max` function.  Then to help us make sure the labels have enough
+the `sort_values` function followed by the `iloc` property.  Then to help us make sure the labels have enough
 space, we'll use horizontal bars instead of vertical ones. We do this by
 swapping the `x` and `y` variables:
 \index{slice\_max}
@@ -1080,9 +1076,9 @@ swapping the `x` and `y` variables:
 ```{code-cell} ipython3
 islands_top12 = islands_df.sort_values(by = "size", ascending=False).iloc[:12] 
 
-islands_bar = alt.Chart(islands_top12).mark_bar().encode(
+islands_bar_sorted = alt.Chart(islands_top12).mark_bar().encode(
     x = "size", y = "landmass")
-islands_bar
+
 
 
 ```
@@ -1090,12 +1086,12 @@ islands_bar
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('islands_bar', islands_bar, display=False)
+glue('islands_bar_sorted', islands_bar_sorted, display=True)
 ```
 
-:::{glue:figure} islands_bar
+:::{glue:figure} islands_bar_sorted
 :figwidth: 700px 
-:name: islands_bar
+:name: islands_bar_sorted
 
 Bar plot of size for Earth's largest 12 landmasses.
 :::
@@ -1103,7 +1099,7 @@ Bar plot of size for Earth's largest 12 landmasses.
 
 
 
-The plot in Figure \@ref(fig:03-data-islands-bar-2) is definitely clearer now, 
+The plot in {numref}`islands_bar_sorted` is definitely clearer now, 
 and allows us to answer our question 
 ("are the top 7 largest landmasses continents?") in the affirmative. 
 But the question could be made clearer from the plot 
@@ -1111,56 +1107,51 @@ by organizing the bars not by alphabetical order
 but by size, and to color them based on whether they are a continent. 
 The data for this is stored in the `landmass_type` column. 
 To use this to color the bars, 
-we add the `fill` argument to the aesthetic mapping 
-and set it to `landmass_type`. 
+we use the `color` argument to color the bars according to the `landmass_type`
 
 To organize the landmasses by their `size` variable, 
-we will use the `tidyverse` `fct_reorder` function
-in the aesthetic mapping to organize the landmasses by their `size` variable.
-The first argument passed to `fct_reorder` is the name of the factor column
-whose levels we would like to reorder (here, `landmass`). 
-The second argument is the column name 
-that holds the values we would like to use to do the ordering (here, `size`).
-The `fct_reorder` function uses ascending order by default, 
-but this can be changed to descending order 
-by setting  `.desc = TRUE`.
+we will use the `altair` `sort` function
+in encoding for `y` axis to organize the landmasses by their `size` variable, which is encoded on the x-axis.
+To sort the landmasses by their size(denoted on `x` axis), we use `sort='x'`. This plots the values on `y` axis
+in the ascending order of `x` axis values. 
+
 We do this here so that the largest bar will be closest to the axis line,
 which is more visually appealing.
 
-To label the x and y axes, we will use the `labs` function
-instead of the `xlab` and `ylab` functions from earlier in this chapter. 
-The `labs` function is more general; we are using it in this case because 
- we would also like to change the legend label.
-The default label is the name of the column being mapped to `fill`. Here that
+>> **Note:** If we want to sort the values on `y-axis` in descending order of `x-axis`,
+>> we need to specify `sort='-x'`.
+
+To label the x and y axes, we will use the `alt.X` and `alt.Y` function
+The default label is the name of the column being mapped to `color`. Here that
 would be `landmass_type`;
 however `landmass_type` is not proper English (and so is less readable).
-Thus we use the `fill` argument inside `labs` to change that to "Type."
-Finally, we again \index{ggplot!reorder} use the `theme` function 
+Thus we use the `title` argument inside `alt.Color` to change that to "Type"
+Finally, we again \index{ggplot!reorder} use the `configure_axis` function 
 to change the font size.
 
 
 ```{code-cell} ipython3
-islands_top12_plot = alt.Chart(islands_top12).mark_bar(color='black').encode(
+islands_plot_sorted = alt.Chart(islands_top12).mark_bar(color='black').encode(
     x = alt.X("size",title = "Size (1000 square mi)"),
     y = alt.Y("landmass", title = "Landmass", sort='x'),
     color = alt.Color("landmass_type", title = "Type")).configure_axis(
     titleFontSize=12)
-islands_top_12_plot
+
 ```
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('islands_top12_plot', islands_top12_plot, display=False)
+glue('islands_plot_sorted', islands_plot_sorted, display=True)
 ```
 
-:::{glue:figure} islands_top12_plot
+:::{glue:figure} islands_plot_sorted
 :figwidth: 700px 
-:name: islands_top12_plot
+:name: islands_plot_sorted
 
 Bar plot of size for Earth's largest 12 landmasses colored by whether its a continent with clearer axes and labels.
 :::
 
 
-The plot in Figure \@ref(fig:03-data-islands-bar-4) is now a very effective
+The plot in {numref}`islands_plot_sorted ` is now a very effective
 visualization for answering our original questions. Landmasses are organized by
 their size, and continents are colored differently than other landmasses,
 making it quite clear that continents are the largest seven landmasses.
@@ -1173,8 +1164,7 @@ Five experiments were performed,
 and in each experiment, 20 runs were performed&mdash;meaning that 
 20 measurements of the speed of light were collected 
 in each experiment [@lightdata].
-The `morley` data set is available in base R as a data frame,
-so it does not need to be loaded.
+
 Because the speed of light is a very large number 
 (the true value is 299,792.458 km/sec), the data is coded
 to be the measured speed of light minus 299,000.
@@ -1188,7 +1178,7 @@ these specialized data frames provide.
 **Question:** \index{question!visualization} Given what we know now about the speed of 
 light (299,792.458 kilometres per second), how accurate were each of the experiments?
 
-
+First, we read in the data.
 
 ```{code-cell} ipython3
 morley_df = pd.read_csv("data/morley.csv")
@@ -1208,8 +1198,8 @@ helps us visualize how a particular variable is distributed in a data set
 by separating the data into bins, 
 and then using vertical bars to show how many data points fell in each bin. 
 
-To create a histogram in `ggplot2` we will use the `geom_histogram` geometric
-object, setting the `x` axis to the `Speed` measurement variable. As usual, 
+To create a histogram in `altair` we will use the `mark_bar` geometric
+object, setting the `x` axis to the `Speed` measurement variable and `y` axis to `count()`. As usual, 
 let's use the default arguments just to see how things look.
 
 
@@ -1221,7 +1211,7 @@ let's use the default arguments just to see how things look.
 morley_hist = alt.Chart(morley_df).mark_bar().encode(
     x = alt.X("Speed"),  
     y='count()')
-morley_hist
+
 ```
 
 ```{code-cell} ipython3
@@ -1238,29 +1228,30 @@ Histogram of Michelson's speed of light data.
 
 
 
-Figure \@ref(fig:03-data-morley-hist) is a great start. 
+{numref}`morley_hist` is a great start. 
 However, 
 we cannot tell how accurate the measurements are using this visualization 
 unless we can see the true value.
 In order to visualize the true speed of light, 
-we will add a vertical line with the `geom_vline` function.
-To draw a vertical line with `geom_vline`,  \index{ggplot!geom\_vline}
+we will add a vertical line with the `mark_rule` function.
+To draw a vertical line with `mark_rule`,  \index{ggplot!geom\_vline}
 we need to specify where on the x-axis the line should be drawn. 
-We can do this by setting the `xintercept` argument. 
-Here we set it to 792.458, which is the true value of light speed 
-minus 299,000; this ensures it is coded the same way as the 
+We can do this by creating a dataframe with just one column with value `792.458`, which is the true value of light speed 
+minus 299,000 and encoding it in the `x` axis; this ensures it is coded the same way as the 
 measurements in the `morley` data frame.
 We would also like to fine tune this vertical line, 
 styling it so that it is dashed and 1 point in thickness.
 A point is a measurement unit commonly used with fonts, 
 and 1 point is about 0.353 mm. 
-We do this by setting `linetype = "dashed"` and `size = 2`, respectively. 
-There is a similar function, `geom_hline`, 
-that is used for plotting horizontal lines. 
+We do this by setting `strokeDash=[3,3]` and `size = 1`, respectively. 
+
+Similarly, a horizontal line can be plotted using the `y` axis encoding and the dataframe with one value, which would act as the be the y-intercept
+
 Note that 
 *vertical lines* are used to denote quantities on the *horizontal axis*, 
 while *horizontal lines* are used to denote quantities on the *vertical axis*. 
 
+To add the dashed line on top of the histogram, we will use the `+` operator. This concept is also known as layering in altair.(This is covered in the later sections of the chapter). Here, we add the `mark_rule` chart on the `morley_hist` chart of the form `mark_bar`
 
 
 
@@ -1288,7 +1279,7 @@ glue('final_plot', final_plot, display=False)
 Histogram of Michelson's speed of light data with vertical line indicating true speed of light.
 :::
 
-In Figure \@ref(fig:03-data-morley-hist-2), 
+In {numref}`final_plot`, 
 we still cannot tell which experiments (denoted in the `Expt` column) 
 led to which measurements; 
 perhaps some experiments were more accurate than others. 
@@ -1298,91 +1289,78 @@ We can try to do this using a *colored* histogram,
 where counts from different experiments are stacked on top of each other 
 in different colors. 
 We can create a histogram colored by the `Expt` variable 
-by adding it to the `fill` aesthetic mapping. 
+by adding it to the `color` argument. 
 We make sure the different colors can be seen 
 (despite them all sitting on top of each other) 
-by setting the `alpha` argument in `geom_histogram` to `0.5` 
+by setting the `opacity` argument in `mark_bar` to `0.5` 
 to make the bars slightly translucent. 
-We also specify `position = "identity"` in `geom_histogram` to ensure 
-the histograms for each experiment will be overlaid side-by-side, 
-instead of stacked bars 
-(which is the default for bar plots or histograms 
-when they are colored by another categorical variable).
+
 
 
 ```{code-cell} ipython3
-morley_hist = alt.Chart(morley_df).mark_bar(opacity=0.5).encode(
+morley_hist_colored = alt.Chart(morley_df).mark_bar(opacity=0.5).encode(
     x = alt.X("Speed"), 
     y=alt.Y('count()'),
     color = "Expt")
 
-final_plot = morley_hist + v_line
-final_plot
+final_plot_colored = morley_hist_colored + v_line
+
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('final_plot', final_plot, display=False)
+glue('final_plot_colored', final_plot_colored, display=True)
 ```
 
-:::{glue:figure} final_plot
+:::{glue:figure} final_plot_colored
 :figwidth: 700px 
-:name: final_plot
+:name: final_plot_colored
 
 Histogram of Michelson's speed of light data colored by experiment.
 :::
 
-Alright great, Figure \@ref(fig:03-data-morley-hist-3) looks...wait a second! The
-histogram is still all the same color! What is going on here? Well, if you 
+Alright great, {numref}`final_plot_colored` looks...wait a second! We are not able to distinguish 
+between different Experiments in the histogram! What is going on here? Well, if you 
 recall from Chapter \@ref(wrangling), the *data type* you use for each variable
-can influence how R and `tidyverse` treats it. Here, we indeed have an issue
+can influence how Python and `altair` treats it. Here, we indeed have an issue
 with the data types in the `morley` data frame. In particular, the `Expt` column
-is currently an *integer* (you can see the label `<int>` underneath the `Expt` column in \index{integer} the printed
-data frame at the start of this section). But we want to treat it as a
+is currently an *integer*. But we want to treat it as a
 *category*, i.e., there should be one category per type of experiment.  
 
-To fix this issue we can convert the `Expt` variable into a *factor* by \index{factor}
-passing it to `as_factor` in the `fill` aesthetic mapping.
-Recall that factor is a data type in R that is often used to represent
-categories. By writing
-`as_factor(Expt)` we are ensuring that R will treat this variable as a factor,
-and the color will be mapped discretely.
+To fix this issue we can convert the `Expt` variable into a `nominal`(categorical) type 
+variable by adding a suffix `:N`(where `N` stands for nominal type variable) with the `Expt` variable.
+By doing this, we are ensuring that `altair` will treat this variable as a categorical variable,
+and the color will be mapped discretely. Here, we also mention `stack=False`, so that the bars are not stacked on top of each other.
 \index{factor!usage in ggplot}
 
 
 
 ```{code-cell} ipython3
-morley_hist = alt.Chart(morley_df).mark_bar(opacity=0.4).encode(
-    x = alt.X("Speed", bin=alt.Bin(maxbins=50)),  # or bin=True
+morley_hist_categorical = alt.Chart(morley_df).mark_bar(opacity=0.5).encode(
+    x = alt.X("Speed", bin=alt.Bin(maxbins=50)),  
     y=alt.Y('count()', stack=False),
     color = "Expt:N")
 
-final_plot = morley_hist + v_line
-final_plot
+final_plot_categorical = morley_hist_categorical + v_line
+
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('final_plot', final_plot, display=False)
+glue('final_plot_categorical', final_plot_categorical, display=True)
 ```
 
-:::{glue:figure} final_plot
+:::{glue:figure} final_plot_categorical
 :figwidth: 700px 
-:name: final_plot
+:name: final_plot_categorical
 
-Histogram of Michelson's speed of light data colored by experiment as factor.
+Histogram of Michelson's speed of light data colored by experiment as a categorical variable.
 :::
 
-> **Note:** Factors impact plots in two ways:
-> (1) ensuring a color is mapped as discretely where appropriate (as in this
-> example) and (2) the ordering of levels in a plot. `ggplot` takes into account
-> the order of the factor levels as opposed to the order of data in
-> your data frame. Learning how to reorder your factor levels will help you with
-> reordering the labels of a factor on a plot.  
+
  
 Unfortunately, the attempt to separate out the experiment number visually has
-created a bit of a mess. All of the colors in Figure
-\@ref(fig:03-data-morley-hist-with-factor) are blending together, and although it is
+created a bit of a mess. All of the colors in {numref}`final_plot_categorical` are blending together, and although it is
 possible to derive *some* insight from this (e.g., experiments 1 and 3 had some
 of the most incorrect measurements), it isn't the clearest way to convey our
 message and answer the question. Let's try a different strategy of creating
@@ -1390,45 +1368,43 @@ grid of separate histogram plots.
 
 +++
 
-We use the `facet_grid` function to create a plot 
+We use the `facet` function to create a plot 
 that has multiple subplots arranged in a grid.
-The argument to `facet_grid` specifies the variable(s) used to split the plot 
+The argument to `facet` specifies the variable(s) used to split the plot 
 into subplots, and how to split them (i.e., into rows or columns).
 If the plot is to be split horizontally, into rows, 
 then the `rows` argument is used.
 If the plot is to be split vertically, into columns, 
 then the `columns` argument is used.
 Both the `rows` and `columns` arguments take the column names on which to split the data when creating the subplots. 
-Note that the column names must be surrounded by the `vars` function.
-This function allows the column names to be correctly evaluated 
-in the context of the data frame.
+
 \index{ggplot!facet\_grid}
 
 
 ```{code-cell} ipython3
 
-morley_hist = alt.Chart().mark_bar(opacity = 0.5).encode(
+morley_hist = alt.Chart(morley_df).mark_bar(opacity = 0.5).encode(
     x = alt.X("Speed", bin=alt.Bin(maxbins=50)),  
     y=alt.Y('count()', stack=False),
-    color = "Expt:N").properties(height=100, width=400)
+    color = "Expt:N").properties(height=100, width=200)
 
-final_plot = (morley_hist + v_line).facet(row = 'Expt:N', data = morley_df)
-final_plot
+final_plot_facet = (morley_hist + v_line).facet(row = 'Expt:N', data = morley_df)
+
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('final_plot', final_plot, display=False)
+glue('final_plot_facet', final_plot_facet, display=True)
 ```
 
-:::{glue:figure} final_plot
+:::{glue:figure} final_plot_facet
 :figwidth: 700px 
-:name: final_plot
+:name: final_plot_facet
 
 Histogram of Michelson's speed of light data split vertically by experiment.
 :::
 
-The visualization in Figure \@ref(fig:03-data-morley-hist-4) 
+The visualization in {numref}`final_plot_facet`
 now makes it quite clear how accurate the different experiments were 
 with respect to one another. 
 The most variable measurements came from Experiment 1. 
@@ -1438,10 +1414,10 @@ There, the measurements ranged from about 750&ndash;950 km/sec.
 The most different experiments still obtained quite similar results!
 
 There are two finishing touches to make this visualization even clearer. First and foremost, we need to add informative axis labels
-using the `labs` function, and increase the font size to make it readable using the `theme` function. Second, and perhaps more subtly, even though it 
+using the `alt.X` and `alt.Y` function, and increase the font size to make it readable using the `configure_axis` function. Second, and perhaps more subtly, even though it 
 is easy to compare the experiments on this plot to one another, it is hard to get a sense 
 of just how accurate all the experiments were overall. For example, how accurate is the value 800 on the plot, relative to the true speed of light?
-To answer this question, we'll use the `mutate` function to transform our data into a relative measure of accuracy rather than absolute measurements:
+To answer this question, we'll use the assign function to transform our data into a relative measure of accuracy rather than absolute measurements:
 \index{ggplot!labs}\index{ggplot!theme}
 
 
@@ -1464,18 +1440,18 @@ morley_hist = alt.Chart().mark_bar(opacity=0.6).encode(
     y=alt.Y('count()', stack=False, title = "# Measurements"),
     color = alt.Color("Expt:N",  title = "Experiment ID")).properties(height=100, width= 400)
 
-final_plot = (morley_hist + v_line).facet(row='Expt:N', data=morley_rel)
-final_plot
+final_plot_relative = (morley_hist + v_line).facet(row='Expt:N', data=morley_rel)
+
 ```
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-glue('final_plot', final_plot, display=False)
+glue('final_plot_relative', final_plot_relative, display=True)
 ```
 
-:::{glue:figure} final_plot
+:::{glue:figure} final_plot_relative
 :figwidth: 700px 
-:name: final_plot
+:name: final_plot_relative
 
 Histogram of relative accuracy split vertically by experiment with clearer axes and labels
 :::
@@ -1487,7 +1463,7 @@ admirable job given the technology available at the time.
 
 #### Choosing a binwidth for histograms {-}
 
-When you create a histogram in R, the default number of bins used is 30.
+When you create a histogram in `altair`, the default number of bins used is 30.
 Naturally, this is not always the right number to use.
 You can set the number of bins yourself by using
 the `bins` argument in the `geom_histogram` geometric object.
