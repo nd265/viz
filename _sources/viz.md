@@ -873,7 +873,7 @@ and would run off the page if displayed this way.
 
 ```{code-cell} ipython3
 can_lang_plot_legend = alt.Chart(can_lang).mark_circle().encode(
-    x = alt.X("most_at_home_percent",title = title = ["Language spoken most at home", "(number of Canadian residents)"], scale=alt.Scale(type="log"),axis=alt.Axis(tickCount=7)),
+    x = alt.X("most_at_home_percent",title = ["Language spoken most at home", "(number of Canadian residents)"], scale=alt.Scale(type="log"),axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue_percent", title = ["Mother tongue", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = alt.Color("category", legend=alt.Legend(
                             orient='none',
