@@ -1513,7 +1513,7 @@ morley_hist_70 = alt.Chart(morley_rel).mark_bar(opacity=0.6).encode(
 morley_hist_5 = alt.Chart(morley_rel).mark_bar(opacity=0.6).encode(
     x = alt.X("relative_accuracy", bin=alt.Bin(maxbins=5), title = "Relative Accuracy (%)"), 
     y=alt.Y('count()', stack=False, title = "# Measurements"),
-    color = alt.Color("Expt:N",  title = "Experiment ID")).properties(height=100, width=400)
+    color = alt.Color("Expt:N",  title = "Experiment ID")).properties(height=100, width=300)
 
 
 
@@ -1802,9 +1802,7 @@ sizes.  This makes them great for presentation media of all sizes, from papers
 to posters to billboards.
 
 
-```{r 03-raster-image, echo=FALSE, fig.cap = "(ref:03-raster-image)", fig.show="hold", fig.align= "center", message =F, out.width="100%"}
-knitr::include_graphics("img/png-vs-svg.png")
-```
+
 
 
 ```{figure} img/png-vs-svg.png
