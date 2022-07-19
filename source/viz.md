@@ -68,7 +68,7 @@ As with most coding tasks, it is totally fine (and quite common) to make
 mistakes and iterate a few times before you find the right visualization for
 your data and question. There are many different kinds of plotting
 graphics available to use (see Chapter 5 of *Fundamentals of Data Visualization* [@wilkeviz] for a directory). 
-The types of plot that we introduce in this book are shown in Figure \@ref(fig:plot-sketches);
+The types of plot that we introduce in this book are shown in {numref}`plot_sketches`
 which one you should select depends on your data 
 and the question you want to answer. 
 In general, the guiding principles of when to use each type of plot 
@@ -84,47 +84,15 @@ are as follows:
 - **bar plots** visualize comparisons of amounts
 - **histograms** visualize the distribution of one quantitative variable (i.e., all its possible values and how often they occur) \index{distribution}
 
-```{r plot-sketches, echo = FALSE, fig.width = 4.5, fig.height = 4.65, fig.align = 'center', fig.cap = "Examples of scatter, line and bar plots, as well as histograms."}
-set.seed(1)
 
-scatter_plot <- tibble(x = seq(0.25, 10, by = 0.5) + rnorm(20, 1, 1.5),
-                       y = seq(0.25, 10, by = 0.5) + rnorm(20, 1, 0.5)) |>
-  ggplot(aes(x = x, y = y)) +
-  geom_point() +
-  scale_x_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 3)) +
-  scale_y_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 3)) +
-  ggtitle("Scatter plot") +
-  theme_classic()
-
-line_plot <- tibble(x = seq(0.5, 10, by = 1) + rnorm(10, 1, 0.5),
-                       y = seq(0.5, 10, by = 1) + rnorm(10, 1, 0.1)) |>
-  ggplot(aes(x = x, y = y)) +
-  geom_line() +
-  scale_x_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 3)) +
-  scale_y_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 3)) +
-  ggtitle("Line plot") +
-  theme_classic()
-
-bar_plot <- tibble(count = c(35, 27, 21),
-                   category = as_factor(c("Group 1", "Group 2", "Group 3"))) |>
-  ggplot(aes(y = count, x = category)) +
-  geom_bar(stat = "identity") +
-  ggtitle("Bar plot") +
-  theme_classic()
-
-histogram_plot <- tibble(measurements = rnorm(200, 25, 5)) |>
-  ggplot(aes(x = measurements)) +
-  geom_histogram(binwidth = 3) +
-  ggtitle("Histogram") +
-  theme_classic()
-
-plot_grid(scatter_plot,
-          line_plot,
-          bar_plot,
-          histogram_plot,
-          ncol = 2, 
-          greedy = FALSE)
+```{figure} img/plot-sketches-1.png
+---
+height: 400px
+name: plot_sketches
+---
+Examples of scatter, line and bar plots, as well as histograms.
 ```
+
 
 All types of visualization have their (mis)uses, but three kinds are usually
 hard to understand or are easily replaced with an oft-better alternative.  In
@@ -321,7 +289,7 @@ from myst_nb import glue
 ```
 
 ```{code-cell} ipython3
-co2_scatter = alt.Chart(co2_df).mark_point(size=10, color='black').encode(
+co2_scatter = alt.Chart(co2_df).mark_point().encode(
     x = "date_measured", 
     y = alt.Y("ppm", scale=alt.Scale(zero=False)))
     
@@ -339,6 +307,9 @@ glue('co2_scatter', co2_scatter, display=False)
 
 Scatter plot of atmospheric concentration of CO$_{2}$ over time.
 :::
+
+
+>> Note: We can change the size of the point and color of the plot by specifying `mark_point(size=10, color='black')`. 
 
 Certainly, the visualization in {numref}`co2_scatter` 
 shows a clear upward trend 
@@ -674,9 +645,16 @@ Scatter plot of number of Canadians reporting a language as their mother tongue 
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
+import numpy as np
 numlang_speakers_max = max(can_lang['mother_tongue'])
-
+print(numlang_speakers_max)
 numlang_speakers_min = min(can_lang['mother_tongue'])
+print(numlang_speakers_min)
+log_result = np.floor(np.log(numlang_speakers_max/numlang_speakers_min))
+print(log_result)
+glue("numlang_speakers_max", numlang_speakers_max)
+glue("numlang_speakers_min", numlang_speakers_min)
+glue("log_result", log_result)
 ```
 
 Okay! The axes and labels in {numref}`can_lang_plot_labels` are
@@ -686,9 +664,9 @@ up in the lower left-hand side of the visualization. The data is clumped because
 many more people in Canada speak English or French (the two points in
 the upper right corner) than other languages. 
 In particular, the most common mother tongue language 
-has `r  format(maxlang_speakers, scientific = FALSE, big.mark = ",")` speakers,
-while the least common has only `r  format(minlang_speakers, scientific = FALSE, big.mark = ",")`.
-That's a `r as.integer(floor(log10(maxlang_speakers/minlang_speakers)))`-decimal-place difference
+has {glue:}`numlang_speakers_max` speakers,  
+while the least common has only {glue:}`numlang_speakers_min`.
+That's a {glue:}`log_result` -decimal-place difference
 in the magnitude of these two numbers!
 We can confirm that the two points in the upper right-hand corner correspond
 to Canada's two official languages by filtering the data:
@@ -744,11 +722,13 @@ Scatter plot of number of Canadians reporting a language as their mother tongue 
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
-english_mother_tongue = can_lang.loc[can_lang['language']=='English'].mother_tongue
-english_mother_tongue 
+english_mother_tongue = can_lang.loc[can_lang['language']=='English'].mother_tongue.values[0]
+census_popn = int(35151728)
+result = round((english_mother_tongue/census_popn)*100,2)
+glue("english_mother_tongue", english_mother_tongue)
+glue("census_popn", census_popn)
+glue("result", result)
 
-
-census_popn = 35151728
 ```
 
 Similar to some of the examples in Chapter \@ref(wrangling), 
@@ -760,10 +740,8 @@ by the number of people who live in Canada and multiplying by 100\%.
 For example, 
 the percentage of people who reported that their mother tongue was English 
 in the 2016 Canadian census 
-was `r  format(english_mother_tongue, scientific = FALSE, big.mark = ",") ` 
-/ `r  format(census_popn, scientific = FALSE, big.mark = ",")` $\times$ 
-`r 100` \% =
-`r format(round(english_mother_tongue/census_popn*100, 2), scientific = FALSE, big.mark = ",")`\%.
+was {glue:}`english_mother_tongue` / {glue:}`census_popn` $\times$ 
+`100` \% = {glue:}`result`\%
 
 Below we use `assign` to calculate the percentage of people reporting a given
 language as their mother tongue and primary language at home for all the
@@ -862,7 +840,7 @@ plot.
 
 ```{code-cell} ipython3
 can_lang_plot_category = alt.Chart(can_lang).mark_circle().encode(
-    x = alt.X("most_at_home_percent",title = title = ["Language spoken most at home", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
+    x = alt.X("most_at_home_percent", title = ["Language spoken most at home", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue_percent", title = ["Mother tongue", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = "category").configure_axis(
     titleFontSize=12)
@@ -897,7 +875,7 @@ and would run off the page if displayed this way.
 
 ```{code-cell} ipython3
 can_lang_plot_legend = alt.Chart(can_lang).mark_circle().encode(
-    x = alt.X("most_at_home_percent",title = title = ["Language spoken most at home", "(number of Canadian residents)"], scale=alt.Scale(type="log"),axis=alt.Axis(tickCount=7)),
+    x = alt.X("most_at_home_percent",title = ["Language spoken most at home", "(number of Canadian residents)"], scale=alt.Scale(type="log"),axis=alt.Axis(tickCount=7)),
     y = alt.Y("mother_tongue_percent", title = ["Mother tongue", "(number of Canadian residents)"], scale=alt.Scale(type="log"), axis=alt.Axis(tickCount=7)),
     color = alt.Color("category", legend=alt.Legend(
                             orient='none',
@@ -922,38 +900,24 @@ Scatter plot of percentage of Canadians reporting a language as their mother ton
 
 In {numref}`can_lang_plot_legend`, the points are colored with
 the default `altair` color palette. But what if you want to use different
-colors? In Altair, two packages that provide alternative color 
-palettes \index{color palette} are `RColorBrewer` [@RColorBrewer]
-and `ggthemes` [@ggthemes]; in this book we will cover how to use `RColorBrewer`.
-You can visualize the list of color
-palettes that `RColorBrewer` has to offer with the `display.brewer.all`
-function. You can also print a list of color-blind friendly palettes by adding
-`colorblindFriendly = TRUE` to the function. 
+colors? In Altair, there are many themes available, which can be viewed [here](https://vega.github.io/vega/docs/schemes/)
 
-(ref:rcolorbrewer) Color palettes available from the `RColorBrewer` R package.
 
-```{r rcolorbrewer, fig.height = 7, fig.cap = "(ref:rcolorbrewer)"}
-library(RColorBrewer)
-display.brewer.all(colorblindFriendly = TRUE)
-```
-
-From Figure \@ref(fig:rcolorbrewer), 
-we can choose the color palette we want to use in our plot. 
-To change the color palette, 
-we add the `scale_color_brewer` layer indicating the palette we want to use. 
+To change the color scheme, 
+we add the `scheme` argument in the `scale` of the `color` argument in `altair` layer indicating the palette we want to use. 
 You can use 
 this [color blindness simulator](https://www.color-blindness.com/coblis-color-blindness-simulator/) to check 
 if your visualizations \index{color palette!color blindness simulator} 
 are color-blind friendly.
 
 Below we pick the `"dark2"` theme, with the result shown
-in Figure \@ref(fig:scatter-color-by-category-palette).
+in {numref}`can_lang_plot_theme`
 We also set the `shape` aesthetic mapping to the `category` variable as well;
-this makes the scatter point shapes different for each category. Note: We cannot use different shapes with `mark_circle`, it can only be used with `mark_point`. This kind of 
+this makes the scatter point shapes different for each category. This kind of 
 visual redundancy&mdash;i.e., conveying the same information with both scatter point color and shape&mdash;can
 further improve the clarity and accessibility of your visualization.
 
-
+>> Note: We cannot use different shapes with `mark_circle`, it can only be used with `mark_point`
 
 
 ```{code-cell} ipython3
@@ -1487,8 +1451,8 @@ In {numref}`final_plot_max_bins`,
 we compare the default setting with three other histograms where we set the 
 `maxbins` to 200, 70 and 5.
 In this case, we can see that both the default number of bins 
-and the bins=5 of  are effective for helping answer our question.
-On the other hand, the bin widths of 0.001 and 0.1 are too small and too big, respectively.
+and the `maxbins=70` of  are effective for helping answer our question.
+On the other hand, the `maxbins=200` and `maxbins=5` are too small and too big, respectively.
 
 
 
