@@ -719,7 +719,7 @@ english_mother_tongue = can_lang.loc[can_lang['language']=='English'].mother_ton
 print(english_mother_tongue)
 census_popn = 35151728
 result = round((english_mother_tongue/census_popn)*100,2)
-glue("english_mother_tongue", nglish_mother_tongue)
+glue("english_mother_tongue", english_mother_tongue)
 glue("census_popn", census_popn)
 glue("result", result)
 
