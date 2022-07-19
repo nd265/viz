@@ -714,8 +714,9 @@ Scatter plot of number of Canadians reporting a language as their mother tongue 
 
 
 ```{code-cell} ipython3
-:tags: ["remove-cell"]
+#:tags: ["remove-cell"]
 english_mother_tongue = can_lang.loc[can_lang['language']=='English'].mother_tongue.values[0]
+print(english_mother_tongue)
 census_popn = 35151728
 result = round((english_mother_tongue/census_popn)*100,2)
 glue("english_mother_tongue", nglish_mother_tongue)
