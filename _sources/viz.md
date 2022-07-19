@@ -289,7 +289,7 @@ from myst_nb import glue
 ```
 
 ```{code-cell} ipython3
-co2_scatter = alt.Chart(co2_df).mark_point(size=10, color='black').encode(
+co2_scatter = alt.Chart(co2_df).mark_point().encode(
     x = "date_measured", 
     y = alt.Y("ppm", scale=alt.Scale(zero=False)))
     
@@ -307,6 +307,9 @@ glue('co2_scatter', co2_scatter, display=False)
 
 Scatter plot of atmospheric concentration of CO$_{2}$ over time.
 :::
+
+
+>> Note: We can change the size of the point and color of the plot by specifying `mark_point(size=10, color='black')`. 
 
 Certainly, the visualization in {numref}`co2_scatter` 
 shows a clear upward trend 
@@ -713,10 +716,12 @@ Scatter plot of number of Canadians reporting a language as their mother tongue 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
 english_mother_tongue = can_lang.loc[can_lang['language']=='English'].mother_tongue
-english_mother_tongue 
-
-
 census_popn = 35151728
+result = round((english_mother_tongue/census_popn)*100,2)
+glue("english_mother_tongue", nglish_mother_tongue)
+glue("census_popn", census_popn)
+glue("result", result)
+
 ```
 
 Similar to some of the examples in Chapter \@ref(wrangling), 
@@ -728,10 +733,9 @@ by the number of people who live in Canada and multiplying by 100\%.
 For example, 
 the percentage of people who reported that their mother tongue was English 
 in the 2016 Canadian census 
-was `r  format(english_mother_tongue, scientific = FALSE, big.mark = ",") ` 
-/ `r  format(census_popn, scientific = FALSE, big.mark = ",")` $\times$ 
-`r 100` \% =
-`r format(round(english_mother_tongue/census_popn*100, 2), scientific = FALSE, big.mark = ",")`\%.
+was {glue:}`english_mother_tongue` 
+/ {glue:}`census_popn` $\times$ 
+`100` \% = {glue:}`result`\%
 
 Below we use `assign` to calculate the percentage of people reporting a given
 language as their mother tongue and primary language at home for all the
@@ -1441,8 +1445,8 @@ In {numref}`final_plot_max_bins`,
 we compare the default setting with three other histograms where we set the 
 `maxbins` to 200, 70 and 5.
 In this case, we can see that both the default number of bins 
-and the bins=5 of  are effective for helping answer our question.
-On the other hand, the bin widths of 0.001 and 0.1 are too small and too big, respectively.
+and the `maxbins=70` of  are effective for helping answer our question.
+On the other hand, the `maxbins=200` and `maxbins=5` are too small and too big, respectively.
 
 
 

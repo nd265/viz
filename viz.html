@@ -922,7 +922,7 @@ default settings.
 <p>\newpage</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2_scatter</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">co2_df</span><span class="p">)</span><span class="o">.</span><span class="n">mark_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2_scatter</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">co2_df</span><span class="p">)</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;date_measured&quot;</span><span class="p">,</span> 
     <span class="n">y</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s2">&quot;ppm&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">zero</span><span class="o">=</span><span class="kc">False</span><span class="p">)))</span>
     
@@ -933,13 +933,13 @@ default settings.
 <div class="figure align-default" id="co2-scatter" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-2db17b6a78584373ae9115a5b41c8e5d"></div>
+<div id="altair-viz-b82f7eeacac54238b029de02d22c7403"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2db17b6a78584373ae9115a5b41c8e5d") {
-      outputDiv = document.getElementById("altair-viz-2db17b6a78584373ae9115a5b41c8e5d");
+    if (outputDiv.id !== "altair-viz-b82f7eeacac54238b029de02d22c7403") {
+      outputDiv = document.getElementById("altair-viz-b82f7eeacac54238b029de02d22c7403");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -985,10 +985,15 @@ default settings.
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-ecfc281786dd23148efa483af3159f83"}, "mark": {"type": "point", "color": "black", "size": 10}, "encoding": {"x": {"field": "date_measured", "type": "temporal"}, "y": {"field": "ppm", "scale": {"zero": false}, "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-ecfc281786dd23148efa483af3159f83": [{"date_measured": "1980-02-01T00:00:00", "ppm": 338.34}, {"date_measured": "1980-03-01T00:00:00", "ppm": 340.01}, {"date_measured": "1980-04-01T00:00:00", "ppm": 340.93}, {"date_measured": "1980-05-01T00:00:00", "ppm": 341.48}, {"date_measured": "1980-06-01T00:00:00", "ppm": 341.33}, {"date_measured": "1980-07-01T00:00:00", "ppm": 339.4}, {"date_measured": "1980-08-01T00:00:00", "ppm": 337.7}, {"date_measured": "1980-09-01T00:00:00", "ppm": 336.19}, {"date_measured": "1980-10-01T00:00:00", "ppm": 336.15}, {"date_measured": "1980-11-01T00:00:00", "ppm": 337.27}, {"date_measured": "1980-12-01T00:00:00", "ppm": 338.32}, {"date_measured": "1981-01-01T00:00:00", "ppm": 339.29}, {"date_measured": "1981-02-01T00:00:00", "ppm": 340.55}, {"date_measured": "1981-03-01T00:00:00", "ppm": 341.61}, {"date_measured": "1981-04-01T00:00:00", "ppm": 342.53}, {"date_measured": "1981-05-01T00:00:00", "ppm": 343.03}, {"date_measured": "1981-06-01T00:00:00", "ppm": 342.54}, {"date_measured": "1981-07-01T00:00:00", "ppm": 340.78}, {"date_measured": "1981-08-01T00:00:00", "ppm": 338.44}, {"date_measured": "1981-09-01T00:00:00", "ppm": 336.95}, {"date_measured": "1981-10-01T00:00:00", "ppm": 337.08}, {"date_measured": "1981-11-01T00:00:00", "ppm": 338.58}, {"date_measured": "1981-12-01T00:00:00", "ppm": 339.88}, {"date_measured": "1982-01-01T00:00:00", "ppm": 340.96}, {"date_measured": "1982-02-01T00:00:00", "ppm": 341.73}, {"date_measured": "1982-03-01T00:00:00", "ppm": 342.81}, {"date_measured": "1982-04-01T00:00:00", "ppm": 343.97}, {"date_measured": "1982-05-01T00:00:00", "ppm": 344.63}, {"date_measured": "1982-06-01T00:00:00", "ppm": 343.79}, {"date_measured": "1982-07-01T00:00:00", "ppm": 342.32}, {"date_measured": "1982-08-01T00:00:00", "ppm": 340.09}, {"date_measured": "1982-09-01T00:00:00", "ppm": 338.28}, {"date_measured": "1982-10-01T00:00:00", "ppm": 338.29}, {"date_measured": "1982-11-01T00:00:00", "ppm": 339.6}, {"date_measured": "1982-12-01T00:00:00", "ppm": 340.9}, {"date_measured": "1983-01-01T00:00:00", "ppm": 341.68}, {"date_measured": "1983-02-01T00:00:00", "ppm": 342.9}, {"date_measured": "1983-03-01T00:00:00", "ppm": 343.33}, {"date_measured": "1983-04-01T00:00:00", "ppm": 345.25}, {"date_measured": "1983-05-01T00:00:00", "ppm": 346.03}, {"date_measured": "1983-06-01T00:00:00", "ppm": 345.63}, {"date_measured": "1983-07-01T00:00:00", "ppm": 344.19}, {"date_measured": "1983-08-01T00:00:00", "ppm": 342.27}, {"date_measured": "1983-09-01T00:00:00", "ppm": 340.35}, {"date_measured": "1983-10-01T00:00:00", "ppm": 340.38}, {"date_measured": "1983-11-01T00:00:00", "ppm": 341.59}, {"date_measured": "1983-12-01T00:00:00", "ppm": 343.05}, {"date_measured": "1984-01-01T00:00:00", "ppm": 344.1}, {"date_measured": "1984-02-01T00:00:00", "ppm": 344.79}, {"date_measured": "1984-03-01T00:00:00", "ppm": 345.52}, {"date_measured": "1984-05-01T00:00:00", "ppm": 347.63}, {"date_measured": "1984-06-01T00:00:00", "ppm": 346.98}, {"date_measured": "1984-07-01T00:00:00", "ppm": 345.53}, {"date_measured": "1984-08-01T00:00:00", "ppm": 343.55}, {"date_measured": "1984-09-01T00:00:00", "ppm": 341.4}, {"date_measured": "1984-10-01T00:00:00", "ppm": 341.67}, {"date_measured": "1984-11-01T00:00:00", "ppm": 343.1}, {"date_measured": "1984-12-01T00:00:00", "ppm": 344.7}, {"date_measured": "1985-01-01T00:00:00", "ppm": 345.21}, {"date_measured": "1985-02-01T00:00:00", "ppm": 346.16}, {"date_measured": "1985-03-01T00:00:00", "ppm": 347.74}, {"date_measured": "1985-04-01T00:00:00", "ppm": 348.34}, {"date_measured": "1985-05-01T00:00:00", "ppm": 349.06}, {"date_measured": "1985-06-01T00:00:00", "ppm": 348.38}, {"date_measured": "1985-07-01T00:00:00", "ppm": 346.71}, {"date_measured": "1985-08-01T00:00:00", "ppm": 345.02}, {"date_measured": "1985-09-01T00:00:00", "ppm": 343.27}, {"date_measured": "1985-10-01T00:00:00", "ppm": 343.13}, {"date_measured": "1985-11-01T00:00:00", "ppm": 344.49}, {"date_measured": "1985-12-01T00:00:00", "ppm": 345.88}, {"date_measured": "1986-01-01T00:00:00", "ppm": 346.56}, {"date_measured": "1986-02-01T00:00:00", "ppm": 347.28}, {"date_measured": "1986-03-01T00:00:00", "ppm": 348.01}, {"date_measured": "1986-04-01T00:00:00", "ppm": 349.77}, {"date_measured": "1986-05-01T00:00:00", "ppm": 350.38}, {"date_measured": "1986-06-01T00:00:00", "ppm": 349.93}, {"date_measured": "1986-07-01T00:00:00", "ppm": 348.16}, {"date_measured": "1986-08-01T00:00:00", "ppm": 346.08}, {"date_measured": "1986-09-01T00:00:00", "ppm": 345.22}, {"date_measured": "1986-10-01T00:00:00", "ppm": 344.51}, {"date_measured": "1986-11-01T00:00:00", "ppm": 345.93}, {"date_measured": "1986-12-01T00:00:00", "ppm": 347.22}, {"date_measured": "1987-01-01T00:00:00", "ppm": 348.52}, {"date_measured": "1987-02-01T00:00:00", "ppm": 348.73}, {"date_measured": "1987-03-01T00:00:00", "ppm": 349.73}, {"date_measured": "1987-04-01T00:00:00", "ppm": 351.31}, {"date_measured": "1987-05-01T00:00:00", "ppm": 352.09}, {"date_measured": "1987-06-01T00:00:00", "ppm": 351.53}, {"date_measured": "1987-07-01T00:00:00", "ppm": 350.11}, {"date_measured": "1987-08-01T00:00:00", "ppm": 348.08}, {"date_measured": "1987-09-01T00:00:00", "ppm": 346.52}, {"date_measured": "1987-10-01T00:00:00", "ppm": 346.59}, {"date_measured": "1987-11-01T00:00:00", "ppm": 347.96}, {"date_measured": "1987-12-01T00:00:00", "ppm": 349.16}, {"date_measured": "1988-01-01T00:00:00", "ppm": 350.39}, {"date_measured": "1988-02-01T00:00:00", "ppm": 351.64}, {"date_measured": "1988-03-01T00:00:00", "ppm": 352.4}, {"date_measured": "1988-04-01T00:00:00", "ppm": 353.69}, {"date_measured": "1988-05-01T00:00:00", "ppm": 354.21}, {"date_measured": "1988-06-01T00:00:00", "ppm": 353.72}, {"date_measured": "1988-07-01T00:00:00", "ppm": 352.69}, {"date_measured": "1988-08-01T00:00:00", "ppm": 350.4}, {"date_measured": "1988-09-01T00:00:00", "ppm": 348.92}, {"date_measured": "1988-10-01T00:00:00", "ppm": 349.13}, {"date_measured": "1988-11-01T00:00:00", "ppm": 350.2}, {"date_measured": "1988-12-01T00:00:00", "ppm": 351.41}, {"date_measured": "1989-01-01T00:00:00", "ppm": 352.91}, {"date_measured": "1989-02-01T00:00:00", "ppm": 353.27}, {"date_measured": "1989-03-01T00:00:00", "ppm": 353.96}, {"date_measured": "1989-04-01T00:00:00", "ppm": 355.64}, {"date_measured": "1989-05-01T00:00:00", "ppm": 355.86}, {"date_measured": "1989-06-01T00:00:00", "ppm": 355.37}, {"date_measured": "1989-07-01T00:00:00", "ppm": 353.99}, {"date_measured": "1989-08-01T00:00:00", "ppm": 351.81}, {"date_measured": "1989-09-01T00:00:00", "ppm": 350.05}, {"date_measured": "1989-10-01T00:00:00", "ppm": 350.25}, {"date_measured": "1989-11-01T00:00:00", "ppm": 351.49}, {"date_measured": "1989-12-01T00:00:00", "ppm": 352.85}, {"date_measured": "1990-01-01T00:00:00", "ppm": 353.8}, {"date_measured": "1990-02-01T00:00:00", "ppm": 355.04}, {"date_measured": "1990-03-01T00:00:00", "ppm": 355.73}, {"date_measured": "1990-04-01T00:00:00", "ppm": 356.32}, {"date_measured": "1990-05-01T00:00:00", "ppm": 357.32}, {"date_measured": "1990-06-01T00:00:00", "ppm": 356.34}, {"date_measured": "1990-07-01T00:00:00", "ppm": 354.84}, {"date_measured": "1990-08-01T00:00:00", "ppm": 353.01}, {"date_measured": "1990-09-01T00:00:00", "ppm": 351.31}, {"date_measured": "1990-10-01T00:00:00", "ppm": 351.62}, {"date_measured": "1990-11-01T00:00:00", "ppm": 353.07}, {"date_measured": "1990-12-01T00:00:00", "ppm": 354.33}, {"date_measured": "1991-01-01T00:00:00", "ppm": 354.84}, {"date_measured": "1991-02-01T00:00:00", "ppm": 355.73}, {"date_measured": "1991-03-01T00:00:00", "ppm": 357.23}, {"date_measured": "1991-04-01T00:00:00", "ppm": 358.66}, {"date_measured": "1991-05-01T00:00:00", "ppm": 359.13}, {"date_measured": "1991-06-01T00:00:00", "ppm": 358.13}, {"date_measured": "1991-07-01T00:00:00", "ppm": 356.19}, {"date_measured": "1991-08-01T00:00:00", "ppm": 353.85}, {"date_measured": "1991-09-01T00:00:00", "ppm": 352.25}, {"date_measured": "1991-10-01T00:00:00", "ppm": 352.35}, {"date_measured": "1991-11-01T00:00:00", "ppm": 353.81}, {"date_measured": "1991-12-01T00:00:00", "ppm": 355.12}, {"date_measured": "1992-01-01T00:00:00", "ppm": 356.25}, {"date_measured": "1992-02-01T00:00:00", "ppm": 357.11}, {"date_measured": "1992-03-01T00:00:00", "ppm": 357.86}, {"date_measured": "1992-04-01T00:00:00", "ppm": 359.09}, {"date_measured": "1992-05-01T00:00:00", "ppm": 359.59}, {"date_measured": "1992-06-01T00:00:00", "ppm": 359.33}, {"date_measured": "1992-07-01T00:00:00", "ppm": 357.01}, {"date_measured": "1992-08-01T00:00:00", "ppm": 354.94}, {"date_measured": "1992-09-01T00:00:00", "ppm": 352.95}, {"date_measured": "1992-10-01T00:00:00", "ppm": 353.32}, {"date_measured": "1992-11-01T00:00:00", "ppm": 354.32}, {"date_measured": "1992-12-01T00:00:00", "ppm": 355.57}, {"date_measured": "1993-01-01T00:00:00", "ppm": 357.0}, {"date_measured": "1993-02-01T00:00:00", "ppm": 357.31}, {"date_measured": "1993-03-01T00:00:00", "ppm": 358.47}, {"date_measured": "1993-04-01T00:00:00", "ppm": 359.27}, {"date_measured": "1993-05-01T00:00:00", "ppm": 360.19}, {"date_measured": "1993-06-01T00:00:00", "ppm": 359.52}, {"date_measured": "1993-07-01T00:00:00", "ppm": 357.33}, {"date_measured": "1993-08-01T00:00:00", "ppm": 355.64}, {"date_measured": "1993-09-01T00:00:00", "ppm": 354.03}, {"date_measured": "1993-10-01T00:00:00", "ppm": 354.12}, {"date_measured": "1993-11-01T00:00:00", "ppm": 355.41}, {"date_measured": "1993-12-01T00:00:00", "ppm": 356.91}, {"date_measured": "1994-01-01T00:00:00", "ppm": 358.24}, {"date_measured": "1994-02-01T00:00:00", "ppm": 358.92}, {"date_measured": "1994-03-01T00:00:00", "ppm": 359.99}, {"date_measured": "1994-04-01T00:00:00", "ppm": 361.23}, {"date_measured": "1994-05-01T00:00:00", "ppm": 361.65}, {"date_measured": "1994-06-01T00:00:00", "ppm": 360.81}, {"date_measured": "1994-07-01T00:00:00", "ppm": 359.38}, {"date_measured": "1994-08-01T00:00:00", "ppm": 357.46}, {"date_measured": "1994-09-01T00:00:00", "ppm": 355.73}, {"date_measured": "1994-10-01T00:00:00", "ppm": 356.08}, {"date_measured": "1994-11-01T00:00:00", "ppm": 357.53}, {"date_measured": "1994-12-01T00:00:00", "ppm": 358.98}, {"date_measured": "1995-01-01T00:00:00", "ppm": 359.92}, {"date_measured": "1995-02-01T00:00:00", "ppm": 360.86}, {"date_measured": "1995-03-01T00:00:00", "ppm": 361.83}, {"date_measured": "1995-04-01T00:00:00", "ppm": 363.3}, {"date_measured": "1995-05-01T00:00:00", "ppm": 363.69}, {"date_measured": "1995-06-01T00:00:00", "ppm": 363.19}, {"date_measured": "1995-07-01T00:00:00", "ppm": 361.64}, {"date_measured": "1995-08-01T00:00:00", "ppm": 359.12}, {"date_measured": "1995-09-01T00:00:00", "ppm": 358.17}, {"date_measured": "1995-10-01T00:00:00", "ppm": 357.99}, {"date_measured": "1995-11-01T00:00:00", "ppm": 359.45}, {"date_measured": "1995-12-01T00:00:00", "ppm": 360.68}, {"date_measured": "1996-01-01T00:00:00", "ppm": 362.07}, {"date_measured": "1996-02-01T00:00:00", "ppm": 363.24}, {"date_measured": "1996-03-01T00:00:00", "ppm": 364.17}, {"date_measured": "1996-04-01T00:00:00", "ppm": 364.57}, {"date_measured": "1996-05-01T00:00:00", "ppm": 365.13}, {"date_measured": "1996-06-01T00:00:00", "ppm": 364.92}, {"date_measured": "1996-07-01T00:00:00", "ppm": 363.55}, {"date_measured": "1996-08-01T00:00:00", "ppm": 361.38}, {"date_measured": "1996-09-01T00:00:00", "ppm": 359.54}, {"date_measured": "1996-10-01T00:00:00", "ppm": 359.58}, {"date_measured": "1996-11-01T00:00:00", "ppm": 360.89}, {"date_measured": "1996-12-01T00:00:00", "ppm": 362.24}, {"date_measured": "1997-01-01T00:00:00", "ppm": 363.09}, {"date_measured": "1997-02-01T00:00:00", "ppm": 364.03}, {"date_measured": "1997-03-01T00:00:00", "ppm": 364.51}, {"date_measured": "1997-04-01T00:00:00", "ppm": 366.35}, {"date_measured": "1997-05-01T00:00:00", "ppm": 366.64}, {"date_measured": "1997-06-01T00:00:00", "ppm": 365.59}, {"date_measured": "1997-07-01T00:00:00", "ppm": 364.31}, {"date_measured": "1997-08-01T00:00:00", "ppm": 362.25}, {"date_measured": "1997-09-01T00:00:00", "ppm": 360.29}, {"date_measured": "1997-10-01T00:00:00", "ppm": 360.82}, {"date_measured": "1997-11-01T00:00:00", "ppm": 362.49}, {"date_measured": "1997-12-01T00:00:00", "ppm": 364.38}, {"date_measured": "1998-01-01T00:00:00", "ppm": 365.27}, {"date_measured": "1998-02-01T00:00:00", "ppm": 365.98}, {"date_measured": "1998-03-01T00:00:00", "ppm": 367.24}, {"date_measured": "1998-04-01T00:00:00", "ppm": 368.66}, {"date_measured": "1998-05-01T00:00:00", "ppm": 369.42}, {"date_measured": "1998-06-01T00:00:00", "ppm": 368.99}, {"date_measured": "1998-07-01T00:00:00", "ppm": 367.82}, {"date_measured": "1998-08-01T00:00:00", "ppm": 365.95}, {"date_measured": "1998-09-01T00:00:00", "ppm": 364.02}, {"date_measured": "1998-10-01T00:00:00", "ppm": 364.4}, {"date_measured": "1998-11-01T00:00:00", "ppm": 365.52}, {"date_measured": "1998-12-01T00:00:00", "ppm": 367.13}, {"date_measured": "1999-01-01T00:00:00", "ppm": 368.18}, {"date_measured": "1999-02-01T00:00:00", "ppm": 369.07}, {"date_measured": "1999-03-01T00:00:00", "ppm": 369.68}, {"date_measured": "1999-04-01T00:00:00", "ppm": 370.99}, {"date_measured": "1999-05-01T00:00:00", "ppm": 370.96}, {"date_measured": "1999-06-01T00:00:00", "ppm": 370.3}, {"date_measured": "1999-07-01T00:00:00", "ppm": 369.45}, {"date_measured": "1999-08-01T00:00:00", "ppm": 366.9}, {"date_measured": "1999-09-01T00:00:00", "ppm": 364.81}, {"date_measured": "1999-10-01T00:00:00", "ppm": 365.37}, {"date_measured": "1999-11-01T00:00:00", "ppm": 366.72}, {"date_measured": "1999-12-01T00:00:00", "ppm": 368.1}, {"date_measured": "2000-01-01T00:00:00", "ppm": 369.29}, {"date_measured": "2000-02-01T00:00:00", "ppm": 369.55}, {"date_measured": "2000-03-01T00:00:00", "ppm": 370.6}, {"date_measured": "2000-04-01T00:00:00", "ppm": 371.82}, {"date_measured": "2000-05-01T00:00:00", "ppm": 371.58}, {"date_measured": "2000-06-01T00:00:00", "ppm": 371.7}, {"date_measured": "2000-07-01T00:00:00", "ppm": 369.86}, {"date_measured": "2000-08-01T00:00:00", "ppm": 368.13}, {"date_measured": "2000-09-01T00:00:00", "ppm": 367.0}, {"date_measured": "2000-10-01T00:00:00", "ppm": 367.03}, {"date_measured": "2000-11-01T00:00:00", "ppm": 368.37}, {"date_measured": "2000-12-01T00:00:00", "ppm": 369.67}, {"date_measured": "2001-01-01T00:00:00", "ppm": 370.59}, {"date_measured": "2001-02-01T00:00:00", "ppm": 371.51}, {"date_measured": "2001-03-01T00:00:00", "ppm": 372.43}, {"date_measured": "2001-04-01T00:00:00", "ppm": 373.37}, {"date_measured": "2001-05-01T00:00:00", "ppm": 373.85}, {"date_measured": "2001-06-01T00:00:00", "ppm": 373.22}, {"date_measured": "2001-07-01T00:00:00", "ppm": 371.5}, {"date_measured": "2001-08-01T00:00:00", "ppm": 369.61}, {"date_measured": "2001-09-01T00:00:00", "ppm": 368.18}, {"date_measured": "2001-10-01T00:00:00", "ppm": 368.45}, {"date_measured": "2001-11-01T00:00:00", "ppm": 369.76}, {"date_measured": "2001-12-01T00:00:00", "ppm": 371.24}, {"date_measured": "2002-01-01T00:00:00", "ppm": 372.53}, {"date_measured": "2002-02-01T00:00:00", "ppm": 373.2}, {"date_measured": "2002-03-01T00:00:00", "ppm": 374.12}, {"date_measured": "2002-04-01T00:00:00", "ppm": 375.02}, {"date_measured": "2002-05-01T00:00:00", "ppm": 375.76}, {"date_measured": "2002-06-01T00:00:00", "ppm": 375.52}, {"date_measured": "2002-07-01T00:00:00", "ppm": 374.01}, {"date_measured": "2002-08-01T00:00:00", "ppm": 371.85}, {"date_measured": "2002-09-01T00:00:00", "ppm": 370.75}, {"date_measured": "2002-10-01T00:00:00", "ppm": 370.55}, {"date_measured": "2002-11-01T00:00:00", "ppm": 372.25}, {"date_measured": "2002-12-01T00:00:00", "ppm": 373.79}, {"date_measured": "2003-01-01T00:00:00", "ppm": 374.88}, {"date_measured": "2003-02-01T00:00:00", "ppm": 375.64}, {"date_measured": "2003-03-01T00:00:00", "ppm": 376.45}, {"date_measured": "2003-04-01T00:00:00", "ppm": 377.73}, {"date_measured": "2003-05-01T00:00:00", "ppm": 378.6}, {"date_measured": "2003-06-01T00:00:00", "ppm": 378.28}, {"date_measured": "2003-07-01T00:00:00", "ppm": 376.7}, {"date_measured": "2003-08-01T00:00:00", "ppm": 374.38}, {"date_measured": "2003-09-01T00:00:00", "ppm": 373.17}, {"date_measured": "2003-10-01T00:00:00", "ppm": 373.15}, {"date_measured": "2003-11-01T00:00:00", "ppm": 374.66}, {"date_measured": "2003-12-01T00:00:00", "ppm": 375.99}, {"date_measured": "2004-01-01T00:00:00", "ppm": 377.0}, {"date_measured": "2004-02-01T00:00:00", "ppm": 377.87}, {"date_measured": "2004-03-01T00:00:00", "ppm": 378.88}, {"date_measured": "2004-04-01T00:00:00", "ppm": 380.35}, {"date_measured": "2004-05-01T00:00:00", "ppm": 380.62}, {"date_measured": "2004-06-01T00:00:00", "ppm": 379.69}, {"date_measured": "2004-07-01T00:00:00", "ppm": 377.47}, {"date_measured": "2004-08-01T00:00:00", "ppm": 376.01}, {"date_measured": "2004-09-01T00:00:00", "ppm": 374.25}, {"date_measured": "2004-10-01T00:00:00", "ppm": 374.46}, {"date_measured": "2004-11-01T00:00:00", "ppm": 376.16}, {"date_measured": "2004-12-01T00:00:00", "ppm": 377.51}, {"date_measured": "2005-01-01T00:00:00", "ppm": 378.46}, {"date_measured": "2005-02-01T00:00:00", "ppm": 379.73}, {"date_measured": "2005-03-01T00:00:00", "ppm": 380.77}, {"date_measured": "2005-04-01T00:00:00", "ppm": 382.29}, {"date_measured": "2005-05-01T00:00:00", "ppm": 382.45}, {"date_measured": "2005-06-01T00:00:00", "ppm": 382.21}, {"date_measured": "2005-07-01T00:00:00", "ppm": 380.74}, {"date_measured": "2005-08-01T00:00:00", "ppm": 378.74}, {"date_measured": "2005-09-01T00:00:00", "ppm": 376.7}, {"date_measured": "2005-10-01T00:00:00", "ppm": 377.0}, {"date_measured": "2005-11-01T00:00:00", "ppm": 378.35}, {"date_measured": "2005-12-01T00:00:00", "ppm": 380.11}, {"date_measured": "2006-01-01T00:00:00", "ppm": 381.38}, {"date_measured": "2006-02-01T00:00:00", "ppm": 382.2}, {"date_measured": "2006-03-01T00:00:00", "ppm": 382.67}, {"date_measured": "2006-04-01T00:00:00", "ppm": 384.61}, {"date_measured": "2006-05-01T00:00:00", "ppm": 385.03}, {"date_measured": "2006-06-01T00:00:00", "ppm": 384.05}, {"date_measured": "2006-07-01T00:00:00", "ppm": 382.46}, {"date_measured": "2006-08-01T00:00:00", "ppm": 380.41}, {"date_measured": "2006-09-01T00:00:00", "ppm": 378.85}, {"date_measured": "2006-10-01T00:00:00", "ppm": 379.13}, {"date_measured": "2006-11-01T00:00:00", "ppm": 380.15}, {"date_measured": "2006-12-01T00:00:00", "ppm": 381.82}, {"date_measured": "2007-01-01T00:00:00", "ppm": 382.89}, {"date_measured": "2007-02-01T00:00:00", "ppm": 383.9}, {"date_measured": "2007-03-01T00:00:00", "ppm": 384.58}, {"date_measured": "2007-04-01T00:00:00", "ppm": 386.5}, {"date_measured": "2007-05-01T00:00:00", "ppm": 386.56}, {"date_measured": "2007-06-01T00:00:00", "ppm": 386.1}, {"date_measured": "2007-07-01T00:00:00", "ppm": 384.5}, {"date_measured": "2007-08-01T00:00:00", "ppm": 381.99}, {"date_measured": "2007-09-01T00:00:00", "ppm": 380.96}, {"date_measured": "2007-10-01T00:00:00", "ppm": 381.12}, {"date_measured": "2007-11-01T00:00:00", "ppm": 382.45}, {"date_measured": "2007-12-01T00:00:00", "ppm": 383.94}, {"date_measured": "2008-01-01T00:00:00", "ppm": 385.52}, {"date_measured": "2008-02-01T00:00:00", "ppm": 385.82}, {"date_measured": "2008-03-01T00:00:00", "ppm": 386.03}, {"date_measured": "2008-04-01T00:00:00", "ppm": 387.21}, {"date_measured": "2008-05-01T00:00:00", "ppm": 388.54}, {"date_measured": "2008-06-01T00:00:00", "ppm": 387.76}, {"date_measured": "2008-07-01T00:00:00", "ppm": 386.37}, {"date_measured": "2008-08-01T00:00:00", "ppm": 384.09}, {"date_measured": "2008-09-01T00:00:00", "ppm": 383.18}, {"date_measured": "2008-10-01T00:00:00", "ppm": 382.99}, {"date_measured": "2008-11-01T00:00:00", "ppm": 384.19}, {"date_measured": "2008-12-01T00:00:00", "ppm": 385.56}, {"date_measured": "2009-01-01T00:00:00", "ppm": 386.94}, {"date_measured": "2009-02-01T00:00:00", "ppm": 387.48}, {"date_measured": "2009-03-01T00:00:00", "ppm": 388.82}, {"date_measured": "2009-04-01T00:00:00", "ppm": 389.55}, {"date_measured": "2009-05-01T00:00:00", "ppm": 390.14}, {"date_measured": "2009-06-01T00:00:00", "ppm": 389.48}, {"date_measured": "2009-07-01T00:00:00", "ppm": 388.03}, {"date_measured": "2009-08-01T00:00:00", "ppm": 386.11}, {"date_measured": "2009-09-01T00:00:00", "ppm": 384.74}, {"date_measured": "2009-10-01T00:00:00", "ppm": 384.43}, {"date_measured": "2009-11-01T00:00:00", "ppm": 386.02}, {"date_measured": "2009-12-01T00:00:00", "ppm": 387.42}, {"date_measured": "2010-01-01T00:00:00", "ppm": 388.71}, {"date_measured": "2010-02-01T00:00:00", "ppm": 390.2}, {"date_measured": "2010-03-01T00:00:00", "ppm": 391.17}, {"date_measured": "2010-04-01T00:00:00", "ppm": 392.46}, {"date_measured": "2010-05-01T00:00:00", "ppm": 393.0}, {"date_measured": "2010-06-01T00:00:00", "ppm": 392.15}, {"date_measured": "2010-07-01T00:00:00", "ppm": 390.2}, {"date_measured": "2010-08-01T00:00:00", "ppm": 388.35}, {"date_measured": "2010-09-01T00:00:00", "ppm": 386.85}, {"date_measured": "2010-10-01T00:00:00", "ppm": 387.24}, {"date_measured": "2010-11-01T00:00:00", "ppm": 388.67}, {"date_measured": "2010-12-01T00:00:00", "ppm": 389.79}, {"date_measured": "2011-01-01T00:00:00", "ppm": 391.33}, {"date_measured": "2011-02-01T00:00:00", "ppm": 391.86}, {"date_measured": "2011-03-01T00:00:00", "ppm": 392.6}, {"date_measured": "2011-04-01T00:00:00", "ppm": 393.25}, {"date_measured": "2011-05-01T00:00:00", "ppm": 394.19}, {"date_measured": "2011-06-01T00:00:00", "ppm": 393.74}, {"date_measured": "2011-07-01T00:00:00", "ppm": 392.51}, {"date_measured": "2011-08-01T00:00:00", "ppm": 390.13}, {"date_measured": "2011-09-01T00:00:00", "ppm": 389.08}, {"date_measured": "2011-10-01T00:00:00", "ppm": 389.0}, {"date_measured": "2011-11-01T00:00:00", "ppm": 390.28}, {"date_measured": "2011-12-01T00:00:00", "ppm": 391.86}, {"date_measured": "2012-01-01T00:00:00", "ppm": 393.12}, {"date_measured": "2012-02-01T00:00:00", "ppm": 393.86}, {"date_measured": "2012-03-01T00:00:00", "ppm": 394.4}, {"date_measured": "2012-04-01T00:00:00", "ppm": 396.18}, {"date_measured": "2012-05-01T00:00:00", "ppm": 396.74}, {"date_measured": "2012-06-01T00:00:00", "ppm": 395.71}, {"date_measured": "2012-07-01T00:00:00", "ppm": 394.36}, {"date_measured": "2012-08-01T00:00:00", "ppm": 392.39}, {"date_measured": "2012-09-01T00:00:00", "ppm": 391.11}, {"date_measured": "2012-10-01T00:00:00", "ppm": 391.05}, {"date_measured": "2012-11-01T00:00:00", "ppm": 392.98}, {"date_measured": "2012-12-01T00:00:00", "ppm": 394.34}, {"date_measured": "2013-01-01T00:00:00", "ppm": 395.55}, {"date_measured": "2013-02-01T00:00:00", "ppm": 396.8}, {"date_measured": "2013-03-01T00:00:00", "ppm": 397.43}, {"date_measured": "2013-04-01T00:00:00", "ppm": 398.41}, {"date_measured": "2013-05-01T00:00:00", "ppm": 399.78}, {"date_measured": "2013-06-01T00:00:00", "ppm": 398.6}, {"date_measured": "2013-07-01T00:00:00", "ppm": 397.32}, {"date_measured": "2013-08-01T00:00:00", "ppm": 395.2}, {"date_measured": "2013-09-01T00:00:00", "ppm": 393.45}, {"date_measured": "2013-10-01T00:00:00", "ppm": 393.7}, {"date_measured": "2013-11-01T00:00:00", "ppm": 395.16}, {"date_measured": "2013-12-01T00:00:00", "ppm": 396.84}, {"date_measured": "2014-01-01T00:00:00", "ppm": 397.85}, {"date_measured": "2014-02-01T00:00:00", "ppm": 398.01}, {"date_measured": "2014-03-01T00:00:00", "ppm": 399.77}, {"date_measured": "2014-04-01T00:00:00", "ppm": 401.38}, {"date_measured": "2014-05-01T00:00:00", "ppm": 401.78}, {"date_measured": "2014-06-01T00:00:00", "ppm": 401.25}, {"date_measured": "2014-07-01T00:00:00", "ppm": 399.1}, {"date_measured": "2014-08-01T00:00:00", "ppm": 397.03}, {"date_measured": "2014-09-01T00:00:00", "ppm": 395.38}, {"date_measured": "2014-10-01T00:00:00", "ppm": 396.03}, {"date_measured": "2014-11-01T00:00:00", "ppm": 397.28}, {"date_measured": "2014-12-01T00:00:00", "ppm": 398.91}, {"date_measured": "2015-01-01T00:00:00", "ppm": 399.98}, {"date_measured": "2015-02-01T00:00:00", "ppm": 400.28}, {"date_measured": "2015-03-01T00:00:00", "ppm": 401.54}, {"date_measured": "2015-04-01T00:00:00", "ppm": 403.28}, {"date_measured": "2015-05-01T00:00:00", "ppm": 403.96}, {"date_measured": "2015-06-01T00:00:00", "ppm": 402.8}, {"date_measured": "2015-07-01T00:00:00", "ppm": 401.31}, {"date_measured": "2015-08-01T00:00:00", "ppm": 398.93}, {"date_measured": "2015-09-01T00:00:00", "ppm": 397.63}, {"date_measured": "2015-10-01T00:00:00", "ppm": 398.29}, {"date_measured": "2015-11-01T00:00:00", "ppm": 400.16}, {"date_measured": "2015-12-01T00:00:00", "ppm": 401.85}, {"date_measured": "2016-01-01T00:00:00", "ppm": 402.56}, {"date_measured": "2016-02-01T00:00:00", "ppm": 404.12}, {"date_measured": "2016-03-01T00:00:00", "ppm": 404.87}, {"date_measured": "2016-04-01T00:00:00", "ppm": 407.45}, {"date_measured": "2016-05-01T00:00:00", "ppm": 407.72}, {"date_measured": "2016-06-01T00:00:00", "ppm": 406.83}, {"date_measured": "2016-07-01T00:00:00", "ppm": 404.41}, {"date_measured": "2016-08-01T00:00:00", "ppm": 402.27}, {"date_measured": "2016-09-01T00:00:00", "ppm": 401.05}, {"date_measured": "2016-10-01T00:00:00", "ppm": 401.59}, {"date_measured": "2016-11-01T00:00:00", "ppm": 403.55}, {"date_measured": "2016-12-01T00:00:00", "ppm": 404.45}, {"date_measured": "2017-01-01T00:00:00", "ppm": 406.17}, {"date_measured": "2017-02-01T00:00:00", "ppm": 406.46}, {"date_measured": "2017-03-01T00:00:00", "ppm": 407.22}, {"date_measured": "2017-04-01T00:00:00", "ppm": 409.04}, {"date_measured": "2017-05-01T00:00:00", "ppm": 409.69}, {"date_measured": "2017-06-01T00:00:00", "ppm": 408.88}, {"date_measured": "2017-07-01T00:00:00", "ppm": 407.12}, {"date_measured": "2017-08-01T00:00:00", "ppm": 405.13}, {"date_measured": "2017-09-01T00:00:00", "ppm": 403.37}, {"date_measured": "2017-10-01T00:00:00", "ppm": 403.63}, {"date_measured": "2017-11-01T00:00:00", "ppm": 405.12}, {"date_measured": "2017-12-01T00:00:00", "ppm": 406.81}, {"date_measured": "2018-01-01T00:00:00", "ppm": 407.96}, {"date_measured": "2018-02-01T00:00:00", "ppm": 408.32}, {"date_measured": "2018-03-01T00:00:00", "ppm": 409.41}, {"date_measured": "2018-04-01T00:00:00", "ppm": 410.24}, {"date_measured": "2018-05-01T00:00:00", "ppm": 411.24}, {"date_measured": "2018-06-01T00:00:00", "ppm": 410.79}, {"date_measured": "2018-07-01T00:00:00", "ppm": 408.71}, {"date_measured": "2018-08-01T00:00:00", "ppm": 406.99}, {"date_measured": "2018-09-01T00:00:00", "ppm": 405.51}, {"date_measured": "2018-10-01T00:00:00", "ppm": 406.0}, {"date_measured": "2018-11-01T00:00:00", "ppm": 408.02}, {"date_measured": "2018-12-01T00:00:00", "ppm": 409.07}, {"date_measured": "2019-01-01T00:00:00", "ppm": 410.83}, {"date_measured": "2019-02-01T00:00:00", "ppm": 411.75}, {"date_measured": "2019-03-01T00:00:00", "ppm": 411.97}, {"date_measured": "2019-04-01T00:00:00", "ppm": 413.33}, {"date_measured": "2019-05-01T00:00:00", "ppm": 414.64}, {"date_measured": "2019-06-01T00:00:00", "ppm": 413.93}, {"date_measured": "2019-07-01T00:00:00", "ppm": 411.74}, {"date_measured": "2019-08-01T00:00:00", "ppm": 409.95}, {"date_measured": "2019-09-01T00:00:00", "ppm": 408.54}, {"date_measured": "2019-10-01T00:00:00", "ppm": 408.52}, {"date_measured": "2019-11-01T00:00:00", "ppm": 410.25}, {"date_measured": "2019-12-01T00:00:00", "ppm": 411.76}, {"date_measured": "2020-01-01T00:00:00", "ppm": 413.39}, {"date_measured": "2020-02-01T00:00:00", "ppm": 414.11}, {"date_measured": "2020-03-01T00:00:00", "ppm": 414.51}, {"date_measured": "2020-04-01T00:00:00", "ppm": 416.21}, {"date_measured": "2020-05-01T00:00:00", "ppm": 417.07}, {"date_measured": "2020-06-01T00:00:00", "ppm": 416.39}]}}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-ecfc281786dd23148efa483af3159f83"}, "mark": "point", "encoding": {"x": {"field": "date_measured", "type": "temporal"}, "y": {"field": "ppm", "scale": {"zero": false}, "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-ecfc281786dd23148efa483af3159f83": [{"date_measured": "1980-02-01T00:00:00", "ppm": 338.34}, {"date_measured": "1980-03-01T00:00:00", "ppm": 340.01}, {"date_measured": "1980-04-01T00:00:00", "ppm": 340.93}, {"date_measured": "1980-05-01T00:00:00", "ppm": 341.48}, {"date_measured": "1980-06-01T00:00:00", "ppm": 341.33}, {"date_measured": "1980-07-01T00:00:00", "ppm": 339.4}, {"date_measured": "1980-08-01T00:00:00", "ppm": 337.7}, {"date_measured": "1980-09-01T00:00:00", "ppm": 336.19}, {"date_measured": "1980-10-01T00:00:00", "ppm": 336.15}, {"date_measured": "1980-11-01T00:00:00", "ppm": 337.27}, {"date_measured": "1980-12-01T00:00:00", "ppm": 338.32}, {"date_measured": "1981-01-01T00:00:00", "ppm": 339.29}, {"date_measured": "1981-02-01T00:00:00", "ppm": 340.55}, {"date_measured": "1981-03-01T00:00:00", "ppm": 341.61}, {"date_measured": "1981-04-01T00:00:00", "ppm": 342.53}, {"date_measured": "1981-05-01T00:00:00", "ppm": 343.03}, {"date_measured": "1981-06-01T00:00:00", "ppm": 342.54}, {"date_measured": "1981-07-01T00:00:00", "ppm": 340.78}, {"date_measured": "1981-08-01T00:00:00", "ppm": 338.44}, {"date_measured": "1981-09-01T00:00:00", "ppm": 336.95}, {"date_measured": "1981-10-01T00:00:00", "ppm": 337.08}, {"date_measured": "1981-11-01T00:00:00", "ppm": 338.58}, {"date_measured": "1981-12-01T00:00:00", "ppm": 339.88}, {"date_measured": "1982-01-01T00:00:00", "ppm": 340.96}, {"date_measured": "1982-02-01T00:00:00", "ppm": 341.73}, {"date_measured": "1982-03-01T00:00:00", "ppm": 342.81}, {"date_measured": "1982-04-01T00:00:00", "ppm": 343.97}, {"date_measured": "1982-05-01T00:00:00", "ppm": 344.63}, {"date_measured": "1982-06-01T00:00:00", "ppm": 343.79}, {"date_measured": "1982-07-01T00:00:00", "ppm": 342.32}, {"date_measured": "1982-08-01T00:00:00", "ppm": 340.09}, {"date_measured": "1982-09-01T00:00:00", "ppm": 338.28}, {"date_measured": "1982-10-01T00:00:00", "ppm": 338.29}, {"date_measured": "1982-11-01T00:00:00", "ppm": 339.6}, {"date_measured": "1982-12-01T00:00:00", "ppm": 340.9}, {"date_measured": "1983-01-01T00:00:00", "ppm": 341.68}, {"date_measured": "1983-02-01T00:00:00", "ppm": 342.9}, {"date_measured": "1983-03-01T00:00:00", "ppm": 343.33}, {"date_measured": "1983-04-01T00:00:00", "ppm": 345.25}, {"date_measured": "1983-05-01T00:00:00", "ppm": 346.03}, {"date_measured": "1983-06-01T00:00:00", "ppm": 345.63}, {"date_measured": "1983-07-01T00:00:00", "ppm": 344.19}, {"date_measured": "1983-08-01T00:00:00", "ppm": 342.27}, {"date_measured": "1983-09-01T00:00:00", "ppm": 340.35}, {"date_measured": "1983-10-01T00:00:00", "ppm": 340.38}, {"date_measured": "1983-11-01T00:00:00", "ppm": 341.59}, {"date_measured": "1983-12-01T00:00:00", "ppm": 343.05}, {"date_measured": "1984-01-01T00:00:00", "ppm": 344.1}, {"date_measured": "1984-02-01T00:00:00", "ppm": 344.79}, {"date_measured": "1984-03-01T00:00:00", "ppm": 345.52}, {"date_measured": "1984-05-01T00:00:00", "ppm": 347.63}, {"date_measured": "1984-06-01T00:00:00", "ppm": 346.98}, {"date_measured": "1984-07-01T00:00:00", "ppm": 345.53}, {"date_measured": "1984-08-01T00:00:00", "ppm": 343.55}, {"date_measured": "1984-09-01T00:00:00", "ppm": 341.4}, {"date_measured": "1984-10-01T00:00:00", "ppm": 341.67}, {"date_measured": "1984-11-01T00:00:00", "ppm": 343.1}, {"date_measured": "1984-12-01T00:00:00", "ppm": 344.7}, {"date_measured": "1985-01-01T00:00:00", "ppm": 345.21}, {"date_measured": "1985-02-01T00:00:00", "ppm": 346.16}, {"date_measured": "1985-03-01T00:00:00", "ppm": 347.74}, {"date_measured": "1985-04-01T00:00:00", "ppm": 348.34}, {"date_measured": "1985-05-01T00:00:00", "ppm": 349.06}, {"date_measured": "1985-06-01T00:00:00", "ppm": 348.38}, {"date_measured": "1985-07-01T00:00:00", "ppm": 346.71}, {"date_measured": "1985-08-01T00:00:00", "ppm": 345.02}, {"date_measured": "1985-09-01T00:00:00", "ppm": 343.27}, {"date_measured": "1985-10-01T00:00:00", "ppm": 343.13}, {"date_measured": "1985-11-01T00:00:00", "ppm": 344.49}, {"date_measured": "1985-12-01T00:00:00", "ppm": 345.88}, {"date_measured": "1986-01-01T00:00:00", "ppm": 346.56}, {"date_measured": "1986-02-01T00:00:00", "ppm": 347.28}, {"date_measured": "1986-03-01T00:00:00", "ppm": 348.01}, {"date_measured": "1986-04-01T00:00:00", "ppm": 349.77}, {"date_measured": "1986-05-01T00:00:00", "ppm": 350.38}, {"date_measured": "1986-06-01T00:00:00", "ppm": 349.93}, {"date_measured": "1986-07-01T00:00:00", "ppm": 348.16}, {"date_measured": "1986-08-01T00:00:00", "ppm": 346.08}, {"date_measured": "1986-09-01T00:00:00", "ppm": 345.22}, {"date_measured": "1986-10-01T00:00:00", "ppm": 344.51}, {"date_measured": "1986-11-01T00:00:00", "ppm": 345.93}, {"date_measured": "1986-12-01T00:00:00", "ppm": 347.22}, {"date_measured": "1987-01-01T00:00:00", "ppm": 348.52}, {"date_measured": "1987-02-01T00:00:00", "ppm": 348.73}, {"date_measured": "1987-03-01T00:00:00", "ppm": 349.73}, {"date_measured": "1987-04-01T00:00:00", "ppm": 351.31}, {"date_measured": "1987-05-01T00:00:00", "ppm": 352.09}, {"date_measured": "1987-06-01T00:00:00", "ppm": 351.53}, {"date_measured": "1987-07-01T00:00:00", "ppm": 350.11}, {"date_measured": "1987-08-01T00:00:00", "ppm": 348.08}, {"date_measured": "1987-09-01T00:00:00", "ppm": 346.52}, {"date_measured": "1987-10-01T00:00:00", "ppm": 346.59}, {"date_measured": "1987-11-01T00:00:00", "ppm": 347.96}, {"date_measured": "1987-12-01T00:00:00", "ppm": 349.16}, {"date_measured": "1988-01-01T00:00:00", "ppm": 350.39}, {"date_measured": "1988-02-01T00:00:00", "ppm": 351.64}, {"date_measured": "1988-03-01T00:00:00", "ppm": 352.4}, {"date_measured": "1988-04-01T00:00:00", "ppm": 353.69}, {"date_measured": "1988-05-01T00:00:00", "ppm": 354.21}, {"date_measured": "1988-06-01T00:00:00", "ppm": 353.72}, {"date_measured": "1988-07-01T00:00:00", "ppm": 352.69}, {"date_measured": "1988-08-01T00:00:00", "ppm": 350.4}, {"date_measured": "1988-09-01T00:00:00", "ppm": 348.92}, {"date_measured": "1988-10-01T00:00:00", "ppm": 349.13}, {"date_measured": "1988-11-01T00:00:00", "ppm": 350.2}, {"date_measured": "1988-12-01T00:00:00", "ppm": 351.41}, {"date_measured": "1989-01-01T00:00:00", "ppm": 352.91}, {"date_measured": "1989-02-01T00:00:00", "ppm": 353.27}, {"date_measured": "1989-03-01T00:00:00", "ppm": 353.96}, {"date_measured": "1989-04-01T00:00:00", "ppm": 355.64}, {"date_measured": "1989-05-01T00:00:00", "ppm": 355.86}, {"date_measured": "1989-06-01T00:00:00", "ppm": 355.37}, {"date_measured": "1989-07-01T00:00:00", "ppm": 353.99}, {"date_measured": "1989-08-01T00:00:00", "ppm": 351.81}, {"date_measured": "1989-09-01T00:00:00", "ppm": 350.05}, {"date_measured": "1989-10-01T00:00:00", "ppm": 350.25}, {"date_measured": "1989-11-01T00:00:00", "ppm": 351.49}, {"date_measured": "1989-12-01T00:00:00", "ppm": 352.85}, {"date_measured": "1990-01-01T00:00:00", "ppm": 353.8}, {"date_measured": "1990-02-01T00:00:00", "ppm": 355.04}, {"date_measured": "1990-03-01T00:00:00", "ppm": 355.73}, {"date_measured": "1990-04-01T00:00:00", "ppm": 356.32}, {"date_measured": "1990-05-01T00:00:00", "ppm": 357.32}, {"date_measured": "1990-06-01T00:00:00", "ppm": 356.34}, {"date_measured": "1990-07-01T00:00:00", "ppm": 354.84}, {"date_measured": "1990-08-01T00:00:00", "ppm": 353.01}, {"date_measured": "1990-09-01T00:00:00", "ppm": 351.31}, {"date_measured": "1990-10-01T00:00:00", "ppm": 351.62}, {"date_measured": "1990-11-01T00:00:00", "ppm": 353.07}, {"date_measured": "1990-12-01T00:00:00", "ppm": 354.33}, {"date_measured": "1991-01-01T00:00:00", "ppm": 354.84}, {"date_measured": "1991-02-01T00:00:00", "ppm": 355.73}, {"date_measured": "1991-03-01T00:00:00", "ppm": 357.23}, {"date_measured": "1991-04-01T00:00:00", "ppm": 358.66}, {"date_measured": "1991-05-01T00:00:00", "ppm": 359.13}, {"date_measured": "1991-06-01T00:00:00", "ppm": 358.13}, {"date_measured": "1991-07-01T00:00:00", "ppm": 356.19}, {"date_measured": "1991-08-01T00:00:00", "ppm": 353.85}, {"date_measured": "1991-09-01T00:00:00", "ppm": 352.25}, {"date_measured": "1991-10-01T00:00:00", "ppm": 352.35}, {"date_measured": "1991-11-01T00:00:00", "ppm": 353.81}, {"date_measured": "1991-12-01T00:00:00", "ppm": 355.12}, {"date_measured": "1992-01-01T00:00:00", "ppm": 356.25}, {"date_measured": "1992-02-01T00:00:00", "ppm": 357.11}, {"date_measured": "1992-03-01T00:00:00", "ppm": 357.86}, {"date_measured": "1992-04-01T00:00:00", "ppm": 359.09}, {"date_measured": "1992-05-01T00:00:00", "ppm": 359.59}, {"date_measured": "1992-06-01T00:00:00", "ppm": 359.33}, {"date_measured": "1992-07-01T00:00:00", "ppm": 357.01}, {"date_measured": "1992-08-01T00:00:00", "ppm": 354.94}, {"date_measured": "1992-09-01T00:00:00", "ppm": 352.95}, {"date_measured": "1992-10-01T00:00:00", "ppm": 353.32}, {"date_measured": "1992-11-01T00:00:00", "ppm": 354.32}, {"date_measured": "1992-12-01T00:00:00", "ppm": 355.57}, {"date_measured": "1993-01-01T00:00:00", "ppm": 357.0}, {"date_measured": "1993-02-01T00:00:00", "ppm": 357.31}, {"date_measured": "1993-03-01T00:00:00", "ppm": 358.47}, {"date_measured": "1993-04-01T00:00:00", "ppm": 359.27}, {"date_measured": "1993-05-01T00:00:00", "ppm": 360.19}, {"date_measured": "1993-06-01T00:00:00", "ppm": 359.52}, {"date_measured": "1993-07-01T00:00:00", "ppm": 357.33}, {"date_measured": "1993-08-01T00:00:00", "ppm": 355.64}, {"date_measured": "1993-09-01T00:00:00", "ppm": 354.03}, {"date_measured": "1993-10-01T00:00:00", "ppm": 354.12}, {"date_measured": "1993-11-01T00:00:00", "ppm": 355.41}, {"date_measured": "1993-12-01T00:00:00", "ppm": 356.91}, {"date_measured": "1994-01-01T00:00:00", "ppm": 358.24}, {"date_measured": "1994-02-01T00:00:00", "ppm": 358.92}, {"date_measured": "1994-03-01T00:00:00", "ppm": 359.99}, {"date_measured": "1994-04-01T00:00:00", "ppm": 361.23}, {"date_measured": "1994-05-01T00:00:00", "ppm": 361.65}, {"date_measured": "1994-06-01T00:00:00", "ppm": 360.81}, {"date_measured": "1994-07-01T00:00:00", "ppm": 359.38}, {"date_measured": "1994-08-01T00:00:00", "ppm": 357.46}, {"date_measured": "1994-09-01T00:00:00", "ppm": 355.73}, {"date_measured": "1994-10-01T00:00:00", "ppm": 356.08}, {"date_measured": "1994-11-01T00:00:00", "ppm": 357.53}, {"date_measured": "1994-12-01T00:00:00", "ppm": 358.98}, {"date_measured": "1995-01-01T00:00:00", "ppm": 359.92}, {"date_measured": "1995-02-01T00:00:00", "ppm": 360.86}, {"date_measured": "1995-03-01T00:00:00", "ppm": 361.83}, {"date_measured": "1995-04-01T00:00:00", "ppm": 363.3}, {"date_measured": "1995-05-01T00:00:00", "ppm": 363.69}, {"date_measured": "1995-06-01T00:00:00", "ppm": 363.19}, {"date_measured": "1995-07-01T00:00:00", "ppm": 361.64}, {"date_measured": "1995-08-01T00:00:00", "ppm": 359.12}, {"date_measured": "1995-09-01T00:00:00", "ppm": 358.17}, {"date_measured": "1995-10-01T00:00:00", "ppm": 357.99}, {"date_measured": "1995-11-01T00:00:00", "ppm": 359.45}, {"date_measured": "1995-12-01T00:00:00", "ppm": 360.68}, {"date_measured": "1996-01-01T00:00:00", "ppm": 362.07}, {"date_measured": "1996-02-01T00:00:00", "ppm": 363.24}, {"date_measured": "1996-03-01T00:00:00", "ppm": 364.17}, {"date_measured": "1996-04-01T00:00:00", "ppm": 364.57}, {"date_measured": "1996-05-01T00:00:00", "ppm": 365.13}, {"date_measured": "1996-06-01T00:00:00", "ppm": 364.92}, {"date_measured": "1996-07-01T00:00:00", "ppm": 363.55}, {"date_measured": "1996-08-01T00:00:00", "ppm": 361.38}, {"date_measured": "1996-09-01T00:00:00", "ppm": 359.54}, {"date_measured": "1996-10-01T00:00:00", "ppm": 359.58}, {"date_measured": "1996-11-01T00:00:00", "ppm": 360.89}, {"date_measured": "1996-12-01T00:00:00", "ppm": 362.24}, {"date_measured": "1997-01-01T00:00:00", "ppm": 363.09}, {"date_measured": "1997-02-01T00:00:00", "ppm": 364.03}, {"date_measured": "1997-03-01T00:00:00", "ppm": 364.51}, {"date_measured": "1997-04-01T00:00:00", "ppm": 366.35}, {"date_measured": "1997-05-01T00:00:00", "ppm": 366.64}, {"date_measured": "1997-06-01T00:00:00", "ppm": 365.59}, {"date_measured": "1997-07-01T00:00:00", "ppm": 364.31}, {"date_measured": "1997-08-01T00:00:00", "ppm": 362.25}, {"date_measured": "1997-09-01T00:00:00", "ppm": 360.29}, {"date_measured": "1997-10-01T00:00:00", "ppm": 360.82}, {"date_measured": "1997-11-01T00:00:00", "ppm": 362.49}, {"date_measured": "1997-12-01T00:00:00", "ppm": 364.38}, {"date_measured": "1998-01-01T00:00:00", "ppm": 365.27}, {"date_measured": "1998-02-01T00:00:00", "ppm": 365.98}, {"date_measured": "1998-03-01T00:00:00", "ppm": 367.24}, {"date_measured": "1998-04-01T00:00:00", "ppm": 368.66}, {"date_measured": "1998-05-01T00:00:00", "ppm": 369.42}, {"date_measured": "1998-06-01T00:00:00", "ppm": 368.99}, {"date_measured": "1998-07-01T00:00:00", "ppm": 367.82}, {"date_measured": "1998-08-01T00:00:00", "ppm": 365.95}, {"date_measured": "1998-09-01T00:00:00", "ppm": 364.02}, {"date_measured": "1998-10-01T00:00:00", "ppm": 364.4}, {"date_measured": "1998-11-01T00:00:00", "ppm": 365.52}, {"date_measured": "1998-12-01T00:00:00", "ppm": 367.13}, {"date_measured": "1999-01-01T00:00:00", "ppm": 368.18}, {"date_measured": "1999-02-01T00:00:00", "ppm": 369.07}, {"date_measured": "1999-03-01T00:00:00", "ppm": 369.68}, {"date_measured": "1999-04-01T00:00:00", "ppm": 370.99}, {"date_measured": "1999-05-01T00:00:00", "ppm": 370.96}, {"date_measured": "1999-06-01T00:00:00", "ppm": 370.3}, {"date_measured": "1999-07-01T00:00:00", "ppm": 369.45}, {"date_measured": "1999-08-01T00:00:00", "ppm": 366.9}, {"date_measured": "1999-09-01T00:00:00", "ppm": 364.81}, {"date_measured": "1999-10-01T00:00:00", "ppm": 365.37}, {"date_measured": "1999-11-01T00:00:00", "ppm": 366.72}, {"date_measured": "1999-12-01T00:00:00", "ppm": 368.1}, {"date_measured": "2000-01-01T00:00:00", "ppm": 369.29}, {"date_measured": "2000-02-01T00:00:00", "ppm": 369.55}, {"date_measured": "2000-03-01T00:00:00", "ppm": 370.6}, {"date_measured": "2000-04-01T00:00:00", "ppm": 371.82}, {"date_measured": "2000-05-01T00:00:00", "ppm": 371.58}, {"date_measured": "2000-06-01T00:00:00", "ppm": 371.7}, {"date_measured": "2000-07-01T00:00:00", "ppm": 369.86}, {"date_measured": "2000-08-01T00:00:00", "ppm": 368.13}, {"date_measured": "2000-09-01T00:00:00", "ppm": 367.0}, {"date_measured": "2000-10-01T00:00:00", "ppm": 367.03}, {"date_measured": "2000-11-01T00:00:00", "ppm": 368.37}, {"date_measured": "2000-12-01T00:00:00", "ppm": 369.67}, {"date_measured": "2001-01-01T00:00:00", "ppm": 370.59}, {"date_measured": "2001-02-01T00:00:00", "ppm": 371.51}, {"date_measured": "2001-03-01T00:00:00", "ppm": 372.43}, {"date_measured": "2001-04-01T00:00:00", "ppm": 373.37}, {"date_measured": "2001-05-01T00:00:00", "ppm": 373.85}, {"date_measured": "2001-06-01T00:00:00", "ppm": 373.22}, {"date_measured": "2001-07-01T00:00:00", "ppm": 371.5}, {"date_measured": "2001-08-01T00:00:00", "ppm": 369.61}, {"date_measured": "2001-09-01T00:00:00", "ppm": 368.18}, {"date_measured": "2001-10-01T00:00:00", "ppm": 368.45}, {"date_measured": "2001-11-01T00:00:00", "ppm": 369.76}, {"date_measured": "2001-12-01T00:00:00", "ppm": 371.24}, {"date_measured": "2002-01-01T00:00:00", "ppm": 372.53}, {"date_measured": "2002-02-01T00:00:00", "ppm": 373.2}, {"date_measured": "2002-03-01T00:00:00", "ppm": 374.12}, {"date_measured": "2002-04-01T00:00:00", "ppm": 375.02}, {"date_measured": "2002-05-01T00:00:00", "ppm": 375.76}, {"date_measured": "2002-06-01T00:00:00", "ppm": 375.52}, {"date_measured": "2002-07-01T00:00:00", "ppm": 374.01}, {"date_measured": "2002-08-01T00:00:00", "ppm": 371.85}, {"date_measured": "2002-09-01T00:00:00", "ppm": 370.75}, {"date_measured": "2002-10-01T00:00:00", "ppm": 370.55}, {"date_measured": "2002-11-01T00:00:00", "ppm": 372.25}, {"date_measured": "2002-12-01T00:00:00", "ppm": 373.79}, {"date_measured": "2003-01-01T00:00:00", "ppm": 374.88}, {"date_measured": "2003-02-01T00:00:00", "ppm": 375.64}, {"date_measured": "2003-03-01T00:00:00", "ppm": 376.45}, {"date_measured": "2003-04-01T00:00:00", "ppm": 377.73}, {"date_measured": "2003-05-01T00:00:00", "ppm": 378.6}, {"date_measured": "2003-06-01T00:00:00", "ppm": 378.28}, {"date_measured": "2003-07-01T00:00:00", "ppm": 376.7}, {"date_measured": "2003-08-01T00:00:00", "ppm": 374.38}, {"date_measured": "2003-09-01T00:00:00", "ppm": 373.17}, {"date_measured": "2003-10-01T00:00:00", "ppm": 373.15}, {"date_measured": "2003-11-01T00:00:00", "ppm": 374.66}, {"date_measured": "2003-12-01T00:00:00", "ppm": 375.99}, {"date_measured": "2004-01-01T00:00:00", "ppm": 377.0}, {"date_measured": "2004-02-01T00:00:00", "ppm": 377.87}, {"date_measured": "2004-03-01T00:00:00", "ppm": 378.88}, {"date_measured": "2004-04-01T00:00:00", "ppm": 380.35}, {"date_measured": "2004-05-01T00:00:00", "ppm": 380.62}, {"date_measured": "2004-06-01T00:00:00", "ppm": 379.69}, {"date_measured": "2004-07-01T00:00:00", "ppm": 377.47}, {"date_measured": "2004-08-01T00:00:00", "ppm": 376.01}, {"date_measured": "2004-09-01T00:00:00", "ppm": 374.25}, {"date_measured": "2004-10-01T00:00:00", "ppm": 374.46}, {"date_measured": "2004-11-01T00:00:00", "ppm": 376.16}, {"date_measured": "2004-12-01T00:00:00", "ppm": 377.51}, {"date_measured": "2005-01-01T00:00:00", "ppm": 378.46}, {"date_measured": "2005-02-01T00:00:00", "ppm": 379.73}, {"date_measured": "2005-03-01T00:00:00", "ppm": 380.77}, {"date_measured": "2005-04-01T00:00:00", "ppm": 382.29}, {"date_measured": "2005-05-01T00:00:00", "ppm": 382.45}, {"date_measured": "2005-06-01T00:00:00", "ppm": 382.21}, {"date_measured": "2005-07-01T00:00:00", "ppm": 380.74}, {"date_measured": "2005-08-01T00:00:00", "ppm": 378.74}, {"date_measured": "2005-09-01T00:00:00", "ppm": 376.7}, {"date_measured": "2005-10-01T00:00:00", "ppm": 377.0}, {"date_measured": "2005-11-01T00:00:00", "ppm": 378.35}, {"date_measured": "2005-12-01T00:00:00", "ppm": 380.11}, {"date_measured": "2006-01-01T00:00:00", "ppm": 381.38}, {"date_measured": "2006-02-01T00:00:00", "ppm": 382.2}, {"date_measured": "2006-03-01T00:00:00", "ppm": 382.67}, {"date_measured": "2006-04-01T00:00:00", "ppm": 384.61}, {"date_measured": "2006-05-01T00:00:00", "ppm": 385.03}, {"date_measured": "2006-06-01T00:00:00", "ppm": 384.05}, {"date_measured": "2006-07-01T00:00:00", "ppm": 382.46}, {"date_measured": "2006-08-01T00:00:00", "ppm": 380.41}, {"date_measured": "2006-09-01T00:00:00", "ppm": 378.85}, {"date_measured": "2006-10-01T00:00:00", "ppm": 379.13}, {"date_measured": "2006-11-01T00:00:00", "ppm": 380.15}, {"date_measured": "2006-12-01T00:00:00", "ppm": 381.82}, {"date_measured": "2007-01-01T00:00:00", "ppm": 382.89}, {"date_measured": "2007-02-01T00:00:00", "ppm": 383.9}, {"date_measured": "2007-03-01T00:00:00", "ppm": 384.58}, {"date_measured": "2007-04-01T00:00:00", "ppm": 386.5}, {"date_measured": "2007-05-01T00:00:00", "ppm": 386.56}, {"date_measured": "2007-06-01T00:00:00", "ppm": 386.1}, {"date_measured": "2007-07-01T00:00:00", "ppm": 384.5}, {"date_measured": "2007-08-01T00:00:00", "ppm": 381.99}, {"date_measured": "2007-09-01T00:00:00", "ppm": 380.96}, {"date_measured": "2007-10-01T00:00:00", "ppm": 381.12}, {"date_measured": "2007-11-01T00:00:00", "ppm": 382.45}, {"date_measured": "2007-12-01T00:00:00", "ppm": 383.94}, {"date_measured": "2008-01-01T00:00:00", "ppm": 385.52}, {"date_measured": "2008-02-01T00:00:00", "ppm": 385.82}, {"date_measured": "2008-03-01T00:00:00", "ppm": 386.03}, {"date_measured": "2008-04-01T00:00:00", "ppm": 387.21}, {"date_measured": "2008-05-01T00:00:00", "ppm": 388.54}, {"date_measured": "2008-06-01T00:00:00", "ppm": 387.76}, {"date_measured": "2008-07-01T00:00:00", "ppm": 386.37}, {"date_measured": "2008-08-01T00:00:00", "ppm": 384.09}, {"date_measured": "2008-09-01T00:00:00", "ppm": 383.18}, {"date_measured": "2008-10-01T00:00:00", "ppm": 382.99}, {"date_measured": "2008-11-01T00:00:00", "ppm": 384.19}, {"date_measured": "2008-12-01T00:00:00", "ppm": 385.56}, {"date_measured": "2009-01-01T00:00:00", "ppm": 386.94}, {"date_measured": "2009-02-01T00:00:00", "ppm": 387.48}, {"date_measured": "2009-03-01T00:00:00", "ppm": 388.82}, {"date_measured": "2009-04-01T00:00:00", "ppm": 389.55}, {"date_measured": "2009-05-01T00:00:00", "ppm": 390.14}, {"date_measured": "2009-06-01T00:00:00", "ppm": 389.48}, {"date_measured": "2009-07-01T00:00:00", "ppm": 388.03}, {"date_measured": "2009-08-01T00:00:00", "ppm": 386.11}, {"date_measured": "2009-09-01T00:00:00", "ppm": 384.74}, {"date_measured": "2009-10-01T00:00:00", "ppm": 384.43}, {"date_measured": "2009-11-01T00:00:00", "ppm": 386.02}, {"date_measured": "2009-12-01T00:00:00", "ppm": 387.42}, {"date_measured": "2010-01-01T00:00:00", "ppm": 388.71}, {"date_measured": "2010-02-01T00:00:00", "ppm": 390.2}, {"date_measured": "2010-03-01T00:00:00", "ppm": 391.17}, {"date_measured": "2010-04-01T00:00:00", "ppm": 392.46}, {"date_measured": "2010-05-01T00:00:00", "ppm": 393.0}, {"date_measured": "2010-06-01T00:00:00", "ppm": 392.15}, {"date_measured": "2010-07-01T00:00:00", "ppm": 390.2}, {"date_measured": "2010-08-01T00:00:00", "ppm": 388.35}, {"date_measured": "2010-09-01T00:00:00", "ppm": 386.85}, {"date_measured": "2010-10-01T00:00:00", "ppm": 387.24}, {"date_measured": "2010-11-01T00:00:00", "ppm": 388.67}, {"date_measured": "2010-12-01T00:00:00", "ppm": 389.79}, {"date_measured": "2011-01-01T00:00:00", "ppm": 391.33}, {"date_measured": "2011-02-01T00:00:00", "ppm": 391.86}, {"date_measured": "2011-03-01T00:00:00", "ppm": 392.6}, {"date_measured": "2011-04-01T00:00:00", "ppm": 393.25}, {"date_measured": "2011-05-01T00:00:00", "ppm": 394.19}, {"date_measured": "2011-06-01T00:00:00", "ppm": 393.74}, {"date_measured": "2011-07-01T00:00:00", "ppm": 392.51}, {"date_measured": "2011-08-01T00:00:00", "ppm": 390.13}, {"date_measured": "2011-09-01T00:00:00", "ppm": 389.08}, {"date_measured": "2011-10-01T00:00:00", "ppm": 389.0}, {"date_measured": "2011-11-01T00:00:00", "ppm": 390.28}, {"date_measured": "2011-12-01T00:00:00", "ppm": 391.86}, {"date_measured": "2012-01-01T00:00:00", "ppm": 393.12}, {"date_measured": "2012-02-01T00:00:00", "ppm": 393.86}, {"date_measured": "2012-03-01T00:00:00", "ppm": 394.4}, {"date_measured": "2012-04-01T00:00:00", "ppm": 396.18}, {"date_measured": "2012-05-01T00:00:00", "ppm": 396.74}, {"date_measured": "2012-06-01T00:00:00", "ppm": 395.71}, {"date_measured": "2012-07-01T00:00:00", "ppm": 394.36}, {"date_measured": "2012-08-01T00:00:00", "ppm": 392.39}, {"date_measured": "2012-09-01T00:00:00", "ppm": 391.11}, {"date_measured": "2012-10-01T00:00:00", "ppm": 391.05}, {"date_measured": "2012-11-01T00:00:00", "ppm": 392.98}, {"date_measured": "2012-12-01T00:00:00", "ppm": 394.34}, {"date_measured": "2013-01-01T00:00:00", "ppm": 395.55}, {"date_measured": "2013-02-01T00:00:00", "ppm": 396.8}, {"date_measured": "2013-03-01T00:00:00", "ppm": 397.43}, {"date_measured": "2013-04-01T00:00:00", "ppm": 398.41}, {"date_measured": "2013-05-01T00:00:00", "ppm": 399.78}, {"date_measured": "2013-06-01T00:00:00", "ppm": 398.6}, {"date_measured": "2013-07-01T00:00:00", "ppm": 397.32}, {"date_measured": "2013-08-01T00:00:00", "ppm": 395.2}, {"date_measured": "2013-09-01T00:00:00", "ppm": 393.45}, {"date_measured": "2013-10-01T00:00:00", "ppm": 393.7}, {"date_measured": "2013-11-01T00:00:00", "ppm": 395.16}, {"date_measured": "2013-12-01T00:00:00", "ppm": 396.84}, {"date_measured": "2014-01-01T00:00:00", "ppm": 397.85}, {"date_measured": "2014-02-01T00:00:00", "ppm": 398.01}, {"date_measured": "2014-03-01T00:00:00", "ppm": 399.77}, {"date_measured": "2014-04-01T00:00:00", "ppm": 401.38}, {"date_measured": "2014-05-01T00:00:00", "ppm": 401.78}, {"date_measured": "2014-06-01T00:00:00", "ppm": 401.25}, {"date_measured": "2014-07-01T00:00:00", "ppm": 399.1}, {"date_measured": "2014-08-01T00:00:00", "ppm": 397.03}, {"date_measured": "2014-09-01T00:00:00", "ppm": 395.38}, {"date_measured": "2014-10-01T00:00:00", "ppm": 396.03}, {"date_measured": "2014-11-01T00:00:00", "ppm": 397.28}, {"date_measured": "2014-12-01T00:00:00", "ppm": 398.91}, {"date_measured": "2015-01-01T00:00:00", "ppm": 399.98}, {"date_measured": "2015-02-01T00:00:00", "ppm": 400.28}, {"date_measured": "2015-03-01T00:00:00", "ppm": 401.54}, {"date_measured": "2015-04-01T00:00:00", "ppm": 403.28}, {"date_measured": "2015-05-01T00:00:00", "ppm": 403.96}, {"date_measured": "2015-06-01T00:00:00", "ppm": 402.8}, {"date_measured": "2015-07-01T00:00:00", "ppm": 401.31}, {"date_measured": "2015-08-01T00:00:00", "ppm": 398.93}, {"date_measured": "2015-09-01T00:00:00", "ppm": 397.63}, {"date_measured": "2015-10-01T00:00:00", "ppm": 398.29}, {"date_measured": "2015-11-01T00:00:00", "ppm": 400.16}, {"date_measured": "2015-12-01T00:00:00", "ppm": 401.85}, {"date_measured": "2016-01-01T00:00:00", "ppm": 402.56}, {"date_measured": "2016-02-01T00:00:00", "ppm": 404.12}, {"date_measured": "2016-03-01T00:00:00", "ppm": 404.87}, {"date_measured": "2016-04-01T00:00:00", "ppm": 407.45}, {"date_measured": "2016-05-01T00:00:00", "ppm": 407.72}, {"date_measured": "2016-06-01T00:00:00", "ppm": 406.83}, {"date_measured": "2016-07-01T00:00:00", "ppm": 404.41}, {"date_measured": "2016-08-01T00:00:00", "ppm": 402.27}, {"date_measured": "2016-09-01T00:00:00", "ppm": 401.05}, {"date_measured": "2016-10-01T00:00:00", "ppm": 401.59}, {"date_measured": "2016-11-01T00:00:00", "ppm": 403.55}, {"date_measured": "2016-12-01T00:00:00", "ppm": 404.45}, {"date_measured": "2017-01-01T00:00:00", "ppm": 406.17}, {"date_measured": "2017-02-01T00:00:00", "ppm": 406.46}, {"date_measured": "2017-03-01T00:00:00", "ppm": 407.22}, {"date_measured": "2017-04-01T00:00:00", "ppm": 409.04}, {"date_measured": "2017-05-01T00:00:00", "ppm": 409.69}, {"date_measured": "2017-06-01T00:00:00", "ppm": 408.88}, {"date_measured": "2017-07-01T00:00:00", "ppm": 407.12}, {"date_measured": "2017-08-01T00:00:00", "ppm": 405.13}, {"date_measured": "2017-09-01T00:00:00", "ppm": 403.37}, {"date_measured": "2017-10-01T00:00:00", "ppm": 403.63}, {"date_measured": "2017-11-01T00:00:00", "ppm": 405.12}, {"date_measured": "2017-12-01T00:00:00", "ppm": 406.81}, {"date_measured": "2018-01-01T00:00:00", "ppm": 407.96}, {"date_measured": "2018-02-01T00:00:00", "ppm": 408.32}, {"date_measured": "2018-03-01T00:00:00", "ppm": 409.41}, {"date_measured": "2018-04-01T00:00:00", "ppm": 410.24}, {"date_measured": "2018-05-01T00:00:00", "ppm": 411.24}, {"date_measured": "2018-06-01T00:00:00", "ppm": 410.79}, {"date_measured": "2018-07-01T00:00:00", "ppm": 408.71}, {"date_measured": "2018-08-01T00:00:00", "ppm": 406.99}, {"date_measured": "2018-09-01T00:00:00", "ppm": 405.51}, {"date_measured": "2018-10-01T00:00:00", "ppm": 406.0}, {"date_measured": "2018-11-01T00:00:00", "ppm": 408.02}, {"date_measured": "2018-12-01T00:00:00", "ppm": 409.07}, {"date_measured": "2019-01-01T00:00:00", "ppm": 410.83}, {"date_measured": "2019-02-01T00:00:00", "ppm": 411.75}, {"date_measured": "2019-03-01T00:00:00", "ppm": 411.97}, {"date_measured": "2019-04-01T00:00:00", "ppm": 413.33}, {"date_measured": "2019-05-01T00:00:00", "ppm": 414.64}, {"date_measured": "2019-06-01T00:00:00", "ppm": 413.93}, {"date_measured": "2019-07-01T00:00:00", "ppm": 411.74}, {"date_measured": "2019-08-01T00:00:00", "ppm": 409.95}, {"date_measured": "2019-09-01T00:00:00", "ppm": 408.54}, {"date_measured": "2019-10-01T00:00:00", "ppm": 408.52}, {"date_measured": "2019-11-01T00:00:00", "ppm": 410.25}, {"date_measured": "2019-12-01T00:00:00", "ppm": 411.76}, {"date_measured": "2020-01-01T00:00:00", "ppm": 413.39}, {"date_measured": "2020-02-01T00:00:00", "ppm": 414.11}, {"date_measured": "2020-03-01T00:00:00", "ppm": 414.51}, {"date_measured": "2020-04-01T00:00:00", "ppm": 416.21}, {"date_measured": "2020-05-01T00:00:00", "ppm": 417.07}, {"date_measured": "2020-06-01T00:00:00", "ppm": 416.39}]}}, {"mode": "vega-lite"});
 </script></div></div>
 <p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Scatter plot of atmospheric concentration of CO<span class="math notranslate nohighlight">\(_{2}\)</span> over time.</span><a class="headerlink" href="#co2-scatter" title="Permalink to this image">¶</a></p>
 </div>
+<blockquote>
+<div><blockquote>
+<div><p>Note: We can change the size of the point and color of the plot by specifying <code class="docutils literal notranslate"><span class="pre">mark_point(size=10,</span> <span class="pre">color='black')</span></code>.</p>
+</div></blockquote>
+</div></blockquote>
 <p>Certainly, the visualization in <a class="reference internal" href="#co2-scatter"><span class="std std-numref">Fig. 31</span></a>
 shows a clear upward trend
 in the atmospheric concentration of CO<span class="math notranslate nohighlight">\(_{\text{2}}\)</span> over time.
@@ -1022,13 +1027,13 @@ with just the default arguments:
 <div class="figure align-default" id="co2-line" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-5eacf771483e48f7a6656b61088d7b07"></div>
+<div id="altair-viz-b79ed3c8c87846fb9695a6ad37396d35"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-5eacf771483e48f7a6656b61088d7b07") {
-      outputDiv = document.getElementById("altair-viz-5eacf771483e48f7a6656b61088d7b07");
+    if (outputDiv.id !== "altair-viz-b79ed3c8c87846fb9695a6ad37396d35") {
+      outputDiv = document.getElementById("altair-viz-b79ed3c8c87846fb9695a6ad37396d35");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1108,13 +1113,13 @@ change the font size, we use the <code class="docutils literal notranslate"><spa
 <div class="figure align-default" id="co2-line-labels" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-bc517479756f4f169368730a7314ad28"></div>
+<div id="altair-viz-f65dd2b433b946d4aaf55d10449b725a"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-bc517479756f4f169368730a7314ad28") {
-      outputDiv = document.getElementById("altair-viz-bc517479756f4f169368730a7314ad28");
+    if (outputDiv.id !== "altair-viz-f65dd2b433b946d4aaf55d10449b725a") {
+      outputDiv = document.getElementById("altair-viz-f65dd2b433b946d4aaf55d10449b725a");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1195,13 +1200,13 @@ to specify the upper and lower bounds to limit the axis.</p>
 <div class="figure align-default" id="co2-line-scale" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-b0ed2d79ab9a4b71910e7173c7c80da0"></div>
+<div id="altair-viz-2168ec0401d14f9d9851788c5c86c561"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-b0ed2d79ab9a4b71910e7173c7c80da0") {
-      outputDiv = document.getElementById("altair-viz-b0ed2d79ab9a4b71910e7173c7c80da0");
+    if (outputDiv.id !== "altair-viz-2168ec0401d14f9d9851788c5c86c561") {
+      outputDiv = document.getElementById("altair-viz-2168ec0401d14f9d9851788c5c86c561");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1396,13 +1401,13 @@ The result is shown in <a class="reference internal" href="#faithful-scatter"><s
 <div class="figure align-default" id="faithful-scatter" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-38ab2f28cafc4314a9138270e3076ece"></div>
+<div id="altair-viz-4409d3592105459f93b870986cc22051"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-38ab2f28cafc4314a9138270e3076ece") {
-      outputDiv = document.getElementById("altair-viz-38ab2f28cafc4314a9138270e3076ece");
+    if (outputDiv.id !== "altair-viz-4409d3592105459f93b870986cc22051") {
+      outputDiv = document.getElementById("altair-viz-4409d3592105459f93b870986cc22051");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1472,13 +1477,13 @@ labels and make the font more readable:</p>
 <div class="figure align-default" id="faithful-scatter-labels" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-b0af13e5c5604b92a6763909ec7dea50"></div>
+<div id="altair-viz-4b684459f9244809982f0439551b125b"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-b0af13e5c5604b92a6763909ec7dea50") {
-      outputDiv = document.getElementById("altair-viz-b0af13e5c5604b92a6763909ec7dea50");
+    if (outputDiv.id !== "altair-viz-4b684459f9244809982f0439551b125b") {
+      outputDiv = document.getElementById("altair-viz-4b684459f9244809982f0439551b125b");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1564,13 +1569,13 @@ The resulting plot is shown in <a class="reference internal" href="#can-lang-plo
 <div class="figure align-default" id="can-lang-plot" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-2a2ad05f0ea04edc863e89b8aba8581a"></div>
+<div id="altair-viz-2492f149411a4f808cd9ecc86755db35"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2a2ad05f0ea04edc863e89b8aba8581a") {
-      outputDiv = document.getElementById("altair-viz-2a2ad05f0ea04edc863e89b8aba8581a");
+    if (outputDiv.id !== "altair-viz-2492f149411a4f808cd9ecc86755db35") {
+      outputDiv = document.getElementById("altair-viz-2492f149411a4f808cd9ecc86755db35");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1641,13 +1646,13 @@ improve readability.</p>
 <div class="figure align-default" id="can-lang-plot-labels" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-703fb5ed2d1b46f297ccce5a64c4e9f8"></div>
+<div id="altair-viz-2bc76e7442354caea2db2a137a3d706e"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-703fb5ed2d1b46f297ccce5a64c4e9f8") {
-      outputDiv = document.getElementById("altair-viz-703fb5ed2d1b46f297ccce5a64c4e9f8");
+    if (outputDiv.id !== "altair-viz-2bc76e7442354caea2db2a137a3d706e") {
+      outputDiv = document.getElementById("altair-viz-2bc76e7442354caea2db2a137a3d706e");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1798,13 +1803,13 @@ using the argument <code class="docutils literal notranslate"><span class="pre">
 <div class="figure align-default" id="can-lang-plot-log" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-2e7e60950c2244ac843ef715f1cd752f"></div>
+<div id="altair-viz-04620976760043e091b6bbcb9cd838b9"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2e7e60950c2244ac843ef715f1cd752f") {
-      outputDiv = document.getElementById("altair-viz-2e7e60950c2244ac843ef715f1cd752f");
+    if (outputDiv.id !== "altair-viz-04620976760043e091b6bbcb9cd838b9") {
+      outputDiv = document.getElementById("altair-viz-04620976760043e091b6bbcb9cd838b9");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1863,10 +1868,9 @@ by the number of people who live in Canada and multiplying by 100%.
 For example,
 the percentage of people who reported that their mother tongue was English
 in the 2016 Canadian census
-was <code class="docutils literal notranslate"><span class="pre">r</span>&#160; <span class="pre">format(english_mother_tongue,</span> <span class="pre">scientific</span> <span class="pre">=</span> <span class="pre">FALSE,</span> <span class="pre">big.mark</span> <span class="pre">=</span> <span class="pre">&quot;,&quot;)</span> </code>
-/ <code class="docutils literal notranslate"><span class="pre">r</span>&#160; <span class="pre">format(census_popn,</span> <span class="pre">scientific</span> <span class="pre">=</span> <span class="pre">FALSE,</span> <span class="pre">big.mark</span> <span class="pre">=</span> <span class="pre">&quot;,&quot;)</span></code> <span class="math notranslate nohighlight">\(\times\)</span>
-<code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">100</span></code> % =
-<code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">format(round(english_mother_tongue/census_popn*100,</span> <span class="pre">2),</span> <span class="pre">scientific</span> <span class="pre">=</span> <span class="pre">FALSE,</span> <span class="pre">big.mark</span> <span class="pre">=</span> <span class="pre">&quot;,&quot;)</span></code>%.</p>
+was 
+/ <span class="pasted-inline"><code class="output text_plain docutils literal notranslate"><span class="pre">'35,151,728'</span></code></span> <span class="math notranslate nohighlight">\(\times\)</span>
+<code class="docutils literal notranslate"><span class="pre">100</span></code> % = %</p>
 <p>Below we use <code class="docutils literal notranslate"><span class="pre">assign</span></code> to calculate the percentage of people reporting a given
 language as their mother tongue and primary language at home for all the
 languages in the <code class="docutils literal notranslate"><span class="pre">can_lang</span></code> data set. Since the new columns are appended to the
@@ -1982,13 +1986,13 @@ the final result.</p>
 <div class="figure align-default" id="can-lang-plot-percent" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-e93b7670546b4e9fb3ba52b18d2dd4b1"></div>
+<div id="altair-viz-0a8f9bf8ecda4acf97ad055e8111f70d"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-e93b7670546b4e9fb3ba52b18d2dd4b1") {
-      outputDiv = document.getElementById("altair-viz-e93b7670546b4e9fb3ba52b18d2dd4b1");
+    if (outputDiv.id !== "altair-viz-0a8f9bf8ecda4acf97ad055e8111f70d") {
+      outputDiv = document.getElementById("altair-viz-0a8f9bf8ecda4acf97ad055e8111f70d");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -2096,13 +2100,13 @@ plot.</p>
 <div class="figure align-default" id="can-lang-plot-category" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-667ff1e33dce4971a45af3eb61c0aaee"></div>
+<div id="altair-viz-ba685ad2dd544f8d9918845cb358a7c2"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-667ff1e33dce4971a45af3eb61c0aaee") {
-      outputDiv = document.getElementById("altair-viz-667ff1e33dce4971a45af3eb61c0aaee");
+    if (outputDiv.id !== "altair-viz-ba685ad2dd544f8d9918845cb358a7c2") {
+      outputDiv = document.getElementById("altair-viz-ba685ad2dd544f8d9918845cb358a7c2");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -2226,13 +2230,13 @@ further improve the clarity and accessibility of your visualization.</p>
 <div class="figure align-default" id="can-lang-plot-theme" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-52f8e18db9e2481b9d86fcbc4a154fd2"></div>
+<div id="altair-viz-ea06cdbbddb842f28daf25cdf769a605"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-52f8e18db9e2481b9d86fcbc4a154fd2") {
-      outputDiv = document.getElementById("altair-viz-52f8e18db9e2481b9d86fcbc4a154fd2");
+    if (outputDiv.id !== "altair-viz-ea06cdbbddb842f28daf25cdf769a605") {
+      outputDiv = document.getElementById("altair-viz-ea06cdbbddb842f28daf25cdf769a605");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -2657,13 +2661,13 @@ The result is shown in <a class="reference internal" href="#islands-bar"><span c
 <div class="figure align-default" id="islands-bar" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-f6f3246caede491aa96581d044876c30"></div>
+<div id="altair-viz-b29d8b86de014124b66b6f783c708f8c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f6f3246caede491aa96581d044876c30") {
-      outputDiv = document.getElementById("altair-viz-f6f3246caede491aa96581d044876c30");
+    if (outputDiv.id !== "altair-viz-b29d8b86de014124b66b6f783c708f8c") {
+      outputDiv = document.getElementById("altair-viz-b29d8b86de014124b66b6f783c708f8c");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -2736,13 +2740,13 @@ swapping the <code class="docutils literal notranslate"><span class="pre">x</spa
 <div class="figure align-default" id="islands-bar-sorted" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-d84ea425e36a45d39050eb1a8f78c7a0"></div>
+<div id="altair-viz-957b9e3c08034d399e96a206d0f55348"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d84ea425e36a45d39050eb1a8f78c7a0") {
-      outputDiv = document.getElementById("altair-viz-d84ea425e36a45d39050eb1a8f78c7a0");
+    if (outputDiv.id !== "altair-viz-957b9e3c08034d399e96a206d0f55348") {
+      outputDiv = document.getElementById("altair-viz-957b9e3c08034d399e96a206d0f55348");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -2835,13 +2839,13 @@ to change the font size.</p>
 <div class="figure align-default" id="islands-plot-sorted" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-fd904f9d6cb24b1f94d58c3711de658d"></div>
+<div id="altair-viz-8e02a1882fb64fd2b24a5c07e9dbb568"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-fd904f9d6cb24b1f94d58c3711de658d") {
-      outputDiv = document.getElementById("altair-viz-fd904f9d6cb24b1f94d58c3711de658d");
+    if (outputDiv.id !== "altair-viz-8e02a1882fb64fd2b24a5c07e9dbb568") {
+      outputDiv = document.getElementById("altair-viz-8e02a1882fb64fd2b24a5c07e9dbb568");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -2952,13 +2956,13 @@ let’s use the default arguments just to see how things look.</p>
 <div class="figure align-default" id="morley-hist" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-1563fc09f60d4bba896ccf95d7d1707a"></div>
+<div id="altair-viz-fb1e53436acc47dda2b4a0ad60be1791"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-1563fc09f60d4bba896ccf95d7d1707a") {
-      outputDiv = document.getElementById("altair-viz-1563fc09f60d4bba896ccf95d7d1707a");
+    if (outputDiv.id !== "altair-viz-fb1e53436acc47dda2b4a0ad60be1791") {
+      outputDiv = document.getElementById("altair-viz-fb1e53436acc47dda2b4a0ad60be1791");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -3044,13 +3048,13 @@ while <em>horizontal lines</em> are used to denote quantities on the <em>vertica
 <div class="figure align-default" id="final-plot" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-4050fefdd7e8424d89a21bf6cc876562"></div>
+<div id="altair-viz-cdc5908857364dce9d5b199bd4aee686"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-4050fefdd7e8424d89a21bf6cc876562") {
-      outputDiv = document.getElementById("altair-viz-4050fefdd7e8424d89a21bf6cc876562");
+    if (outputDiv.id !== "altair-viz-cdc5908857364dce9d5b199bd4aee686") {
+      outputDiv = document.getElementById("altair-viz-cdc5908857364dce9d5b199bd4aee686");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -3130,13 +3134,13 @@ to make the bars slightly translucent.</p>
 <div class="figure align-default" id="final-plot-colored" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-b89f5bee0c1d45b38fa1e41184d9f9f2"></div>
+<div id="altair-viz-be110b6c25504ee5b5761125b904cacd"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-b89f5bee0c1d45b38fa1e41184d9f9f2") {
-      outputDiv = document.getElementById("altair-viz-b89f5bee0c1d45b38fa1e41184d9f9f2");
+    if (outputDiv.id !== "altair-viz-be110b6c25504ee5b5761125b904cacd") {
+      outputDiv = document.getElementById("altair-viz-be110b6c25504ee5b5761125b904cacd");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -3213,13 +3217,13 @@ and the color will be mapped discretely. Here, we also mention <code class="docu
 <div class="figure align-default" id="final-plot-categorical" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-8136395f577346b18bbaa3c1604add8a"></div>
+<div id="altair-viz-f5a7ef8aa259401e970a5f2031d9f80d"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-8136395f577346b18bbaa3c1604add8a") {
-      outputDiv = document.getElementById("altair-viz-8136395f577346b18bbaa3c1604add8a");
+    if (outputDiv.id !== "altair-viz-f5a7ef8aa259401e970a5f2031d9f80d") {
+      outputDiv = document.getElementById("altair-viz-f5a7ef8aa259401e970a5f2031d9f80d");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -3300,13 +3304,13 @@ Both the <code class="docutils literal notranslate"><span class="pre">rows</span
 <div class="figure align-default" id="final-plot-facet" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-fb35517daf2d4d8d9a889ba221a2d03b"></div>
+<div id="altair-viz-621c60ef93844172b6ab3e9bef4c39f7"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-fb35517daf2d4d8d9a889ba221a2d03b") {
-      outputDiv = document.getElementById("altair-viz-fb35517daf2d4d8d9a889ba221a2d03b");
+    if (outputDiv.id !== "altair-viz-621c60ef93844172b6ab3e9bef4c39f7") {
+      outputDiv = document.getElementById("altair-viz-621c60ef93844172b6ab3e9bef4c39f7");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -3506,13 +3510,13 @@ To answer this question, we’ll use the assign function to transform our data i
 <div class="figure align-default" id="final-plot-relative" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-7c5657d376d64ba3ae2ba9e4a9064c45"></div>
+<div id="altair-viz-26127895ebf74cb795b50cf77103f92a"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-7c5657d376d64ba3ae2ba9e4a9064c45") {
-      outputDiv = document.getElementById("altair-viz-7c5657d376d64ba3ae2ba9e4a9064c45");
+    if (outputDiv.id !== "altair-viz-26127895ebf74cb795b50cf77103f92a") {
+      outputDiv = document.getElementById("altair-viz-26127895ebf74cb795b50cf77103f92a");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -3587,18 +3591,18 @@ In <a class="reference internal" href="#final-plot-max-bins"><span class="std st
 we compare the default setting with three other histograms where we set the
 <code class="docutils literal notranslate"><span class="pre">maxbins</span></code> to 200, 70 and 5.
 In this case, we can see that both the default number of bins
-and the bins=5 of  are effective for helping answer our question.
-On the other hand, the bin widths of 0.001 and 0.1 are too small and too big, respectively.</p>
+and the <code class="docutils literal notranslate"><span class="pre">maxbins=70</span></code> of  are effective for helping answer our question.
+On the other hand, the <code class="docutils literal notranslate"><span class="pre">maxbins=200</span></code> and <code class="docutils literal notranslate"><span class="pre">maxbins=5</span></code> are too small and too big, respectively.</p>
 <div class="figure align-default" id="final-plot-max-bins" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-2601c09f6e9a49e6a428be3299870003"></div>
+<div id="altair-viz-3e8f228c04da4a929d6ece09b154c2ab"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2601c09f6e9a49e6a428be3299870003") {
-      outputDiv = document.getElementById("altair-viz-2601c09f6e9a49e6a428be3299870003");
+    if (outputDiv.id !== "altair-viz-3e8f228c04da4a929d6ece09b154c2ab") {
+      outputDiv = document.getElementById("altair-viz-3e8f228c04da4a929d6ece09b154c2ab");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -3678,13 +3682,13 @@ The result is shown in <a class="reference internal" href="#morley-hist-layer"><
 <div class="figure align-default" id="morley-hist-layer" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-40546313ab8a4deebcafc5b2cac460c9"></div>
+<div id="altair-viz-b416a5f82013413a871033d22a6d1b9a"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-40546313ab8a4deebcafc5b2cac460c9") {
-      outputDiv = document.getElementById("altair-viz-40546313ab8a4deebcafc5b2cac460c9");
+    if (outputDiv.id !== "altair-viz-b416a5f82013413a871033d22a6d1b9a") {
+      outputDiv = document.getElementById("altair-viz-b416a5f82013413a871033d22a6d1b9a");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -3748,13 +3752,13 @@ The result is shown in <a class="reference internal" href="#morley-hist-layer"><
 <div class="figure align-default" id="morley-hist-title" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-6eb1803a5017425e871e0f9a9089c9de"></div>
+<div id="altair-viz-df5c5c9a470c441cb06bee36b2477889"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-6eb1803a5017425e871e0f9a9089c9de") {
-      outputDiv = document.getElementById("altair-viz-6eb1803a5017425e871e0f9a9089c9de");
+    if (outputDiv.id !== "altair-viz-df5c5c9a470c441cb06bee36b2477889") {
+      outputDiv = document.getElementById("altair-viz-df5c5c9a470c441cb06bee36b2477889");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -3941,13 +3945,13 @@ shown in <code class="xref std std-numref docutils literal notranslate"><span cl
 <div class="figure align-default" id="id1" style="width: 700px">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<div id="altair-viz-b0af13e5c5604b92a6763909ec7dea50"></div>
+<div id="altair-viz-4b684459f9244809982f0439551b125b"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-b0af13e5c5604b92a6763909ec7dea50") {
-      outputDiv = document.getElementById("altair-viz-b0af13e5c5604b92a6763909ec7dea50");
+    if (outputDiv.id !== "altair-viz-4b684459f9244809982f0439551b125b") {
+      outputDiv = document.getElementById("altair-viz-4b684459f9244809982f0439551b125b");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
